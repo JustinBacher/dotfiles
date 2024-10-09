@@ -1,0 +1,72 @@
+#!/usr/bin/env sh
+
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+# Automatically focus most recent window within space when space is focused
+yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+
+# Global settings
+yabai -m config									\
+	layout bsp									\
+	window_placement second_child 				\
+	window_opacity on 							\
+	window_animation_easing ease_in_out_cubic 	\
+	window_animation_duration 0.3 				\
+	active_window_opacity 1.0 					\
+	normal_window_opacity 0.9 					\
+	window_shadow on 							\
+	external_bar all:32:0						\
+	mouse_follows_focus on						\
+	focus_follows_mouse autofocus
+
+
+# Padding
+yabai -m config			\
+	top_padding 16 		\
+	bottom_padding 16 	\
+	left_padding 16 	\
+	right_padding 16 	\
+	window_gap 8
+
+# Mouse
+yabai -m config				\
+	mouse_follows_focus on	\
+	focus_follows_mouse on 	\
+	mouse_modifier alt 		\
+	mouse_action1 move 		\
+	mouse_action2 resize 	\
+	mouse_drop_action swap
+
+# Let these apps be floating instead of tiled
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+
+# Assign apps to specific spaces
+yabai -m rule --add app="^Kitty$" space=^1
+yabai -m rule --add app="^Arc$" space=^2
+yabai -m rule --add app="^Whiskey$" space=^3
+yabai -m rule --add app="^Vesktop$" space=^4
+yabai -m rule --add app="^Spotify$" space=^5
+
+function setup_space {
+  local idx="$1"
+  local name="$2"
+  local space=
+  echo "setup space $idx : $name"
+
+  space=$(yabai -m query --spaces --space "$idx")
+  if [ -z "$space" ]; then
+    yabai -m space --create
+  fi
+
+  yabai -m space "$idx" --label "$name"
+}
+
+setup_space 1 code
+setup_space 2 browser
+setup_space 3 gaming
+setup_space 4 social
+setup_space 5 media
+setup_space 6 other
