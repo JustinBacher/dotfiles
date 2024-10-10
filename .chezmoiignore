@@ -1,0 +1,17 @@
+{{ if ne .chezmoi.os "linux" }}
+.config/hypr
+.config/rofi
+.config/swww
+.config/waybar
+.config/wlogout
+scripts/archlinux.sh
+
+{{ else if ne .chezmoi.os "darwin" }}
+.config/skhd
+.config/sketchybar
+.config/yabai
+
+{{ else if ( .chezmoi.kernel.osrelease | lower | contains "microsoft" ) }}
+.config/komorebi
+
+{{ end }}

@@ -43,7 +43,6 @@ abbr ani ani-cli
 abbr yay paru
 abbr yays paru -S --skipreview
 abbr yayr paru -Rns
-abbr yayup paru && ~/.tmux/plugins/tpm/scripts/update_plugin.sh "all"
 
 # git
 abbr g git
@@ -72,3 +71,5 @@ abbr please sudo !!
 abbr dammit fuck
 
 abbr py python3
+
+abbr cz chezmoi

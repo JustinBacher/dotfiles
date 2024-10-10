@@ -1,0 +1,172 @@
+local wezterm = require "wezterm"
+local act = wezterm.action
+local config = {} or wezterm.config_builder()
+
+-- Helpers to determine OS
+local os = wezterm.target_triple
+
+-- ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗
+-- ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝
+-- ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
+-- ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
+-- ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
+--  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝
+
+config.window_close_confirmation = "NeverPrompt"
+
+-- Tmux like sessions
+-- config.unix_domains = { name = "unix" }
+config.default_gui_startup_args = { "connect", "unix" }
+
+-- Input
+config.enable_kitty_keyboard = true
+config.use_ime = true
+
+-- Only visual bell
+config.audible_bell = "Disabled"
+config.visual_bell = {
+	fade_in_duration_ms = 20,
+	fade_out_duration_ms = 200,
+	fade_in_function = "Linear",
+	fade_out_function = "EaseOut",
+}
+
+if is_linux then
+	config.enable_wayland = false
+	config.front_end = "WebGpu"
+end
+
+-- ███████╗ ██████╗ ███╗   ██╗████████╗
+-- ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝
+-- █████╗  ██║   ██║██╔██╗ ██║   ██║
+-- ██╔══╝  ██║   ██║██║╚██╗██║   ██║
+-- ██║     ╚██████╔╝██║ ╚████║   ██║
+-- ╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝
+
+config.font = wezterm.font(
+	{ family = "VictorMono Nerd Font", weight = "Regular" }
+)
+
+if is_darwin then
+	config.font_size = 15
+else
+	config.font_size = 13
+end
+
+--  ██████╗██╗   ██╗██████╗ ███████╗ ██████╗ ██████╗
+-- ██╔════╝██║   ██║██╔══██╗██╔════╝██╔═══██╗██╔══██╗
+-- ██║     ██║   ██║██████╔╝███████╗██║   ██║██████╔╝
+-- ██║     ██║   ██║██╔══██╗╚════██║██║   ██║██╔══██╗
+-- ╚██████╗╚██████╔╝██║  ██║███████║╚██████╔╝██║  ██║
+--  ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
+
+config.default_cursor_style = "BlinkingBar"
+config.animation_fps = 1
+config.cursor_blink_ease_in = "Constant"
+config.cursor_blink_ease_out = "EaseOut"
+
+-- ██╗  ██╗███████╗██╗   ██╗██████╗ ██╗███╗   ██╗██████╗ ███████╗
+-- ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔══██╗██║████╗  ██║██╔══██╗██╔════╝
+-- █████╔╝ █████╗   ╚████╔╝ ██████╔╝██║██╔██╗ ██║██║  ██║███████╗
+-- █████╔╝ █████╗   ╚████╔╝ ██████╔╝██║██╔██╗ ██║██║  ██║███████╗
+-- ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔══██╗██║████╗  ██║██╔══██╗██╔════╝
+-- █████╔╝ █████╗   ╚████╔╝ ██████╔╝██║██╔██╗ ██║██║  ██║███████╗
+-- ██╔═██╗ ██╔══╝    ╚██╔╝  ██╔══██╗██║██║╚██╗██║██║  ██║╚════██║
+-- ██║  ██╗███████╗   ██║   ██████╔╝██║██║ ╚████║██████╔╝███████║
+-- ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝
+
+config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
+config.keys = {
+	-- Splitting panes
+	{ key = "h",      mods = "ALT",  action = act.Multiple { act.SplitPane { direction = "Left", size = { Percent = 50 } }, act.ActivatePaneDirection "Left" } },
+	{ key = "j",      mods = "ALT",  action = act.Multiple { act.SplitPane { direction = "Down", size = { Percent = 50 } }, act.ActivatePaneDirection "Down" } },
+	{ key = "k",      mods = "ALT",  action = act.Multiple { act.SplitPane { direction = "Down", size = { Percent = 50 } }, act.ActivatePaneDirection "Up" } },
+	{ key = "l",      mods = "ALT",  action = act.Multiple { act.SplitPane { direction = "Right", size = { Percent = 50 } }, act.ActivatePaneDirection "Right" } },
+
+	-- Focusing Panes
+	{ key = "h",      mods = "CTRL", action = act.ActivatePaneDirection "Left" },
+	{ key = "j",      mods = "CTRL", action = act.ActivatePaneDirection "Down" },
+	{ key = "k",      mods = "CTRL", action = act.ActivatePaneDirection "Up" },
+	{ key = "l",      mods = "CTRL", action = act.ActivatePaneDirection "Right" },
+
+	{ key = "Escape", mods = "ALT",  action = act.CloseCurrentPane { confirm = false } },
+}
+
+-- leader + number to activate that tab
+for i = 0, 9 do
+	table.insert(config.keys, { key = tostring(i), mods = "ALT", action = act.ActivateTab(i), })
+end
+
+config.key_tables = {
+	resize_pane = {
+		{ key = "LeftArrow",  action = act.AdjustPaneSize { "Left", 1 } },
+		{ key = "h",          action = act.AdjustPaneSize { "Left", 1 } },
+		{ key = "RightArrow", action = act.AdjustPaneSize { "Right", 1 } },
+		{ key = "l",          action = act.AdjustPaneSize { "Right", 1 } },
+		{ key = "UpArrow",    action = act.AdjustPaneSize { "Up", 1 } },
+		{ key = "k",          action = act.AdjustPaneSize { "Up", 1 } },
+		{ key = "DownArrow",  action = act.AdjustPaneSize { "Down", 1 } },
+		{ key = "j",          action = act.AdjustPaneSize { "Down", 1 } },
+
+		-- Cancel the mode by pressing escape
+		{ key = "Escape",     action = "PopKeyTable" },
+	},
+}
+
+wezterm.on("update-right-status", function(window, _)
+	local SOLID_LEFT_ARROW = ""
+	local ARROW_FOREGROUND = { Foreground = { Color = "#c6a0f6" } }
+	local prefix = ""
+
+	if window:leader_is_active() then
+		prefix = " " .. utf8.char(0x1f30a) -- ocean wave
+		SOLID_LEFT_ARROW = utf8.char(0xe0b2)
+	end
+
+	if window:active_tab():tab_id() ~= 0 then
+		ARROW_FOREGROUND = { Foreground = { Color = "#1e2030" } }
+	end -- arrow color based on if tab is first pane
+
+	window:set_left_status(wezterm.format {
+		{ Background = { Color = "#b7bdf8" } },
+		{ Text = prefix },
+		ARROW_FOREGROUND,
+		{ Text = SOLID_LEFT_ARROW }
+	})
+end)
+
+-- ██║███╗██║██║██║╚██╗██║██║  ██║██║   ██║██║███╗██║
+-- ╚███╔███╔╝██║██║ ╚████║██████╔╝╚██████╔╝╚███╔███╔╝
+--  ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝  ╚══╝╚══╝
+
+-- This is because we are using a tiling window manager
+config.window_decorations = "RESIZE"
+
+-- tab bar
+config.hide_tab_bar_if_only_one_tab = true
+config.use_fancy_tab_bar = true
+
+-- ██████╗ ██████╗ ██╗      ██████╗ ██████╗ ███████╗
+-- ██╔════╝██╔═══██╗██║     ██╔═══██╗██╔══██╗██╔════╝
+-- ██║     ██║   ██║██║     ██║   ██║██████╔╝███████╗
+-- ██║     ██║   ██║██║     ██║   ██║██╔══██╗╚════██║
+-- ╚██████╗╚██████╔╝███████╗╚██████╔╝██║  ██║███████║
+--  ╚═════╝ ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+
+-- Ensure  the wezterm TERM definitions are installed for wezterm TERM to work
+-- otherwise set to xterm-256color. Follow the line below to install the definitions
+-- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=term#term-xterm-256color
+config.term = "wezterm"
+
+if is_darwin then
+	config.window_background_opacity = 0.3
+	config.macos_window_background_blur = 20
+elseif is_linux then
+	config.window_background_opacity = 0.2
+else
+	config.window_background_opacity = 0.6
+end
+
+config.color_scheme = "Tokyo Night Moon"
+
+return config
