@@ -1,6 +1,6 @@
 aic94xx-firmware
 alsa-utils
-amd-ucode
+ani-cli
 arch-gaming-meta
 ast-firmware
 base
@@ -15,6 +15,8 @@ fastfetch
 figlet
 firefox
 fish
+foot
+git-credential-manager-bin
 gnome-tweaks
 googledot-cursor-theme
 gparted
@@ -24,8 +26,10 @@ hyprland
 kitty
 lazygit
 libva-nvidia-driver
+linux
 linux-firmware
 linux-firmware-qlogic
+linux-headers
 linux-zen
 linux-zen-headers
 most
@@ -33,6 +37,7 @@ neovim
 npm
 ntfs-3g
 nushell
+os-prober
 paru
 paru-debug
 pipewire-alsa
