@@ -30,6 +30,15 @@ return {
 			require("lazy.core.loader").add_to_rtp(plugin)
 			require("nvim-treesitter.query_predicates")
 			vim.filetype.add({ pattern = { [".*/hypr/.*%.conf"] = "hyprlang" } })
+			vim.filetype.add({
+				extension = {
+					tmpl = 'gotmpl',
+				},
+				pattern = {
+					[".*.%.toml"] = "toml",
+					[".*.%.lua"] = "lua"
+				}
+			})
 		end,
 		build = ":TSUpdate",
 		--- @diagnostic disable-next-line: missing-fields
@@ -38,6 +47,7 @@ return {
 				"bash",
 				"c",
 				"diff",
+				"gotmpl",
 				"html",
 				"hyprlang",
 				"javascript",

@@ -2,9 +2,6 @@ local wezterm = require "wezterm"
 local act = wezterm.action
 local config = {} or wezterm.config_builder()
 
--- Helpers to determine OS
-local os = wezterm.target_triple
-
 -- ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗
 -- ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝
 -- ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
@@ -16,7 +13,7 @@ config.window_close_confirmation = "NeverPrompt"
 
 -- Tmux like sessions
 -- config.unix_domains = { name = "unix" }
-config.default_gui_startup_args = { "connect", "unix" }
+-- config.default_gui_startup_args = { "connect", "unix" }
 
 -- Input
 config.enable_kitty_keyboard = true
@@ -31,10 +28,11 @@ config.visual_bell = {
 	fade_out_function = "EaseOut",
 }
 
-if is_linux then
-	config.enable_wayland = false
-	config.front_end = "WebGpu"
-end
+-- Wayland fix
+{{ if eq .displayServer "wayland" }}
+config.enable_wayland = false
+config.front_end = "WebGpu"
+{{- end }}
 
 -- ███████╗ ██████╗ ███╗   ██╗████████╗
 -- ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝
@@ -43,15 +41,16 @@ end
 -- ██║     ╚██████╔╝██║ ╚████║   ██║
 -- ╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝
 
-config.font = wezterm.font(
-	{ family = "VictorMono Nerd Font", weight = "Regular" }
-)
+config.font = wezterm.font_with_fallback({
+	{ family = "VictorMono Nerd Font", weight = "Regular" },
+	{ family = "Symbols Nerd Font", weight = "Regular" },
+})
 
-if is_darwin then
-	config.font_size = 15
-else
-	config.font_size = 13
-end
+{{- if eq .chezmoi.os "darwin" }}
+config.font_size = 15
+{{- else }}
+config.font_size = 13
+{{- end }}
 
 --  ██████╗██╗   ██╗██████╗ ███████╗ ██████╗ ██████╗
 -- ██╔════╝██║   ██║██╔══██╗██╔════╝██╔═══██╗██╔══██╗
@@ -135,9 +134,12 @@ wezterm.on("update-right-status", function(window, _)
 	})
 end)
 
+-- ██╗    ██╗██╗███╗   ██╗██████╗  ██████╗ ██╗    ██╗
+-- ██║    ██║██║████╗  ██║██╔══██╗██╔═══██╗██║    ██║
+-- ██║ █╗ ██║██║██╔██╗ ██║██║  ██║██║   ██║██║ █╗ ██║
 -- ██║███╗██║██║██║╚██╗██║██║  ██║██║   ██║██║███╗██║
 -- ╚███╔███╔╝██║██║ ╚████║██████╔╝╚██████╔╝╚███╔███╔╝
---  ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝  ╚══╝╚══╝
+ -- ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝  ╚══╝╚══╝ 
 
 -- This is because we are using a tiling window manager
 config.window_decorations = "RESIZE"
@@ -153,20 +155,25 @@ config.use_fancy_tab_bar = true
 -- ╚██████╗╚██████╔╝███████╗╚██████╔╝██║  ██║███████║
 --  ╚═════╝ ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
 
--- Ensure  the wezterm TERM definitions are installed for wezterm TERM to work
+config.color_scheme = "Tokyo Night Moon"
+
+{{- if eq .chezmoi.os "darwin" }}
+config.window_background_opacity = 0.3
+config.macos_window_background_blur = 20
+{{- else if eq .chezmoi.os "linux" }}
+config.window_background_opacity = 0.2
+{{- else }}
+config.window_background_opacity = 0.6
+{{- end }}
+
+config.inactive_pane_hsb = {
+  saturation = 0.8,
+  brightness = 0.3,
+}
+
+-- Ensure the wezterm TERM definitions are installed for wezterm TERM to work
 -- otherwise set to xterm-256color. Follow the line below to install the definitions
 -- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=term#term-xterm-256color
 config.term = "wezterm"
-
-if is_darwin then
-	config.window_background_opacity = 0.3
-	config.macos_window_background_blur = 20
-elseif is_linux then
-	config.window_background_opacity = 0.2
-else
-	config.window_background_opacity = 0.6
-end
-
-config.color_scheme = "Tokyo Night Moon"
 
 return config
