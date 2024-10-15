@@ -1,0 +1,16 @@
+actions:
+  - action: command.run
+    where: os.distribution == "arch" # TODO: also check gpu
+    privileged: true
+    command: sh
+    args:
+    - "-c"
+    - "(grep -qxF 'MODULES=' /etc/mkinitcpio.conf) =~ 'nvidia' || sed -i "/MODULES=/ s/)$/ nvidia nvidia_modeset nvidia_uvm nvidia_drm)/" /etc/mkinitcpio.conf"
+  
+  - action: command.run
+    where: os.distribution == "arch" # TODO: also check gpu
+    privileged: true
+    command: sh
+    args:
+    - "-c"
+    - "line='options nvidia-drm modeset=1'; loc=/etc/modprobe.d/nvidia.conf; grep -qxF $line $file || echo line >> file"
