@@ -39,11 +39,6 @@ abbr vim nvim
 abbr neofetch fastfetch
 abbr ani ani-cli
 
-# package manager shortcuts
-abbr yay paru
-abbr yays paru -S --skipreview
-abbr yayr paru -Rns
-
 # git
 abbr g git
 abbr gti git
@@ -73,3 +68,6 @@ abbr dammit fuck
 abbr py python3
 
 abbr cz chezmoi
+abbr cze chezmoi edit
+abbr cza chezmoi apply
+abbr czu chezmoi epdate
