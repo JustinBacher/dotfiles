@@ -60,4 +60,5 @@ return {
 	tflint = default_lsp_config,
 	ts_ls = default_lsp_config,
 	yamlls = default_lsp_config,
+	taplo = default_lsp_config,
 }
