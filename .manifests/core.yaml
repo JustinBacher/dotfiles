@@ -1,0 +1,9 @@
+actions:
+  - action: package.install
+    provider: paru
+    list: 
+      - aic94xx-firmware
+      - alsa-utils
+      - ast-firmware
+      - nvidia-dkms
+      - neofetch
