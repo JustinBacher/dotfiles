@@ -1,6 +1,6 @@
 local wezterm = require "wezterm"
-local act = wezterm.action
 local config = {} or wezterm.config_builder()
+local act = wezterm.action
 
 -- ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗
 -- ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝
@@ -12,12 +12,12 @@ local config = {} or wezterm.config_builder()
 config.window_close_confirmation = "NeverPrompt"
 
 -- Tmux like sessions
--- config.unix_domains = { name = "unix" }
--- config.default_gui_startup_args = { "connect", "unix" }
+config.unix_domains = { { name = "unix" } }
+config.default_gui_startup_args = { "connect", "unix" }
 
 -- Input
-config.enable_kitty_keyboard = true
-config.use_ime = true
+-- config.enable_kitty_keyboard = true
+-- config.use_ime = true
 
 -- Only visual bell
 config.audible_bell = "Disabled"
@@ -31,7 +31,7 @@ config.visual_bell = {
 -- Wayland fix
 {{ if eq .displayServer "wayland" }}
 config.enable_wayland = false
-config.front_end = "WebGpu"
+config.front_end = "OpenGL"
 {{- end }}
 
 -- ███████╗ ██████╗ ███╗   ██╗████████╗
