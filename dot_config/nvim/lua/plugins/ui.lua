@@ -145,6 +145,7 @@ return {
 	},
 	{
 		"rcarriga/nvim-notify",
+		lazy = false,
 		keys = {
 			{ "<leader>nd", dismiss_all_notifications,   desc = "Dismiss All Notifications" },
 			{ "<leader>nh", "<cmd>Telescope notify<cr>", desc = "Notification History" },
