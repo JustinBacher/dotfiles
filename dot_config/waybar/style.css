@@ -1,13 +1,15 @@
+@import url("colors.css");
+
 * {
     font-size: 14px;
 }
 
 window#waybar {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: "VictorMono Nerd Font Bold", monospace;
-    background-color: rgba(26, 27, 38, 0.8);
+    font-family: "VictorMono Nerd Font", monospace;
+    background-color: @background-alpha;
     border-bottom: 0px;
-    color: #ebdbb2;
+    color: @foreground;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -19,25 +21,6 @@ window#waybar.hidden {
 window#waybar.empty #window {
     background-color: transparent;
 }
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
-/*.modules-right {*/
-/*    margin: 10px 10px 0 0;*/
-/*}*/
-/*.modules-center {*/
-/*    margin: 10px 0 0 0;*/
-/*}*/
-/*.modules-left {*/
-/*    margin: 10px 0 0 10px;*/
-/*}*/
 
 button {
     /* Use box-shadow instead of border so the text isn't offset */
@@ -53,35 +36,26 @@ button:hover {
 } */
 
 #workspaces {
-    background-color: #7AA2F7;
+    background-color: @color-2;
 }
 
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
-    color: #2A2F41;
+    color: @foreground;
 }
 
-/*#workspaces button:first-child {*/
-/*    border-radius: 5px 0 0 5px;*/
-/*}*/
-
-/*#workspaces button:last-child {*/
-/*    border-radius: 0 5px 5px 0;*/
-/*}*/
-
 #workspaces button:hover {
-    background-color: #2A2F41;
-	color: #A9B1D6;
+    background-color: @color-11;
+	color: @color-7;
 }
 
 #workspaces button.focused {
-    background-color: #665c54;
-    /* box-shadow: inset 0 -3px #ffffff; */
+    background-color: @color-3;
 }
 
 #workspaces button.urgent {
-    background-color: #b16286;
+    background-color: @color-9;
 }
 
 #idle_inhibitor,
@@ -101,36 +75,36 @@ button:hover {
 #memory {
     padding: 0 5px;
     background-color: transparent;
-    color: #A9B1D6;
+    color: @foreground;
 	font-weight: 900;
 }
 
 #clock {
 	padding: 0 8px 0 8px;
-	background-color: #2A2F41;
-    color: #A9B1D6;
+	background-color: @color-6;
+    color: @color-15;
 }
 
 #wireplumber {
-	color: #73DACA;
+	color: @color-12;
 }
 
 #cpu {
-	color: #F2748B;
+	color: @color-9;
 }
 
 #network {
-	color: #E0AF68;
+	color: @color-11;
 }
 
 #memory {
-	color: #414868;
+	color: @color-12;
 }
 
 #custom.dots {
     padding: 0 5px;
     background-color: transparent;
-	color: #FC9C63;
+	color: @color-3;
 	font-weight: 900;
 }
 
@@ -152,9 +126,8 @@ button:hover {
 
 #cava {
     padding: 0 0px;
-    background-color: #2A2F41;
-	color: #7AA2F7;
-	/*transform: translateX(20px);*/
+    background-color: @color-14;
+	color: @color-2;
 }
 
 #battery.charging, #battery.plugged {
@@ -185,7 +158,7 @@ label:focus {
 }
 
 #wireplumber.muted {
-    background-color: #458588;
+    background-color: @color-4;
 }
 
 #tray > .passive {

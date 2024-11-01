@@ -10,6 +10,7 @@ local act = wezterm.action
 --  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝
 
 config.window_close_confirmation = "NeverPrompt"
+config.warn_about_missing_glyphs = false
 
 -- Tmux like sessions
 config.unix_domains = { { name = "unix" } }
@@ -30,7 +31,7 @@ config.visual_bell = {
 
 -- Wayland fix
 {{ if eq .displayServer "wayland" }}
-config.enable_wayland = false
+config.enable_wayland = true
 config.front_end = "OpenGL"
 {{- end }}
 
@@ -42,7 +43,7 @@ config.front_end = "OpenGL"
 -- ╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝
 
 config.font = wezterm.font_with_fallback({
-	{ family = "VictorMono Nerd Font", weight = "Regular" },
+	{ family = "VictorMono Nerd Font", weight = "Regular", stretch="Normal", style="Normal" },
 	{ family = "Symbols Nerd Font", weight = "Regular" },
 })
 
@@ -67,13 +68,19 @@ config.cursor_blink_ease_out = "EaseOut"
 -- ██╗  ██╗███████╗██╗   ██╗██████╗ ██╗███╗   ██╗██████╗ ███████╗
 -- ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔══██╗██║████╗  ██║██╔══██╗██╔════╝
 -- █████╔╝ █████╗   ╚████╔╝ ██████╔╝██║██╔██╗ ██║██║  ██║███████╗
--- █████╔╝ █████╗   ╚████╔╝ ██████╔╝██║██╔██╗ ██║██║  ██║███████╗
--- ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔══██╗██║████╗  ██║██╔══██╗██╔════╝
--- █████╔╝ █████╗   ╚████╔╝ ██████╔╝██║██╔██╗ ██║██║  ██║███████╗
 -- ██╔═██╗ ██╔══╝    ╚██╔╝  ██╔══██╗██║██║╚██╗██║██║  ██║╚════██║
 -- ██║  ██╗███████╗   ██║   ██████╔╝██║██║ ╚████║██████╔╝███████║
 -- ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝
 
+local move_around = function(window, pane, direction_wez, direction_nvim)
+	if pane:get_title():lower() == "nvim" then
+		window:perform_action(wezterm.action{SendString="\x17"..direction_nvim}, pane)
+	else
+		window:perform_action(wezterm.action{ActivatePaneDirection=direction_wez}, pane)
+	end
+end
+
+--[[
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
 	-- Splitting panes
@@ -89,6 +96,7 @@ config.keys = {
 	{ key = "l",      mods = "CTRL", action = act.ActivatePaneDirection "Right" },
 
 	{ key = "Escape", mods = "ALT",  action = act.CloseCurrentPane { confirm = false } },
+	{ key = "r", mods = "LEADER",  action = act.ActivateKeyTable { name = "resize_pane", one_shot = false } },
 }
 
 -- leader + number to activate that tab
@@ -98,14 +106,14 @@ end
 
 config.key_tables = {
 	resize_pane = {
-		{ key = "LeftArrow",  action = act.AdjustPaneSize { "Left", 1 } },
-		{ key = "h",          action = act.AdjustPaneSize { "Left", 1 } },
-		{ key = "RightArrow", action = act.AdjustPaneSize { "Right", 1 } },
-		{ key = "l",          action = act.AdjustPaneSize { "Right", 1 } },
-		{ key = "UpArrow",    action = act.AdjustPaneSize { "Up", 1 } },
-		{ key = "k",          action = act.AdjustPaneSize { "Up", 1 } },
-		{ key = "DownArrow",  action = act.AdjustPaneSize { "Down", 1 } },
-		{ key = "j",          action = act.AdjustPaneSize { "Down", 1 } },
+		{ key = "LeftArrow",  action = act.AdjustPaneSize { "Left", 3 } },
+		{ key = "h",          action = act.AdjustPaneSize { "Left", 3 } },
+		{ key = "RightArrow", action = act.AdjustPaneSize { "Right", 3 } },
+		{ key = "l",          action = act.AdjustPaneSize { "Right", 3 } },
+		{ key = "UpArrow",    action = act.AdjustPaneSize { "Up", 3 } },
+		{ key = "k",          action = act.AdjustPaneSize { "Up", 3 } },
+		{ key = "DownArrow",  action = act.AdjustPaneSize { "Down", 3 } },
+		{ key = "j",          action = act.AdjustPaneSize { "Down", 3 } },
 
 		-- Cancel the mode by pressing escape
 		{ key = "Escape",     action = "PopKeyTable" },
@@ -133,6 +141,7 @@ wezterm.on("update-right-status", function(window, _)
 		{ Text = SOLID_LEFT_ARROW }
 	})
 end)
+]]--
 
 -- ██╗    ██╗██╗███╗   ██╗██████╗  ██████╗ ██╗    ██╗
 -- ██║    ██║██║████╗  ██║██╔══██╗██╔═══██╗██║    ██║
@@ -142,7 +151,11 @@ end)
  -- ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝  ╚══╝╚══╝ 
 
 -- This is because we are using a tiling window manager
+{{- if eq .chezmoi.os "darwin" }}
 config.window_decorations = "RESIZE"
+{{- else }}
+config.window_decorations = "NONE"
+{{- end }}
 
 -- tab bar
 config.hide_tab_bar_if_only_one_tab = true
@@ -161,7 +174,7 @@ config.color_scheme = "Tokyo Night Moon"
 config.window_background_opacity = 0.3
 config.macos_window_background_blur = 20
 {{- else if eq .chezmoi.os "linux" }}
-config.window_background_opacity = 0.2
+config.window_background_opacity = 0.0
 {{- else }}
 config.window_background_opacity = 0.6
 {{- end }}

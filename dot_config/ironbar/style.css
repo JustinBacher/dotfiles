@@ -1,0 +1,217 @@
+* {
+  font-family: "VictorMono Nerd Font Mono", monospace;
+  font-size: 14px;
+  border: none;
+  border-radius: 0;
+  padding: 10px 0px 10px 0px;
+  margin: 10px 0px 10px 0px;
+}
+
+.bar {
+  padding: 10px 0px 10px 0px;
+}
+
+.time {
+  padding: 10px 0px 10px 0px;
+  font-size: 14px;
+  background: linear-gradient(45deg, rgb(254, 240, 224) 0%, rgb(244, 169, 158) 50%, rgb(238, 214, 215) 100%);
+  animation: gradient 5s ease infinite;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.377);
+  box-shadow: rgba(0, 0, 0, 0.288) 2px 2px 5px 2px;
+}
+
+.clock_date {
+  font-family: "VictorMono Nerd Font Mono";
+  color: rgb(49, 50, 68);
+}
+
+.background {
+  background-color: rgba(0, 0, 0, 0)
+}
+
+.popup-clock {
+  font-weight: bolder;
+  background: rgb(36, 39, 58);
+}
+
+.popup-pwr {
+  background: rgb(234, 153, 156);
+  color: rgb(48, 52, 70);
+  background: rgb(238, 190, 190);
+  background: linear-gradient(45deg, rgb(129, 200, 190) 0%, rgb(244, 184, 228) 43%, rgb(153, 209, 219) 80%, rgb(202, 158, 230) 100%);
+  animation: gradient 10s ease infinite;
+  border: none;
+}
+
+#power-btn {
+  background: rgb(238, 190, 190);
+  background: linear-gradient(45deg, rgb(129, 200, 190) 0%, rgb(244, 184, 228) 43%, rgb(153, 209, 219) 80%, rgb(202, 158, 230) 100%);
+  animation: gradient 10s ease infinite;
+  border: none;
+  font-weight: bolder;
+  box-shadow: rgba(0, 0, 0, 0.25) 2px 2px 5px 2px;
+}
+
+#shutdown {
+  background: rgb(238, 190, 190);
+}
+
+#reboot {
+  background: rgb(140, 170, 238);
+}
+
+#hibernation {
+  box-shadow: rgba(0, 0, 0, 0.35) 2px 2px 5px 2px;
+  background: rgb(153, 209, 219);
+}
+
+/* base */
+.sysinfo .item,
+.script,
+.tray {
+  background: #cdd6f4;
+  color: #516079;
+  box-shadow: rgba(0, 0, 0, 0.116) 2px 2px 5px 2px;
+}
+
+.scale,
+.internet,
+.script {
+  transition: all 0.5s cubic-bezier(0.5, 1, 0.89, 1);
+  box-shadow: rgba(0, 0, 0, 0.288) 2px 2px 5px 2px;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.377);
+  background: rgb(202, 158, 230);
+  background: linear-gradient(45deg, rgba(202, 158, 230, 1) 0%, rgba(245, 194, 231, 1) 43%, rgba(180, 190, 254, 1) 80%, rgba(137, 180, 250, 1) 100%);
+  /* background-size: 300% 300%; */
+  animation: gradient 5s ease infinite;
+  color: #fff;
+}
+
+
+scale trough {
+  background-color: #E7D4CB;
+  box-shadow: 0 2px 3px 2px rgba(00, 00, 00, 0.4);
+  min-height: 9px;
+  min-width: 20px;
+  /* margin: 0px 5px 10px 10px; */
+
+}
+
+scale value {
+  color: #77a5bf;
+  font-size: 0px;
+}
+
+scale trough highlight {
+  background-image: linear-gradient(to right, #afcee0 30%, #92B6F4 50%, #77a5bf 100%);
+  background-color: #afcee0;
+}
+
+.focused {
+  color: rgb(84, 111, 175);
+  /* padding: 0px 10px 0px 10px; */
+  background: rgb(238, 190, 190);
+  background: linear-gradient(45deg, rgb(244, 219, 214) 0%, rgb(223, 221, 238) 43%, rgb(245, 208, 225) 100%);
+  /* background-size: 300% 300%; */
+  animation: gradient 5s ease infinite;
+}
+
+
+/* cpu */
+.sysinfo .item:nth-child(1) {
+  background: rgb(180, 190, 254);
+  background: linear-gradient(52deg, rgba(180, 190, 254, 1) 0%, rgba(137, 220, 235, 1) 32%, rgba(137, 180, 250, 1) 72%, rgba(166, 227, 161, 1) 100%);
+  /* background-size: 300% 300%; */
+  animation: gradient 20s ease infinite;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.377);
+  /* background-color: #b4befe; */
+  color: #fff;
+}
+
+.clock {
+  /* padding-right: 20px; */
+  /* padding-left: 20px; */
+  /* padding-bottom: 3px; */
+  box-shadow: rgba(0, 0, 0, 0.288) 2px 2px 5px 2px;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.377);
+  border: none;
+  background: rgb(202, 158, 230);
+  background: linear-gradient(45deg, rgba(202, 158, 230, 1) 0%, rgba(245, 194, 231, 1) 43%, rgba(180, 190, 254, 1) 80%, rgba(137, 180, 250, 1) 100%);
+  /* background-size: 300% 300%; */
+  animation: gradient 10s ease infinite;
+  color: #fff;
+}
+
+.tray {
+  color: rgb(84, 111, 175);
+  font-size: 15px;
+  /* padding: 0px 10px 0px 10px; */
+  background: rgb(238, 190, 190);
+  background: linear-gradient(45deg, rgb(244, 219, 214) 0%, rgb(223, 221, 238) 43%, rgb(245, 208, 225) 100%);
+  background-size: 50% 50%;
+  animation: gradient 5s ease infinite;
+}
+
+.tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+.tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #eb4d4b;
+}
+
+/* .workspaces { */
+/* } */
+
+.workspaces .item {
+  box-shadow: rgba(0, 0, 0, 0.116) 2px 2px 5px 2px;
+  border: unset;
+  background: #fff;
+  /* padding: 5px 20px 5px 20px; */
+  color: #cba6f7;
+}
+
+.workspaces .item.focused {
+  border: unset;
+  transition: all 0.5s cubic-bezier(0.5, 1, 0.89, 1);
+  box-shadow: rgba(0, 0, 0, 0.288) 2px 2px 5px 2px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.377);
+  /* padding: 5px 10px 5px 10px; */
+  background: rgb(202, 158, 230);
+  background: linear-gradient(45deg, rgba(202, 158, 230, 1) 0%, rgba(245, 194, 231, 1) 43%, rgba(180, 190, 254, 1) 80%, rgba(137, 180, 250, 1) 100%);
+  /* background-size: 300% 300%; */
+  animation: gradient 10s ease infinite;
+  color: #fff;
+}
+
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+tooltip.background {
+  background-color: rgba(00, 00, 00, 0.5);
+  color: #FDFDFD;
+}
+
+tooltip * {
+  /* padding: 4px; */
+  background-color: transparent;
+  color: white;
+}
+
+.host tooltip {
+  background-color: rgba(255, 00, 00, 0.5);
+}

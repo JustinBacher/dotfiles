@@ -1,0 +1,121 @@
+let {
+    $tray = { type = "tray" icon_size = 14 }
+    $custom_clock = {
+        type = "custom"
+        class = "time"
+        on_mouse_enter = "ironbar var set clock_state true"
+        on_mouse_exit = "ironbar var set clock_state false"
+        bar = [
+            {
+                type = "label"
+                label = "{{date '+%H:%M'}}"
+            }
+            {
+                type = "label"
+                transition_duration = 400
+                label = " {{date '+%b %d, %Y'}}"
+                class = "clock_date"
+                show_if = "#clock_state"
+            }
+        ]
+    }
+   
+    $window = {
+      type = "focused"
+      show_icon = true
+      show_title = true
+      icon_size = 14
+      icon_theme = "Paper"
+    }
+    $cpu_sys = "{cpu_percent}% "
+    
+    $memory_sys = "{memory_percent}% "
+        
+    $network_sys = "{net_down:wlp6s0} Mbps"
+    
+    $SysInfo = { 
+      type = "sys_info"
+      class = "ram"
+      format = [ $memory_sys ]
+      tooltip = "{{~/.config/ironbar/scripts/ram_info}} GiB"
+    }
+
+    $internet = {
+        type = "custom"
+        class = "internet"
+        on_mouse_enter = "ironbar var set wifi_state true"
+        on_mouse_exit = "ironbar var set wifi_state false"
+        bar = [
+            {
+                type = "label"
+                transition_type = "slide_end"
+                transition_duration = 350
+                label = "{{~/.config/eww/scripts/wifi --ESSID}} "
+                show_if = "#wifi_state"
+            }
+            {
+                type = "label"
+                label = "{{~/.config/eww/scripts/wifi --ICON}}"
+            }
+        ]
+    }
+
+    
+    $expand_sound = {
+        type = "script"
+        mode = "poll"
+        interval = 100
+        cmd = "zsh -c 'if [ '$(ironbar var get soundbar_state | tail -1)' = 'true' ]; then; echo '';else;echo '';fi'"
+        on_click_left = "zsh -c 'if [ '$(ironbar var get soundbar_state | tail -1)' = 'true' ]; then; ironbar var set soundbar_state false;else;ironbar var set soundbar_state true;fi'"
+    }
+
+    $cava = {
+        transition_type = "slide_end"
+        transition_duration = 750
+        name = "cava"
+        type = "script"
+        mode = "watch"
+        cmd = "~/.config/ironbar/scripts/cava"
+        show_if = "#soundbar_state"
+   }
+
+    $volume = {
+        transition_type = "slide_end"
+        transition_duration = 350
+        type = "custom"
+        bar = [ 
+            {
+                type = "slider"
+                class = "scale"
+                length = 100
+                max = 100
+                on_change = "!wpctl set-volume @DEFAULT_SINK@ $0%"
+                on_scroll_down = "wpctl set-volume @DEFAULT_SINK@ 2%-"
+                on_scroll_up = "wpctl set-volume @DEFAULT_SINK@ 2%+"
+                on_click_right = "pavucontrol"
+                value = "100:~/.config/ironbar/scripts/volume"
+                show_if = "#soundbar_state"
+                tooltip = "{{~/.config/ironbar/scripts/volume}}%"
+            }
+        ]
+    }
+
+    $workspace = {
+        type = "workspaces"
+        sort = "alphanumeric"
+        on_scroll_up = "hyprctl dispatch workspace -1"
+        on_scroll_down = "hyprctl dispatch workspace +1"
+    }
+    
+    $start = [ $workspace $window ]
+    $center = [  ]
+    $end = [ $cava $volume $expand_sound $internet $SysInfo $custom_clock $tray ]
+}
+in {
+    position = "top"
+	height = 20
+    start = $start
+    center = $center
+    end = $end
+}
+

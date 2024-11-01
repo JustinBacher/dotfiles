@@ -13,6 +13,7 @@ return {
 	{ "windwp/nvim-autopairs", config = true },
 	{ "echasnovski/mini.ai", event = "LazyFile", config = true },
 	{ "tenxsoydev/karen-yank.nvim", event = "LazyFile", config = true },
+	{ "gpanders/editorconfig.nvim", config = true },
 	{
 		"Shatur/neovim-session-manager",
 		event = "LazyFile",
@@ -76,7 +77,7 @@ return {
 			vim.o.timeoutlen = 300
 		end,
 		opts = {
-			window = {
+			win = {
 				border = "shadow",
 			},
 		},
@@ -86,7 +87,8 @@ return {
 		dependencies = { "nvim-telescope/telescope-media-files.nvim" },
 		cmd = "Telescope",
 		keys = {
-			{ "<leader><space>", "<Cmd>Telescope find_files<CR>", desc = "Find Files (Root Dir)" },
+			-- { "<leader><space>", "<Cmd>Telescope find_files<CR>", desc = "Find Files (Root Dir)" },
+			{ "<leader><space>", "<Cmd>Telescope live_grep<CR>", desc = "Find Files (Root Dir)" },
 			{ "<leader>/", live_grep_from_project_git_root, desc = "Grep (Root Dir)" },
 			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
 			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope Buffers" },
