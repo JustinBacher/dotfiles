@@ -1,4 +1,5 @@
 ## Configuration file for CAVA. Default values are commented out. Use either ';' or '#' for commenting.
+#
 
 
 [general]
@@ -7,7 +8,7 @@
 ; mode = normal
 
 # Accepts only non-negative values.
-; framerate = 60
+framerate = 60
 
 # 'autosens' will attempt to decrease sensitivity if the bars peak. 1 = on, 0 = off
 # new as of 0.6.0 autosens of low values (dynamic range)
@@ -59,11 +60,11 @@
 # For alsa 'source' will be the capture device.
 # For fifo 'source' will be the path to fifo-file.
 # For shmem 'source' will be /squeezelite-AA:BB:CC:DD:EE:FF where 'AA:BB:CC:DD:EE:FF' will be squeezelite's MAC address
-; method = pulse
-; source = auto
+method = pipewire
+source = auto
 
-; method = alsa
-; source = hw:Loopback,1
+method = alsa
+source = hw:Loopback,1
 
 ; method = fifo
 ; source = /tmp/mpd.fifo

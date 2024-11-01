@@ -73,81 +73,23 @@ let dark_theme = {
     shape_raw_string: light_purple
 }
 
-let light_theme = {
-    # color for nushell primitives
-    separator: dark_gray
-    leading_trailing_space_bg: { attr: n } # no fg, no bg, attr none effectively turns this off
-    header: green_bold
-    empty: blue
-    # Closures can be used to choose colors for specific values.
-    # The value (in this case, a bool) is piped into the closure.
-    # eg) {|| if $in { 'dark_cyan' } else { 'dark_gray' } }
-    bool: dark_cyan
-    int: dark_gray
-    filesize: cyan_bold
-    duration: dark_gray
-    date: purple
-    range: dark_gray
-    float: dark_gray
-    string: dark_gray
-    nothing: dark_gray
-    binary: dark_gray
-    cell-path: dark_gray
-    row_index: green_bold
-    record: dark_gray
-    list: dark_gray
-    block: dark_gray
-    hints: dark_gray
-    search_result: { fg: white bg: red }
-    shape_and: purple_bold
-    shape_binary: purple_bold
-    shape_block: blue_bold
-    shape_bool: light_cyan
-    shape_closure: green_bold
-    shape_custom: green
-    shape_datetime: cyan_bold
-    shape_directory: cyan
-    shape_external: cyan
-    shape_externalarg: green_bold
-    shape_external_resolved: light_purple_bold
-    shape_filepath: cyan
-    shape_flag: blue_bold
-    shape_float: purple_bold
-    # shapes are used to change the cli syntax highlighting
-    shape_garbage: { fg: white bg: red attr: b }
-    shape_glob_interpolation: cyan_bold
-    shape_globpattern: cyan_bold
-    shape_int: purple_bold
-    shape_internalcall: cyan_bold
-    shape_keyword: cyan_bold
-    shape_list: cyan_bold
-    shape_literal: blue
-    shape_match_pattern: green
-    shape_matching_brackets: { attr: u }
-    shape_nothing: light_cyan
-    shape_operator: yellow
-    shape_or: purple_bold
-    shape_pipe: purple_bold
-    shape_range: yellow_bold
-    shape_record: cyan_bold
-    shape_redirection: purple_bold
-    shape_signature: green_bold
-    shape_string: green
-    shape_string_interpolation: cyan_bold
-    shape_table: blue_bold
-    shape_variable: purple
-    shape_vardecl: purple
-    shape_raw_string: light_purple
+# ENV
+$env.EDITOR = "nvim"
+
+let abbreviations = {
+    "cd..": 'cd ..'
+	cze: 'chezmoi edit'
+	cza: 'chezmoi apply'
 }
 
 # External completer example
-# let carapace_completer = {|spans|
-#     carapace $spans.0 nushell ...$spans | from json
-# }
+let carapace_completer = {|spans|
+    carapace $spans.0 nushell ...$spans | from json
+}
 
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
-    show_banner: true # true or false to enable or disable the welcome banner at startup
+    show_banner: false
 
     ls: {
         use_ls_colors: true # use the LS_COLORS environment variable to colorize output
@@ -230,8 +172,8 @@ $env.config = {
 
     cursor_shape: {
         emacs: line # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (line is the default)
-        vi_insert: block # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (block is the default)
-        vi_normal: underscore # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (underscore is the default)
+        vi_insert: blink_line # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (block is the default)
+        vi_normal: blink_block # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (underscore is the default)
     }
 
     color_config: $dark_theme # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
@@ -240,7 +182,7 @@ $env.config = {
     buffer_editor: null # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
     use_ansi_coloring: true
     bracketed_paste: true # enable bracketed paste, currently useless on windows
-    edit_mode: emacs # emacs, vi
+    edit_mode: vi # emacs, vi
     shell_integration: {
         # osc2 abbreviates the path if in the home_dir, sets the tab/window title, shows the running command in the tab/window title
         osc2: true
@@ -304,6 +246,30 @@ $env.config = {
     menus: [
         # Configuration for default nushell menus
         # Note the lack of source parameter
+        {
+            name: abbr_menu
+            only_buffer_difference: false
+            marker: none
+            type: {
+                layout: columnar
+                columns: 1
+                col_width: 20
+                col_padding: 2
+            }
+            style: {
+                text: green
+                selected_text: green_reverse
+                description_text: yellow
+            }
+            source: { |buffer, position|
+                let match = $abbreviations | columns | where $it == $buffer
+                if ($match | is-empty) {
+                    { value: $buffer }
+                } else {
+                    { value: ($abbreviations | get $match.0) }
+                }
+            }
+        }
         {
             name: completion_menu
             only_buffer_difference: false
@@ -390,6 +356,27 @@ $env.config = {
     ]
 
     keybindings: [
+	    {
+		  name: abbr_menu
+		  modifier: none
+		  keycode: enter
+		  mode: [emacs, vi_normal, vi_insert]
+		  event: [
+		  	  { send: menu name: abbr_menu }
+			  { edit: insertchar value: ' ' }
+		  	  { send: enter }
+		  ]
+	    }
+	    {
+		  name: abbr_menu
+		  modifier: none
+		  keycode: space
+		  mode: [emacs, vi_normal, vi_insert]
+		  event: [
+			  { send: menu name: abbr_menu }
+			  { edit: insertchar value: ' ' }
+		  ]
+	    }
         {
             name: completion_menu
             modifier: none
@@ -896,3 +883,8 @@ $env.config = {
         }
     ]
 }
+
+use ~/.cache/starship/init.nu
+source ~/.cache/carapace/init.nu
+
+use task.nu

@@ -13,10 +13,14 @@ local function trouble(cmd, opts)
 end
 
 return {
-	{ "stevearc/dressing.nvim",      event = "VeryLazy", config = true },
+	{ "stevearc/dressing.nvim", event = "VeryLazy", config = true },
 	{ "echasnovski/mini.cursorword", event = "LazyFile", config = true },
-	{ "gen740/SmoothCursor.nvim",    event = "LazyFile", opts = { matrix = { enable = true } }, },
-	{ "echasnovski/mini.animate",    event = "LazyFile", opts = { scroll = { enable = false }, resize = { enable = false } } },
+	{ "gen740/SmoothCursor.nvim", event = "LazyFile", opts = { matrix = { enable = true } } },
+	{
+		"echasnovski/mini.animate",
+		event = "LazyFile",
+		opts = { scroll = { enable = false }, resize = { enable = false } },
+	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		opts = {
@@ -78,9 +82,21 @@ return {
 						return {
 							---@diagnostic disable: undefined-field
 							{ n.api.status.message.get_hl, cond = n.api.status.message.has },
-							{ n.api.status.command.get,    cond = n.api.status.command.has, color = { fg = "#ff9e64" } },
-							{ n.api.status.mode.get,       cond = n.api.status.mode.has,    color = { fg = "#ff9e64" } },
-							{ n.api.status.search.get,     cond = n.api.status.search.has,  color = { fg = "#ff9e64" } },
+							{
+								n.api.status.command.get,
+								cond = n.api.status.command.has,
+								color = { fg = "#ff9e64" },
+							},
+							{
+								n.api.status.mode.get,
+								cond = n.api.status.mode.has,
+								color = { fg = "#ff9e64" },
+							},
+							{
+								n.api.status.search.get,
+								cond = n.api.status.search.has,
+								color = { fg = "#ff9e64" },
+							},
 							---@diagnostic enable: undefined-field
 						}
 					end,
@@ -147,7 +163,7 @@ return {
 		"rcarriga/nvim-notify",
 		lazy = false,
 		keys = {
-			{ "<leader>nd", dismiss_all_notifications,   desc = "Dismiss All Notifications" },
+			{ "<leader>nd", dismiss_all_notifications, desc = "Dismiss All Notifications" },
 			{ "<leader>nh", "<cmd>Telescope notify<cr>", desc = "Notification History" },
 		},
 		opts = {
@@ -209,13 +225,18 @@ return {
 	{
 		"akinsho/bufferline.nvim",
 		event = "LazyFile",
+		version = "*",
 		dependencies = "nvim-tree/nvim-web-devicons",
 		opts = {
 			options = {
 				diagnostics = "nvim_lsp",
 				--- @diagnostic disable-next-line: unused-local
 				diagnostics_indicator = function(count, level, diagnostics_dict, context)
-					return " " .. level:match("error") and " " or " " .. count
+					local s = " "
+					for e, n in pairs(diagnostics_dict) do
+						s = s .. n .. e == "error" and " " or (e == "warning" and " " or " ")
+					end
+					return s
 				end,
 			},
 		},

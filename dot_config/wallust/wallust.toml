@@ -1,0 +1,8 @@
+backend = "kmeans"
+palette = "dark16"
+color_space = "lchansi"
+check_contrast = true
+
+[templates]
+waybar = { src = "waybar-colors.css", dst = "~/.config/waybar/colors.css" }
+hypr = { src = "hyprland-colors.conf", dst = "~/.config/hypr/colors.conf" }

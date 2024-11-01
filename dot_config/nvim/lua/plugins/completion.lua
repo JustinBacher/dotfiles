@@ -71,7 +71,7 @@ return {
 
 			cmp.setup({
 				enabled = true,
-				experimental = { ghost_text = true },
+				-- experimental = { ghost_text = true },
 				snippet = { expand = function(args) require("luasnip").lsp_expand(args.body) end },
 				completion = { keyword_length = 1 },
 				preselect = cmp.PreselectMode.Item,
@@ -85,11 +85,11 @@ return {
 				},
 				sources = cmp.config.sources({
 					-- { name = "cmp_ai", max_item_count = 1, group_index = 1 },
-					{ name = "luasnip", max_item_count = 3, group_index = 1 },
-					{ name = "nvim_lsp", max_item_count = 10, group_index = 1 },
+					-- { name = "luasnip", max_item_count = 3, group_index = 1 },
+					{ name = "nvim_lsp",                max_item_count = 10, group_index = 1 },
 					{ name = "nvim_lsp_signature_help", group_index = 1 },
-					{ name = "nvim_lua", group_index = 1 },
-					{ name = "path", group_index = 3 },
+					{ name = "nvim_lua",                group_index = 1 },
+					{ name = "path",                    group_index = 3 },
 				}, {
 					{ name = "buffer", keyword_length = 2, max_item_count = 5, group_index = 2 },
 				}),

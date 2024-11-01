@@ -1,0 +1,21 @@
+@define-color cursor rgb({{cursor | rgb}});
+@define-color background rgb({{background | rgb}});
+@define-color background-alpha rgba({{background | rgb}},0.8);
+@define-color foreground rgb({{foreground | rgb}});
+@define-color color-0 rgb({{color0 | rgb}});
+@define-color color-1 rgb({{color1 | rgb}});
+@define-color color-2 rgb({{color2 | rgb}});
+@define-color color-3 rgb({{color3 | rgb}});
+@define-color color-4 rgb({{color4 | rgb}});
+@define-color color-5 rgb({{color5 | rgb}});
+@define-color color-6 rgb({{color6 | rgb}});
+@define-color color-7 rgb({{color7 | rgb}});
+@define-color color-8 rgb({{color8 | rgb}});
+@define-color color-9 rgb({{color9 | rgb}});
+@define-color color-10 rgb({{color10 | rgb}});
+@define-color color-11 rgb({{color11 | rgb}});
+@define-color color-12 rgb({{color12 | rgb}});
+@define-color color-13 rgb({{color13 | rgb}});
+@define-color color-14 rgb({{color14 | rgb}});
+@define-color color-15 rgb({{color15 | rgb}});
+

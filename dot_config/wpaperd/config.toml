@@ -1,0 +1,8 @@
+[default]
+duration = "5m"
+mode = "fit"
+sorting = "random"
+transition-time = 3000
+
+[any]
+path = "~/.config/swww/Tokyo-Night"

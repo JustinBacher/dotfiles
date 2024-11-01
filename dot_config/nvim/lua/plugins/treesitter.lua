@@ -1,5 +1,4 @@
 return {
-	"fladson/vim-kitty", -- Not exactly treesitter related but it does do syntax highlighting
 	{
 		"andersevenrud/nvim_context_vt",
 		event = "LazyFile",
@@ -32,7 +31,7 @@ return {
 			vim.filetype.add({ pattern = { [".*/hypr/.*%.conf"] = "hyprlang" } })
 			vim.filetype.add({
 				extension = {
-					tmpl = 'gotmpl',
+					tmpl = "gotmpl",
 				},
 				pattern = {
 					[".*.%.toml"] = "toml",
@@ -40,6 +39,7 @@ return {
 				}
 			})
 		end,
+		dependencies = { { "nushell/tree-sitter-nu", build = ":TSUpdate nu" } },
 		build = ":TSUpdate",
 		--- @diagnostic disable-next-line: missing-fields
 		opts = {
@@ -73,7 +73,7 @@ return {
 			auto_install = true,
 			sync_install = true,
 			indent = { enable = true },
-			highlight = { enable = false },
+			highlight = { enable = true, disable = { "c", "ruist" } },
 			disable = function(lang, buf) ---@diagnostic disable-line: unused-local
 				local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 				return ok and stats and stats.size > 100 * 1024 -- 100kb
