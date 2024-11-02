@@ -1,5 +1,5 @@
 set -gx EDITOR nvim
-set -gx PAGER most
+set -gx PAGER less
 
 if status is-interactive
 	and not set -q TMUX
