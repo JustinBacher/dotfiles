@@ -23,6 +23,7 @@ chaotic-keyring
 chaotic-mirrorlist
 check-broken-packages-pacman-hook-git
 chezmoi
+chrome-remote-desktop
 chromium
 cliphist
 code
@@ -117,6 +118,7 @@ snap-sync
 starship
 steam-tui-bin
 stylua
+sunshine
 swaync
 swww
 sync-pacman-hook-git
