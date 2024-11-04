@@ -65,7 +65,7 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "LazyFile",
-		dependencies = { "nvim-tree/nvim-web-devicons", "letieu/harpoon-lualine", "folke/noice.nvim" },
+		dependencies = { "nvim-tree/nvim-web-devicons", "letieu/harpoon-lualine", "folke/noice.nvim", "roobert/action-hints.nvim", },
 		opts = {
 			options = {
 				theme = "tokyonight",
@@ -74,8 +74,8 @@ return {
 			},
 			sections = {
 				lualine_a = { "mode" },
-				lualine_b = { "diff", "diagnostics" },
-				lualine_c = { "harpoon2" },
+				lualine_b = { "diff", "diagnostics", "harpoon2" },
+				lualine_c = {  require("action-hints").statusline },
 				lualine_x = {
 					function()
 						local n = require("noice")

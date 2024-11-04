@@ -1,3 +1,11 @@
+local harpoon_keys = {}
+for i = 1, 10 do
+	table.insert(
+		harpoon_keys,
+		{ "<C-" .. i .. ">", function() require("harpoon"):list():select(i) end, desc = "Harpoon File " .. i }
+	)
+end
+
 return {
 	{
 		"folke/flash.nvim",
@@ -41,28 +49,23 @@ return {
 		},
 	},
 	{
-		"letieu/harpoon-lualine",
-		dependencies = {
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = vim.tbl_extend("force", harpoon_keys, {
+			{ "<leader>a", function() require("harpoon"):list():add() end, desc = "Harpoon: Mark File" },
 			{
-				"ThePrimeagen/harpoon",
-				branch = "harpoon2",
-				dependencies = { "nvim-lua/plenary.nvim" },
-				keys = {
-					{ "<leader>a", function() require("harpoon"):list():add() end, desc = "Harpoon: Mark File" },
-					{
-						"<C-e>",
-						function()
-							local h = require("harpoon")
-							h.ui:toggle_quick_menu(h:list())
-						end,
-						desc = "Toggle Harpoon Menu",
-					},
-					{ "<C-t>", function() require("harpoon"):list():select(1) end, desc = "Harpoon File 1" },
-					{ "<C-s>", function() require("harpoon"):list():select(2) end, desc = "Harpoon File 2" },
-					{ "<C-b>", function() require("harpoon"):list():select(3) end, desc = "Harpoon File 3" },
-					{ "<C-g>", function() require("harpoon"):list():select(4) end, desc = "Harpoon File 4" },
-				},
+				"<C-e>",
+				function()
+					local h = require("harpoon")
+					h.ui:toggle_quick_menu(h:list())
+				end,
+				desc = "Toggle Harpoon Menu",
 			},
-		},
+		}),
+	},
+	{
+		"letieu/harpoon-lualine",
+		dependencies = { "ThePrimeagen/harpoon" },
 	},
 }
