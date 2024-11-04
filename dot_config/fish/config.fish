@@ -6,9 +6,6 @@ set -gx PAGER less
 #     	exec tmux 
 # end
 
-# may want to set this later to something but stop greeting me every time fish :) lvu
-set -g fish_greeting
-
 set -l foreground c8d3f5 #c8d3f5
 set -l selection 2d3f76 #2d3f76
 set -l comment 636da6 #636da6
