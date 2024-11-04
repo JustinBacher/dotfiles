@@ -33,6 +33,8 @@ return {
 	},
 	{
 		"christoomey/vim-tmux-navigator",
+		-- Migrating to smart-splits.nvim for more multiplexer support
+		enabled = false,
 		cmd = {
 			"TmuxNavigateLeft",
 			"TmuxNavigateDown",
@@ -49,11 +51,33 @@ return {
 		},
 	},
 	{
+<<<<<<< HEAD
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		keys = vim.tbl_extend("force", harpoon_keys, {
 			{ "<leader>a", function() require("harpoon"):list():add() end, desc = "Harpoon: Mark File" },
+=======
+		"mrjones2014/smart-splits.nvim",
+		opts = { ignored_filetypes = { "NvimTree" } },
+		setup = function()
+			local wezterm = require("wezterm")
+			local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
+			local config = wezterm.config_builder()
+			-- you can put the rest of your Wezterm config here
+			smart_splits.apply_to_config(config, {
+				direction_keys = { "h", "j", "k", "l" },
+				modifiers = {
+					move = "CTRL",
+					resize = "CTRL SHIFT",
+				},
+			})
+		end,
+	},
+	{
+		"letieu/harpoon-lualine",
+		dependencies = {
+>>>>>>> a745be2 (changing how i do multiplexing)
 			{
 				"<C-e>",
 				function()

@@ -1,10 +1,10 @@
 set -gx EDITOR nvim
 set -gx PAGER less
 
-if status is-interactive
-	and not set -q TMUX
-    	exec tmux 
-end
+# if status is-interactive
+# 	and not set -q TMUX
+#     	exec tmux 
+# end
 
 # may want to set this later to something but stop greeting me every time fish :) lvu
 set -g fish_greeting

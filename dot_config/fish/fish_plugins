@@ -4,4 +4,8 @@ ilancosman/tide@v6
 meaningful-ooo/sponge
 franciscolourenco/done
 jorgebucaran/autopair.fish
+<<<<<<< HEAD
 danhper/fish-ssh-agent
+=======
+danhper/fish-ssh-agents
+>>>>>>> a745be2 (changing how i do multiplexing)
