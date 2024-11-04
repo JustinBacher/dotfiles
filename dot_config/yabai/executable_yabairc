@@ -16,9 +16,7 @@ yabai -m config									\
 	active_window_opacity 1.0 					\
 	normal_window_opacity 0.9 					\
 	window_shadow on 							\
-	external_bar all:32:0						\
-	mouse_follows_focus on						\
-	focus_follows_mouse autofocus
+	external_bar all:32:0
 
 
 # Padding
@@ -30,12 +28,12 @@ yabai -m config			\
 	window_gap 8
 
 # Mouse
-yabai -m config				\
-	mouse_follows_focus on	\
-	focus_follows_mouse on 	\
-	mouse_modifier alt 		\
-	mouse_action1 move 		\
-	mouse_action2 resize 	\
+yabai -m config						\
+	mouse_follows_focus on			\
+	focus_follows_mouse autofocus	\
+	mouse_modifier alt 				\
+	mouse_action1 move 				\
+	mouse_action2 resize 			\
 	mouse_drop_action swap
 
 # Let these apps be floating instead of tiled
