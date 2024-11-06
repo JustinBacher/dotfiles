@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-FONT_FACE="VictorMono Nerd Font Mono"
+FONT_FACE="ComicShannsMono Nerd Font Propo"
 
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins-laptop"
 PLUGIN_SHARED_DIR="$HOME/.config/sketchybar/plugins"
@@ -21,7 +21,7 @@ sketchybar --bar \
 # label.color=0xffffffff
 # background.color=0x9924273a
 sketchybar --default \
-    background.color=0x66494d64 \
+    background.color=0xb0111010 \
     background.corner_radius=5 \
     background.padding_right=5 \
     background.height=26 \
@@ -29,7 +29,7 @@ sketchybar --default \
     icon.padding_left=5 \
     icon.padding_right=5 \
     label.font="$FONT_FACE:Regular:12.0" \
-    label.color=0xffcad3f5 \
+    label.color=0xffe0e0e0 \
     label.y_offset=0 \
     label.padding_left=0 \
     label.padding_right=5
@@ -51,10 +51,10 @@ for sid in $(aerospace list-workspaces --all); do
     sketchybar --add item space.$sid left \
         --subscribe space.$sid aerospace_workspace_change \
         --set space.$sid \
-        background.color=0xffcad3f5 \
+        background.color=0xb0111010 \
         background.corner_radius=5 \
         background.height=20 \
-        background.drawing=off \
+		icon.drawing=off \
         label="$sid" \
         click_script="aerospace workspace $sid" \
         script="$PLUGIN_SHARED_DIR/plugins/aerospace.sh $sid"
@@ -65,7 +65,7 @@ sketchybar --add item front_app left \
     background.color=0xffa6da95 \
     background.padding_left=0 \
     background.padding_right=0 \
-    icon.y_offset=1 \
+    icon.y_offset=0 \
     icon.color=0xff24273a \
     label.drawing=no \
     script="$PLUGIN_SHARED_DIR/front_app.sh" \
@@ -75,7 +75,7 @@ sketchybar --add item front_app left \
     background.padding_left=-3 \
     icon= \
     icon.color=0xffa6da95 \
-    icon.font="$FONT_FACE:Bold:20.0" \
+    icon.font="$FONT_FACE:Bold:18.5" \
     icon.padding_left=0 \
     icon.padding_right=0 \
     icon.y_offset=1 \
@@ -88,25 +88,12 @@ sketchybar --add item front_app left \
     label.font="$FONT_FACE:Bold:12.0" \
     label.drawing=yes
 
-sketchybar --add item weather.moon q \
-    --set weather.moon \
-    background.color=0x667dc4e4 \
-    background.padding_right=-1 \
-    icon.color=0xff181926 \
-    icon.font="$FONT_FACE:Bold:22.0" \
-    icon.padding_left=4 \
-    icon.padding_right=3 \
-    label.drawing=off \
-    --subscribe weather.moon mouse.clicked
-
 sketchybar --add item weather q \
     --set weather \
-    icon= \
-    icon.color=0xfff5bde6 \
-    icon.font="$FONT_FACE:Bold:15.0" \
     update_freq=1800 \
     script="$PLUGIN_SHARED_DIR/weather.sh" \
-    --subscribe weather system_woke
+    --subscribe weather system_woke \
+	--subscribe weather mouse.entered
 
 sketchybar --add bracket front_app_bracket \
     front_app \
