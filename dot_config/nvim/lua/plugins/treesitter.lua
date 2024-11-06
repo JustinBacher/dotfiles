@@ -1,11 +1,11 @@
+local treesitter_parser_path = "~/.local/share/nvim/treesitter-parsers"
+
 return {
 	{
 		"andersevenrud/nvim_context_vt",
 		event = "LazyFile",
 		opts = { prefix = "" },
-		config = function(_, opts)
-			require('nvim_context_vt').setup(opts)
-		end,
+		config = function(_, opts) require("nvim_context_vt").setup(opts) end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -28,6 +28,8 @@ return {
 		init = function(plugin)
 			require("lazy.core.loader").add_to_rtp(plugin)
 			require("nvim-treesitter.query_predicates")
+			-- require("nvim-treesitter.install").prefer_git = true
+			vim.opt.runtimepath:prepend(treesitter_parser_path)
 			vim.filetype.add({ pattern = { [".*/hypr/.*%.conf"] = "hyprlang" } })
 			vim.filetype.add({
 				extension = {
@@ -35,8 +37,8 @@ return {
 				},
 				pattern = {
 					[".*.%.toml"] = "toml",
-					[".*.%.lua"] = "lua"
-				}
+					[".*.%.lua"] = "lua",
+				},
 			})
 		end,
 		dependencies = { { "nushell/tree-sitter-nu", build = ":TSUpdate nu" } },
@@ -70,10 +72,11 @@ return {
 				"xml",
 				"yaml",
 			},
+			parser_install_dir = treesitter_parser_path,
 			auto_install = true,
-			sync_install = true,
+			sync_install = false,
 			indent = { enable = true },
-			highlight = { enable = true, disable = { "c", "ruist" } },
+			highlight = { enable = true, disable = { "c", "rust" } },
 			disable = function(lang, buf) ---@diagnostic disable-line: unused-local
 				local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 				return ok and stats and stats.size > 100 * 1024 -- 100kb
