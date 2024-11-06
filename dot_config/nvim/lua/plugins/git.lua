@@ -5,7 +5,6 @@ local function git_commit_current_buffer()
 		-- local filename = table.remove(path, #path)
 		vim.cmd("Git add " .. vim.fn.expand("%:p"))
 		vim.cmd("Git commit  --message=" .. '"' .. message .. '"')
-
 		-- vim.cmd("Git commit " .. message)
 	end)
 end
@@ -16,7 +15,7 @@ return {
 		cmd = "Git",
 		keys = {
 			{ "<leader>gc", git_commit_current_buffer, desc = "Git add current file" },
-			{ "<leader>gs", "<Cmd>Git status<CR>", desc = "Git status"},
+			{ "<leader>gs", "<Cmd>Git status<CR>", desc = "Git status" },
 			-- { "<leader>gl", },
 		},
 	},
@@ -27,11 +26,17 @@ return {
 			{ "<leader>gp", "<Cmd>Gitsigns preview_hunk_inline<CR>", desc = "Preview hunk" },
 			{ "<leader>gb", "<Cmd>Gitsigns toggle_current_line_blame<CR>", desc = "Toggle line blame" },
 		},
-		config = function()
-			local signs = require("gitsigns")
-			signs.setup()
-			signs.toggle_current_line_blame()
-		end,
+		opts = {
+			signs_staged_enable = true,
+			signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+			numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+			linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
+			word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
+			current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+			current_line_blame_opts = { virt_text = true },
+			sign_priority = 6,
+			preview_config = { border = "border" },
+		},
 	},
 	{
 		"kdheepak/lazygit.nvim",

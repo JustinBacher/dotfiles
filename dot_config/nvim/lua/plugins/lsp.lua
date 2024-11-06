@@ -2,17 +2,11 @@ local function format_buffer() require("conform").format({ async = true, lsp_fal
 local function ufo_peek() return require("ufo").peekFoldedLinesUnderCursor() or vim.lsp.buf.hover() end
 
 return {
-	{ "https://git.sr.ht/~whynothugo/lsp_lines.nvim", version = false, config = true },
-	{ "folke/neodev.nvim", config = true },
+	{ "https://git.sr.ht/~whynothugo/lsp_lines.nvim", enabled = false, version = false, config = true },
 	{
-		"roobert/action-hints.nvim",
-		opts = {
-			template = {
-				definition = { text = " ⊛", color = "#add8e6" },
-				references = { text = " ↱%s", color = "#ff6666" },
-			},
-			use_virtual_text = true,
-		},
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy", -- Or `LspAttach`
+		config = true,
 	},
 	{
 		"nvimtools/none-ls.nvim",
@@ -31,28 +25,47 @@ return {
 		end,
 	},
 	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				"lazy.nvim",
+				{ path = "wezterm-types", mods = { "wezterm" } },
+			},
+		},
+	},
+	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
+			"folke/lazydev.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"b0o/schemastore.nvim",
-			"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-			"folke/neodev.nvim",
 			"nvimtools/none-ls.nvim",
+			-- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		},
 		lazy = false,
 		opts = {
-			virtual_text = false,
+			virtual_text = false, -- TODO: May want to add this back in idk
 			virtual_lines = true,
 			signs = { active = require("plugins.configs.icons") },
 			flags = { debounce_text_changes = 200 },
 			update_in_insert = false,
 			underline = true,
 			severity_sort = true,
+			diagnostics = {
+				update_in_insert = true,
+			},
+			servers = {
+				rust_analyzer = { enable = false },
+				bacon_ls = {
+					enable = true,
+				},
+			},
 			float = {
 				focus = false,
 				focusable = false,
 				style = "minimal",
-				border = "shadow",
+				border = "rounded",
 				source = "always",
 				header = "",
 				prefix = "",
@@ -63,8 +76,8 @@ return {
 				vim.fn.sign_define(name, { texthl = name, text = sign, numhl = "" })
 			end
 			vim.lsp.set_log_level("error")
-			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "shadow" })
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "shadow" })
+			-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "shadow" })
+			-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "shadow" })
 		end,
 		config = function(_, opts)
 			vim.diagnostic.config(opts)
@@ -72,17 +85,29 @@ return {
 			local lspconfig = require("lspconfig")
 			lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, opts)
 
-			for server_name, server_config in pairs(require("plugins.configs.langs")) do
-				lspconfig[server_name].setup(server_config)
+			for server, config in pairs(require("plugins.configs.langs")) do
+				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+				lspconfig[server].setup(config)
 
-				if server_name == "rust_analyzer" then
+				if server == "rust_analyzer" then
 					local rust_tools_present, rust_tools = pcall(require, "rust-tools")
-					if rust_tools_present then rust_tools.setup({ server = server_config }) end
-				elseif server_name == "lua_ls" then
-					require("neodev")
+					if rust_tools_present then rust_tools.setup({ server = config }) end
+				elseif server == "lua_ls" then
+					require("lazydev")
 				end
 			end
 		end,
+	},
+	{
+		"mrcjkb/rustaceanvim",
+		opts = {
+			default_settings = {
+				["rust-analyzer"] = {
+					diagnostics = { enable = false },
+					checkOnSave = { enable = false },
+				},
+			},
+		},
 	},
 
 	-- Formatting

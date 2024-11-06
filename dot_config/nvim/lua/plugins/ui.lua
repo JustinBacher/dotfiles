@@ -13,13 +13,22 @@ local function trouble(cmd, opts)
 end
 
 return {
+	{ "MunifTanjim/nui.nvim", version = "*" },
 	{ "stevearc/dressing.nvim", event = "VeryLazy", config = true },
 	{ "echasnovski/mini.cursorword", event = "LazyFile", config = true },
 	{ "gen740/SmoothCursor.nvim", event = "LazyFile", opts = { matrix = { enable = true } } },
 	{
+		"OXY2DEV/markview.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		ft = "markdown",
+	},
+	{
 		"echasnovski/mini.animate",
 		event = "LazyFile",
-		opts = { scroll = { enable = false }, resize = { enable = false } },
+		opts = {
+			scroll = { enable = false },
+			resize = { enable = false },
+		},
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -33,6 +42,9 @@ return {
 			RainbowCyan = "#56B6C2",
 		},
 		config = function(_, opts)
+			vim.g.rainbow_delimiters = { highlight = opts }
+			require("ibl").setup({ scope = { highlight = opts } })
+
 			local hooks = require("ibl.hooks")
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
@@ -40,8 +52,6 @@ return {
 					vim.api.nvim_set_hl(0, hl, { fg = color })
 				end
 			end)
-			vim.g.rainbow_delimiters = { highlight = opts }
-			require("ibl").setup({ scope = { highlight = opts } })
 		end,
 	},
 	{
@@ -65,7 +75,12 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "LazyFile",
-		dependencies = { "nvim-tree/nvim-web-devicons", "letieu/harpoon-lualine", "folke/noice.nvim", "roobert/action-hints.nvim", },
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"letieu/harpoon-lualine",
+			"folke/noice.nvim",
+			"roobert/action-hints.nvim",
+		},
 		opts = {
 			options = {
 				theme = "tokyonight",
@@ -75,7 +90,7 @@ return {
 			sections = {
 				lualine_a = { "mode" },
 				lualine_b = { "diff", "diagnostics", "harpoon2" },
-				lualine_c = {  require("action-hints").statusline },
+				lualine_c = { function() return { require("action-hints").statusline } end },
 				lualine_x = {
 					function()
 						local n = require("noice")
