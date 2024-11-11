@@ -134,6 +134,7 @@ return {
 	{
 		"echasnovski/mini.map",
 		event = "LazyFile",
+		cmd = "MiniMap",
 		keys = {
 			{ "<leader>mm", "<Cmd>MiniMap.toggle()<CR>", desc = "Toggle MiniMap" },
 		},
@@ -145,6 +146,7 @@ return {
 					map.gen_integration.gitsigns(),
 					map.gen_integration.diagnostic(),
 				},
+				window = { winblend = 90 },
 			})
 		end,
 	},
@@ -160,8 +162,7 @@ return {
 			dashboard.section.buttons.val = { -- LuaFormatter off
 				dashboard.button("e", "  --> File tree", "<leader>e<CR>"),
 				dashboard.button("f", "  --> Find file (cwd)", "<Cmd>Telescope find_files<CR>"),
-				dashboard.button("p", "󱌢  --> Find file (Projects)",
-					":cd $HOME/projects<CR><Cmd>Telescope find_files<CR>"),
+				dashboard.button("p", "󱌢  --> Find file (Projects)", ":cd $HOME/projects<CR><Cmd>Telescope find_files<CR>"),
 				dashboard.button("r", "  --> Recent files", "<Cmd>Telescope oldfiles<CR>"),
 				dashboard.button("l", "󱘖  --> Load last session", "<Cmd>SessionManager load_last_session<CR>"),
 				dashboard.button("h", "󰛔  --> Load session", "<Cmd>SessionManager load_session<CR>"),
@@ -209,7 +210,6 @@ return {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 					["config.lsp.signature.enabled"] = true,
-					["cmp.entry.get_documentation"] = true,
 				},
 				signature = { enabled = false },
 				hover = { enabled = true },
