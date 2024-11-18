@@ -21,15 +21,19 @@ vim.opt.undofile = true
 -- UI
 opt.termguicolors = true
 opt.relativenumber = true
-opt.updatetime = 50
-vim.opt.colorcolumn = "80"
+opt.updatetime = 750
+vim.opt.colorcolumn = "0"
 opt.signcolumn = "yes"
 opt.cursorline = true
 vim.opt.scrolloff = 8
-opt.wrap = false
+opt.wrap = true
 opt.linebreak = true
 
 -- Searching
 opt.ignorecase = true
 opt.smartcase = true
 vim.opt.incsearch = true
+
+-- Other
+vim.o.timeout = true
+vim.o.timeoutlen = 300
