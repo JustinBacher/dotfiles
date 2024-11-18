@@ -2,6 +2,7 @@ return {
 	{ "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
 	{
 		"L3MON4D3/LuaSnip",
+		enabled = false,
 		version = "v2.*",
 		dependencies = { "rafamadriz/friendly-snippets", "saadparwaiz1/cmp_luasnip" },
 		config = function() require("luasnip.loaders.from_vscode").lazy_load() end,
@@ -9,11 +10,10 @@ return {
 	},
 	{
 		"saghen/blink.cmp",
-		lazy = false, -- lazy loading handled internally
-		-- optional: provides snippets for the snippet source
+		lazy = false,
 		dependencies = {
 			"folke/lazydev.nvim",
-			"rafamadriz/friendly-snippets"
+			"rafamadriz/friendly-snippets",
 		},
 		version = "v0.*",
 		opts = {
@@ -24,7 +24,7 @@ return {
 			highlight = { use_nvim_cmp_as_default = true },
 			sources = {
 				completion = {
-					enabled_providers = { "lsp", "path", "snippets", "buffer" }  -- , "lazydev" },
+					enabled_providers = { "lsp", "path", "snippets", "buffer" }, -- , "lazydev" },
 				},
 				--  providers = {
 				-- 	lsp = { fallback_for = { "lazydev" } },

@@ -35,6 +35,7 @@ return {
 	},
 	{
 		"monaqa/dial.nvim",
+		enabled = false,
 		keys = {
 			{ "<C-a>", "<Plug>(dial-increment)" },
 			{ "<C-x>", "<Plug>(dial-decrement)" },
@@ -48,7 +49,6 @@ return {
 		config = function()
 			local augend = require("dial.augend")
 			require("dial.config").augends:register_group({
-				---@type table<( Augend | AugendConstant )>
 				default = {
 					augend.integer.alias.decimal,
 					augend.integer.alias.hex,
