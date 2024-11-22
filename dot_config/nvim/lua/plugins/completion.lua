@@ -24,7 +24,7 @@ return {
 			highlight = { use_nvim_cmp_as_default = true },
 			sources = {
 				completion = {
-					enabled_providers = { "lsp", "path", "snippets", "buffer" }, -- , "lazydev" },
+					enabled_providers = { "lsp", "path", "snippets", "buffer", "lazydev" },
 				},
 				--  providers = {
 				-- 	lsp = { fallback_for = { "lazydev" } },
