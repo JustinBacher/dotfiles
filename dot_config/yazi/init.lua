@@ -1,3 +1,6 @@
+require("git"):setup()
+require("no-status"):setup()
+
 --- @diagnostic disable: undefined-global
 Status:children_add(function()
 	local h = cx.active.current.hovered

@@ -26,3 +26,20 @@ prepend_rules = [
 append_rules = [
 	{ name = "*", use = "my-fallback" },
 ]
+
+[[plugin.prepend_fetchers]]
+id   = "mime"
+if   = "!mime"
+name = "*"
+run  = "mime-ext"
+prio = "high"
+
+[[manager.prepend_keymap]]
+on   = "P"
+run  = "plugin --sync max-preview"
+desc = "Maximize or restore preview"
+
+[[manager.prepend_keymap]]
+on   = [ "c", "m" ]
+run  = "plugin chmod"
+desc = "Chmod on selected files"

@@ -1,3 +1,5 @@
+agsv1
+agsv1-debug
 aic94xx-firmware
 alsa-utils
 anyrun-git
@@ -29,7 +31,6 @@ cliphist
 code
 codelldb-bin
 comtrya
-dart-sass
 dex
 discover
 distcc
@@ -86,7 +87,6 @@ nautilus
 neofetch
 neovim-nvim-treesitter
 networkmanager
-npm
 nushell
 obs-studio
 openbsd-netcat
@@ -116,6 +116,8 @@ rofi-games
 rustup
 snap-pac
 snap-sync
+spotify
+spotify-player
 starship
 steam-tui-bin
 stylua
