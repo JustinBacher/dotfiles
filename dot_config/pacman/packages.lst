@@ -35,13 +35,16 @@ dex
 discover
 distcc
 dmenu
+dmg2img
 dmidecode
 dnsmasq
 dust
 efibootmgr
+evdi-git
 eza
 fastfetch
-figlet
+figlet-fonts
+figlet-fonts-extra
 firefox
 fish
 flatpak
@@ -89,6 +92,7 @@ neovim-nvim-treesitter
 networkmanager
 nushell
 obs-studio
+ollama-cuda-git
 openbsd-netcat
 os-prober
 otf-comicshanns-nerd
@@ -141,6 +145,7 @@ vulkan-tools
 wallust
 waybar-cava
 wd719x-firmware
+wdisplays
 wev
 wezterm-git
 wezterm-terminfo-git
