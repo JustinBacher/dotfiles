@@ -105,6 +105,12 @@ return {
 				["rust-analyzer"] = {
 					diagnostics = { enable = false },
 					checkOnSave = { enable = false },
+					["rust-analyzer.cargo.extraEnv"] = {
+						RUSTFLAGS = "--cfg rust_analyzer",
+					},
+					["rust-analyzer.diagnostics.disabled"] = {
+						"unlinked-file",
+					},
 				},
 			},
 		},

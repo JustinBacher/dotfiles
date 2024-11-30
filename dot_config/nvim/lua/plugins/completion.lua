@@ -17,14 +17,14 @@ return {
 		},
 		version = "v0.*",
 		opts = {
-			keymap = { preset = "default" },
+			keymap = { preset = "super-tab" },
 			nerd_font_variant = "mono",
 			accept = { auto_brackets = { enabled = true } },
 			trigger = { signature_help = { enabled = true } },
 			highlight = { use_nvim_cmp_as_default = true },
 			sources = {
 				completion = {
-					enabled_providers = { "lsp", "path", "snippets", "buffer", "lazydev" },
+					enabled_providers = { "lsp", "path", "snippets", "buffer" },
 				},
 				--  providers = {
 				-- 	lsp = { fallback_for = { "lazydev" } },

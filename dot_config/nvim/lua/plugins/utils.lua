@@ -15,6 +15,19 @@ return {
 	{ "tenxsoydev/karen-yank.nvim", event = "LazyFile", config = true },
 	{ "gpanders/editorconfig.nvim", config = true },
 	{
+		"numToStr/FTerm.nvim",
+		config = {
+			border = "rounded",
+			dimensions = {
+				height = 0.8,
+				width = 0.8,
+			},
+		},
+		keys = {
+			{ "<C-d>", "<CMD>lua require('FTerm').toggle()<CR>", "Toggle floating terminal" },
+		},
+	},
+	{
 		"Shatur/neovim-session-manager",
 		event = "LazyFile",
 		opts = { autoload_mode = false },
