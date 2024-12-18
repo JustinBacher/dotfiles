@@ -2,6 +2,22 @@ return {
 	-- Themes
 	-- TODO: Figure out if I can turn lazy to true for all but current theme
 	{
+		"eldritch-theme/eldritch.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			transparent = true,
+			styles = {
+				properties = { "italic" },
+				property = { "italic" },
+				conditionals = { "italic" },
+				types = { "bold" },
+				parameter = { "italic" },
+				variable = { "italic" },
+			},
+		},
+	},
+	{
 		"Mofiqul/dracula.nvim",
 		name = "dracula",
 		priority = 1000,
@@ -40,6 +56,7 @@ return {
 	-- Themery - Theme Picker
 	{
 		"zaldih/themery.nvim",
+		lazy = false,
 		cmd = "Themery",
 		config = function()
 			local status_ok, themery = pcall(require, "themery")
@@ -54,14 +71,14 @@ return {
 					{ name = "Catppuccin Mocha", colorscheme = "catppuccin-mocha" },
 					{ name = "Catppuccin Macchiato", colorscheme = "catppuccin-macchiato" },
 					{ name = "Rose Pine Moon", colorscheme = "rose-pine-moon" },
+					{ name = "Eldritch", colorscheme = "eldritch" },
 				},
-				themeConfigFile = "~/dotfiles/.config/nvim/lua/config/theme.lua",
 				livePreview = true,
 			})
 		end,
 
 		keys = {
-			{ "<leader>t", "<cmd>:Themery<cr>", desc = "Open Theme Picker" },
+			{ "<leader>tt", "<cmd>:Themery<cr>", desc = "Open Theme Picker" },
 		},
 	},
 	{

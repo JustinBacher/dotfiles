@@ -61,14 +61,13 @@ return {
 		opts = { use_diagnostic_signs = true },
 		-- stylua: ignore start
 		keys = { -- LuaFormatter off
-			{ "<leader>dx", "<Cmd>Trouble<CR>",                                       desc = "Toggle Trouble" },
-			{ "<leader>dw", trouble("toggle", "workspace_diagnostics"),               desc = "Workspace Diagnostics" },
-			{ "<leader>dd", trouble("toggle", "document_diagnostics"),                desc = "Document Diagnostics" },
-			{ "<leader>dq", trouble("toggle", "quickfix"),                            desc = "Trouble Quickfix" },
-			{ "<leader>dl", trouble("toggle", "loclist"),                             desc = "Trouble Location List" },
-			{ "gR",         trouble("toggle", "lsp_references"),                      desc = "Trouble Lsp References" },
-			{ "<leader>dn", trouble("next", { skip_groups = true, jump = true }),     desc = "Trouble Next Diagnostic" },
-			{ "<leader>dp", trouble("previous", { skip_groups = true, jump = true }), desc = "Trouble Previous Diagnostic" },
+			{ "<leader>tx", "<Cmd>Trouble<CR>",                                       desc = "Toggle Trouble" },
+			{ "<leader>tw", trouble("toggle", "workspace_diagnostics"),               desc = "Workspace Diagnostics" },
+			{ "<leader>td", trouble("toggle", "document_diagnostics"),                desc = "Document Diagnostics" },
+			{ "<leader>tq", trouble("toggle", "quickfix"),                            desc = "Trouble Quickfix" },
+			{ "<leader>tl", trouble("toggle", "loclist"),                             desc = "Trouble Location List" },
+			{ "<leader>tn", trouble("next", { skip_groups = true, jump = true }),     desc = "Trouble Next Diagnostic" },
+			{ "<leader>tp", trouble("previous", { skip_groups = true, jump = true }), desc = "Trouble Previous Diagnostic" },
 		}, -- LuaFormatter on
 		-- stylua: ignore stop
 	},

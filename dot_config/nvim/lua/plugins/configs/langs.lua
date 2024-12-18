@@ -39,8 +39,6 @@ return {
 		},
 	}),
 	ruff = default_lsp_config,
-	ruff_lsp = default_lsp_config,
-	rust_analyzer = default_lsp_config,
 	tailwindcss = default_lsp_config,
 	terraformls = default_lsp_config,
 	tflint = default_lsp_config,

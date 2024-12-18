@@ -10,7 +10,6 @@ base
 base-devel
 bat
 bluez-utils
-bridge-utils
 brightnessctl
 btop
 btrfs-assistant
@@ -30,6 +29,7 @@ chromium
 cliphist
 code
 codelldb-bin
+compsize
 comtrya
 dex
 discover
@@ -38,6 +38,7 @@ dmenu
 dmg2img
 dmidecode
 dnsmasq
+docker
 dust
 efibootmgr
 evdi-git
@@ -55,18 +56,19 @@ gnome-font-viewer
 gnome-tweaks
 googledot-cursor-theme
 gparted
-gpu-screen-recorder-git
 grimblast-git
 grub-btrfs
 grub-customizer
 grub-theme-arch-linux
 gum
+heroic-games-launcher
 hyprpicker
 inotify-tools
 ironbar-git
 kdialog
 kitty
 lazygit
+legendary
 lib32-faudio
 libgtop
 libguestfs
@@ -97,6 +99,8 @@ openbsd-netcat
 os-prober
 otf-comicshanns-nerd
 pacdiff-pacman-hook-git
+pacolog
+parallel
 paru
 paru-debug
 pass

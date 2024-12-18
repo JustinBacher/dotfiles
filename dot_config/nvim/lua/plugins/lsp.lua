@@ -8,39 +8,22 @@ return {
 		event = "VeryLazy", -- Or `LspAttach`
 		config = true,
 	},
-	{
-		"nvimtools/none-ls.nvim",
-		dependencies = "nvimtools/none-ls-extras.nvim",
-		config = function()
-			local null_ls = require("null-ls")
-			null_ls.setup({
-				sources = {
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.completion.spell,
-					require("none-ls.diagnostics.eslint"),
-					require("none-ls.diagnostics.cpplint"),
-					require("none-ls.formatting.jq"),
-				},
-			})
-		end,
-	},
-	{
-		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
-		opts = {
-			library = {
-				"lazy.nvim",
-				{ path = "wezterm-types", mods = { "wezterm" } },
-			},
-		},
-	},
+	-- { "nvimtools/none-ls.nvim", dependencies = "nvimtools/none-ls-extras.nvim", config = function() local null_ls = require("null-ls") null_ls.setup({ sources = { null_ls.builtins.formatting.stylua, null_ls.builtins.completion.spell, require("none-ls.diagnostics.eslint"), require("none-ls.diagnostics.cpplint"), require("none-ls.formatting.jq"), }, }) end, },
+	-- {
+	-- 	"folke/lazydev.nvim",
+	-- 	ft = "lua", -- only load on lua files
+	-- 	opts = {
+	-- 		library = {
+	-- 			"lazy.nvim",
+	-- 			{ path = "wezterm-types", mods = { "wezterm" } },
+	-- 		},
+	-- 	},
+	-- },
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"folke/lazydev.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"b0o/schemastore.nvim",
-			"nvimtools/none-ls.nvim",
 			-- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		},
 		lazy = false,
@@ -55,12 +38,7 @@ return {
 			diagnostics = {
 				update_in_insert = true,
 			},
-			servers = {
-				rust_analyzer = { enable = false },
-				bacon_ls = {
-					enable = true,
-				},
-			},
+			servers = {},
 			float = {
 				focus = false,
 				focusable = false,
@@ -89,12 +67,7 @@ return {
 				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 				lspconfig[server].setup(config)
 
-				if server == "rust_analyzer" then
-					local rust_tools_present, rust_tools = pcall(require, "rust-tools")
-					if rust_tools_present then rust_tools.setup({ server = config }) end
-				elseif server == "lua_ls" then
-					require("lazydev")
-				end
+				if server == "lua_ls" then require("lazydev") end
 			end
 		end,
 	},
@@ -114,6 +87,23 @@ return {
 				},
 			},
 		},
+		lazy = false, -- This plugin is already lazy
+		ft = "rust",
+		config = function()
+			local mason_registry = require("mason-registry")
+			local codelldb = mason_registry.get_package("codelldb")
+			local extension_path = codelldb:get_install_path() .. "/extension/"
+			local codelldb_path = extension_path .. "adapter/codelldb"
+			local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+			if string.find(vim.uv.os_uname().sysname, "Linux") then
+				liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+			end
+			local cfg = require("rustaceanvim.config")
+
+			vim.g.rustaceanvim = {
+				dap = { adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path) },
+			}
+		end,
 	},
 
 	-- Formatting
@@ -128,6 +118,11 @@ return {
 				nix = { "alejandra" },
 				python = { "isort", "black" },
 				cpp = { "astyle" },
+			},
+			formatters = {
+				rustfmt = {
+					options = { default_edition = "2024" },
+				},
 			},
 			format_on_save = { timeout_ms = 500, lsp_fallback = true },
 		},
