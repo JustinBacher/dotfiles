@@ -62,8 +62,8 @@ end
 -- ╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝
 
 config.font = wezterm.font_with_fallback({
-	{ family = "ComicShannsMono Nerd Font Mono", weight = "Regular", stretch = "Normal", style = "Normal" },
-	{ family = "VictorMono Nerd Font", weight = "Regular", stretch = "Normal", style = "Italic" },
+	-- { family = "ComicShannsMono Nerd Font Mono", weight = "Regular", stretch = "Normal", style = "Normal" },
+	{ family = "VictorMono Nerd Font", weight = "Medium", stretch = "Normal" },
 	{ family = "Symbols Nerd Font", weight = "Regular" },
 })
 
