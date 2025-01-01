@@ -1,5 +1,6 @@
 set -gx EDITOR nvim
 set -gx PAGER less
+set -gx TERMINAL wezterm
 
 # if status is-interactive
 # 	and not set -q TMUX
@@ -63,7 +64,6 @@ if type -q brew
 	end
 end
 
-thefuck --alias | source
 zoxide init --cmd cd fish | source
 
 # bun

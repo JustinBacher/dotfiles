@@ -1,0 +1,14 @@
+depends:
+  - fish
+  - fisher
+
+actions:
+  - action: command.run
+    dir: .
+    command: bash
+    args:
+    - -c
+    - >
+      cat {{ user.data_dir }}/chezmoi/.manifests/fish/files/plugins.txt
+      |
+      xargs -d' ' -I _ fish -c "fisher install _"

@@ -2,8 +2,9 @@ actions:
   - action: package.install
     provider: paru
     list: 
-      - aic94xx-firmware
-      - alsa-utils
-      - ast-firmware
-      - nvidia-dkms
-      - neofetch
+      - base-devel
+
+  - action: file.link
+    from: "{{ user.data_dir }}/chezmoi/.manifests/files/list_explicitly_installed.hook"
+    to: /etc/pacman.d/hooks/list_explicitly_installed.hook
+    sudo: true

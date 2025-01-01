@@ -18,12 +18,65 @@ return {
 	{ "echasnovski/mini.cursorword", event = "LazyFile", config = true },
 	{ "gen740/SmoothCursor.nvim", event = "LazyFile", opts = { matrix = { enable = true } } },
 	{
+		"lewis6991/satellite.nvim",
+		event = "LazyFile",
+		opts = {
+			width = 3,
+			handlers = {
+				cursor = {
+					enable = false,
+					symbols = { "⎺", "⎻", "⎼", "⎽" },
+				},
+				search = { enable = true },
+				diagnostic = {
+					enable = true,
+					signs = { "󰈜", "=", "≡" },
+					min_severity = vim.diagnostic.severity.HINT,
+					-- Highlights:
+					-- - SatelliteDiagnosticError (default links to DiagnosticError)
+					-- - SatelliteDiagnosticWarn (default links to DiagnosticWarn)
+					-- - SatelliteDiagnosticInfo (default links to DiagnosticInfo)
+					-- - SatelliteDiagnosticHint (default links to DiagnosticHint)
+				},
+				gitsigns = {
+					enable = true,
+					signs = {
+						add = "",
+						change = "󰏬",
+						delete = "",
+					},
+				},
+				marks = {
+					enable = true,
+					show_builtins = false, -- shows the builtin marks like [ ] < >
+					key = "m",
+					-- Highlights:
+					-- SatelliteMark (default links to Normal)
+				},
+				quickfix = {
+					signs = { "-", "=", "≡" },
+					-- Highlights:
+					-- SatelliteQuickfix (default links to WarningMsg)
+				},
+			},
+		},
+	},
+	{
 		"OXY2DEV/markview.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		ft = "markdown",
 	},
 	{
+		"sphamba/smear-cursor.nvim",
+		enabled = true,
+		event = "LazyFile",
+		opts = {
+			legacy_computing_symbols_support = true,
+		},
+	},
+	{
 		"echasnovski/mini.animate",
+		enabled = false,
 		event = "LazyFile",
 		opts = {
 			scroll = { enable = false },

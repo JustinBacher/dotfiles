@@ -25,6 +25,7 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"b0o/schemastore.nvim",
 			-- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+			"folke/lazydev.nvim",
 		},
 		lazy = false,
 		opts = {

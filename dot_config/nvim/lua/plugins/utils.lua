@@ -10,13 +10,28 @@ local function live_grep_from_project_git_root()
 end
 
 return {
-	{ "windwp/nvim-autopairs", config = true },
+	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 	{ "echasnovski/mini.ai", event = "LazyFile", config = true },
 	{ "tenxsoydev/karen-yank.nvim", event = "LazyFile", config = true },
 	{ "gpanders/editorconfig.nvim", config = true },
 	{
+		"andre-kotake/nvim-chezmoi",
+		event = "LazyFile",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		opts = {
+			edit = { apply_on_save = "confirm" },
+			window = {
+				execute_template = { border = "rounded" },
+			},
+		},
+		-- config = function(_, opts) require("nvim-chezmoi").setup(opts) end,
+	},
+	{
 		"numToStr/FTerm.nvim",
-		config = {
+		opts = {
 			border = "rounded",
 			dimensions = {
 				height = 0.8,

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+{{ if eq .chezmoi.os "linux" -}}
+    sudo pacman -S comtrya
+{{ else if eq .chezmoi.os "darwin" -}}
+    brew install comtrya
+{{ end -}}
+
+cd {{ .chezmoi.sourceDir}}/.manifests
+echo $(type -a comtrya)
+pwd
+sudo -u {{ .chezmoi.username }} comtrya apply

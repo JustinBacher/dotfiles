@@ -11,25 +11,27 @@ return {
 	{
 		"saghen/blink.cmp",
 		lazy = false,
-		dependencies = {
-			"folke/lazydev.nvim",
-			"rafamadriz/friendly-snippets",
-		},
-		version = "v0.*",
+		dependencies = { "rafamadriz/friendly-snippets" },
+		version = "*",
+		build = "cargo build --release",
 		opts = {
+			appearance = { nerd_font_variant = "mono" },
 			keymap = { preset = "super-tab" },
-			nerd_font_variant = "mono",
-			accept = { auto_brackets = { enabled = true } },
-			trigger = { signature_help = { enabled = true } },
-			highlight = { use_nvim_cmp_as_default = true },
-			sources = {
-				completion = {
-					enabled_providers = { "lsp", "path", "snippets", "buffer" },
+			sources = { default = { "lsp", "path", "snippets", "buffer" } },
+			signature = { enabled = true },
+			completion = {
+				accept = { auto_brackets = { enabled = true } },
+				documentation = { auto_show = true, auto_show_delay_ms = 500 },
+				ghost_text = { enabled = true },
+				menu = {
+					border = "rounded",
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", "kind" },
+						},
+					},
 				},
-				--  providers = {
-				-- 	lsp = { fallback_for = { "lazydev" } },
-				-- 	lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
-				-- },
 			},
 		},
 	},
