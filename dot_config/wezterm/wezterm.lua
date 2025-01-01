@@ -2,8 +2,8 @@ local wezterm = require("wezterm")
 local config = {} or wezterm.config_builder()
 local act = wezterm.action
 local is_linux = wezterm.target_triple:find("linux") ~= nil
-
 local is_darwin = wezterm.target_triple:find("darwin")
+local is_windows = wezterm.target_triple:find("windows")
 
 -- ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
 -- ██╔══██╗██║     ██║   ██║██╔════╝ ██║████╗  ██║██╔════╝
@@ -62,8 +62,8 @@ end
 -- ╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝
 
 config.font = wezterm.font_with_fallback({
-	-- { family = "ComicShannsMono Nerd Font Mono", weight = "Regular", stretch = "Normal", style = "Normal" },
-	{ family = "VictorMono Nerd Font", weight = "Medium", stretch = "Normal" },
+	{ family = "ComicShannsMono Nerd Font Mono", weight = "Regular", stretch = "Normal", style = "Normal" },
+	-- { family = "VictorMono Nerd Font", weight = "Medium", stretch = "Normal" },
 	{ family = "Symbols Nerd Font", weight = "Regular" },
 })
 
@@ -92,13 +92,13 @@ config.cursor_blink_ease_out = "EaseOut"
 -- ██║  ██╗███████╗   ██║   ██████╔╝██║██║ ╚████║██████╔╝███████║
 -- ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝
 
-local move_around = function(window, pane, direction_wez, direction_nvim)
-	if pane:get_title():lower() == "nvim" then
-		window:perform_action(wezterm.action({ SendString = "\x17" .. direction_nvim }), pane)
-	else
-		window:perform_action(wezterm.action({ ActivatePaneDirection = direction_wez }), pane)
-	end
-end
+-- local move_around = function(window, pane, direction_wez, direction_nvim)
+-- 	if pane:get_title():lower() == "nvim" then
+-- 		window:perform_action(wezterm.action({ SendString = "\x17" .. direction_nvim }), pane)
+-- 	else
+-- 		window:perform_action(wezterm.action({ ActivatePaneDirection = direction_wez }), pane)
+-- 	end
+-- end
 
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
@@ -187,7 +187,7 @@ end)
 -- This is because we are using a tiling window manager
 if is_darwin then
 	config.window_decorations = "RESIZE"
-else
+elseif is_windows then
 	config.window_decorations = "NONE"
 end
 

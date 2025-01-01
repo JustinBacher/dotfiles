@@ -1,0 +1,9 @@
+depends:
+  - core
+
+actions:
+  - action: command.run
+    command: bash
+    args:
+      - -c
+      - paru -S --needed < {{ user.data_dir }}/chezmoi/.manifests/files/linux.txt
