@@ -13,10 +13,10 @@ local function trouble(cmd, opts)
 end
 
 return {
+	{ "echasnovski/mini.icons", version = false },
 	{ "MunifTanjim/nui.nvim", version = "*" },
 	{ "stevearc/dressing.nvim", event = "VeryLazy", config = true },
 	{ "echasnovski/mini.cursorword", event = "LazyFile", config = true },
-	{ "gen740/SmoothCursor.nvim", event = "LazyFile", opts = { matrix = { enable = true } } },
 	{
 		"lewis6991/satellite.nvim",
 		event = "LazyFile",
@@ -72,15 +72,11 @@ return {
 		event = "LazyFile",
 		opts = {
 			legacy_computing_symbols_support = true,
-		},
-	},
-	{
-		"echasnovski/mini.animate",
-		enabled = false,
-		event = "LazyFile",
-		opts = {
-			scroll = { enable = false },
-			resize = { enable = false },
+			stiffness = 0.8,
+			trailing_stiffness = 0.5,
+			distance_stop_animating = 0.5,
+			hide_target_hack = false,
+			smear_to_cmd = false,
 		},
 	},
 	{
@@ -106,23 +102,6 @@ return {
 				end
 			end)
 		end,
-	},
-	{
-		"folke/trouble.nvim",
-		cmd = "Trouble",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		opts = { use_diagnostic_signs = true },
-		-- stylua: ignore start
-		keys = { -- LuaFormatter off
-			{ "<leader>tx", "<Cmd>Trouble<CR>",                                       desc = "Toggle Trouble" },
-			{ "<leader>tw", trouble("toggle", "workspace_diagnostics"),               desc = "Workspace Diagnostics" },
-			{ "<leader>td", trouble("toggle", "document_diagnostics"),                desc = "Document Diagnostics" },
-			{ "<leader>tq", trouble("toggle", "quickfix"),                            desc = "Trouble Quickfix" },
-			{ "<leader>tl", trouble("toggle", "loclist"),                             desc = "Trouble Location List" },
-			{ "<leader>tn", trouble("next", { skip_groups = true, jump = true }),     desc = "Trouble Next Diagnostic" },
-			{ "<leader>tp", trouble("previous", { skip_groups = true, jump = true }), desc = "Trouble Previous Diagnostic" },
-		}, -- LuaFormatter on
-		-- stylua: ignore stop
 	},
 	{
 		"nvim-lualine/lualine.nvim",
@@ -247,6 +226,7 @@ return {
 	},
 	{
 		"folke/noice.nvim",
+		version = "*",
 		event = "VeryLazy",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		opts = {
@@ -262,6 +242,8 @@ return {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 					["config.lsp.signature.enabled"] = true,
+					["vim.lsp.buf.signature_help"] = true,
+					["cmp.entry.get_documentation"] = true,
 				},
 				signature = { enabled = false },
 				hover = { enabled = true },
