@@ -45,6 +45,7 @@ return {
 	{
 		"mrjones2014/smart-splits.nvim",
 		opts = { ignored_filetypes = { "NvimTree" } },
+		enabled = false,
 		setup = function()
 			local wezterm = require("wezterm")
 			local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
@@ -58,6 +59,18 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"swaits/zellij-nav.nvim",
+		lazy = true,
+		event = "VeryLazy",
+		keys = {
+			{ "<C-h>", "<cmd>ZellijNavigateLeftTab<cr>", { silent = true, desc = "Navigate left or tab" } },
+			{ "<C-j>", "<cmd>ZellijNavigateDown<cr>", { silent = true, desc = "Navigate down" } },
+			{ "<C-k>", "<cmd>ZellijNavigateUp<cr>", { silent = true, desc = "Navigate up" } },
+			{ "<c-l>", "<cmd>ZellijNavigateRightTab<cr>", { silent = true, desc = "Navigate right or tab" } },
+		},
+		opts = {},
 	},
 	{
 		"letieu/harpoon-lualine",

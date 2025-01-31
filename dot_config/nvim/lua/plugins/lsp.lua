@@ -6,9 +6,54 @@ return {
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy", -- Or `LspAttach`
-		config = true,
+		opts = {
+			preset = "classic",
+			use_icons_from_diagnostic = true,
+			multiple_diag_under_cursor = true,
+			show_all_diags_on_cursorline = false,
+			multilines = {
+				-- Enable multiline diagnostic messages
+				enabled = true,
+				-- Always show messages on all lines for multiline diagnostics
+				always_show = true,
+			},
+		},
 	},
-	-- { "nvimtools/none-ls.nvim", dependencies = "nvimtools/none-ls-extras.nvim", config = function() local null_ls = require("null-ls") null_ls.setup({ sources = { null_ls.builtins.formatting.stylua, null_ls.builtins.completion.spell, require("none-ls.diagnostics.eslint"), require("none-ls.diagnostics.cpplint"), require("none-ls.formatting.jq"), }, }) end, },
+	{
+		"ray-x/navigator.lua",
+		dependencies = {
+			{ "ray-x/guihua.lua", build = "cd lua/fzy && make" },
+			{ "neovim/nvim-lspconfig" },
+		},
+	},
+	{
+		"aznhe21/actions-preview.nvim",
+		opts = {
+			highlight_command = function() return { require("actions-preview.highlight").delta() } end,
+			telescope = {
+				sorting_strategy = "ascending",
+				layout_strategy = "vertical",
+				layout_config = {
+					width = 0.8,
+					height = 0.9,
+					prompt_position = "top",
+					preview_cutoff = 20,
+					preview_height = function(_, _, max_lines) return max_lines - 15 end,
+				},
+			},
+		},
+		config = function(opts)
+			opts.highlight_command = opts.highlight_command()
+			require("actions-preview").setup(opts)
+		end,
+		keys = {
+			{
+				"<leader>gf",
+				function() require("actions-preview").code_actions() end,
+				desc = "Code actions",
+			},
+		},
+	},
 	-- {
 	-- 	"folke/lazydev.nvim",
 	-- 	ft = "lua", -- only load on lua files
@@ -208,8 +253,7 @@ return {
 			{ "ghi", "<cmd>Lspsaga finder imp<cr>", desc = "Find all implementations" },
 			{ "ghr", "<cmd>Lspsaga finder ref<cr>", desc = "Find all references" },
 			{ "ghd", "<cmd>Lspsaga finder def<cr>", desc = "Find all definitions" },
-			{ "gr", "<cmd>Lspsaga rename<cr>", desc = "Rename symbol" },
-			{ "gR", "<cmd>Lspsaga rename ++project<cr>", desc = "Rename symbol (project)" },
+			{ "gr", "<cmd>Lspsaga rename ++project<cr>", desc = "Rename symbol (project)" },
 			{ "gd", "<cmd>Lspsaga peek_definition<cr>", desc = "Peek definition" },
 			{ "gD", "<cmdLspsaga goto_definition<cr>", desc = "Goto definition" },
 			{ "gt", "<cmd>Lspsaga peek_type_definition<cr>", desc = "Peek type definition" },
