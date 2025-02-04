@@ -1,0 +1,9 @@
+depends:
+  - sleep
+
+actions:
+  - action: command.run
+    command: fish
+    args:
+      - -c
+      - sleep 1
