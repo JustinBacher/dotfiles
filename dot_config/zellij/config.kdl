@@ -268,7 +268,7 @@ load_plugins {
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-// theme "dracula"
+theme "tokyo-night-dark"
  
 // Choose the base input mode of zellij.
 // Default: normal
@@ -321,7 +321,7 @@ pane_frames false
 // (Requires restart)
 // Default: false
 // 
-// mirror_session true
+mirror_session true
  
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
 // eg. when terminal window with an active zellij session is closed
@@ -360,7 +360,7 @@ copy_command "wl-copy"                    // wayland
 //   - system (default)
 //   - primary
 // 
-// copy_clipboard "primary"
+copy_clipboard "primary"
  
 // Enable automatic copying (and clearing) of selection when releasing mouse
 // Default: true
