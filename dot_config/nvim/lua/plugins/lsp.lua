@@ -3,6 +3,36 @@ local function ufo_peek() return require("ufo").peekFoldedLinesUnderCursor() or 
 
 return {
 	{ "https://git.sr.ht/~whynothugo/lsp_lines.nvim", enabled = false, version = false, config = true },
+    {
+        "roobert/action-hints.nvim",
+            opts = {
+              template = {
+                definition = { text = " ⊛", color = "#add8e6" },
+                references = { text = " ↱%s", color = "#ff6666" },
+              },
+              use_virtual_text = true,
+            }
+        },
+    {
+    "aznhe21/actions-preview.nvim",
+            opts = {
+                backend = { "nui", "telescope" },
+                highlight_command = function() return  { require("actions-preview.highlight").delta() } end,
+                keymap = {
+                    focus_next = { "j", "<Down>", "<Tab>" },
+                    focus_prev = { "k", "<Up>", "<S-Tab>" },
+                    close = { "<Esc>", "q" },
+                    submit = { "<CR>", "<Space>" },
+                }
+            },
+            config = function(_, opts)
+                opts.highlight_command = opts.highlight_command()
+                require("actions-preview").setup(opts)
+            end,
+            keys = {
+            {"gf", function() require("actions-preview").code_actions() end, desc = "Preview code actions" }
+            },
+        },
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy", -- Or `LspAttach`
@@ -122,8 +152,9 @@ return {
 		opts = {
 			default_settings = {
 				["rust-analyzer"] = {
-					diagnostics = { enable = false },
+					diagnostics = { enable = true },
 					checkOnSave = { enable = false },
+                    ["rust-analyzer.check.command"] = "clippy",
 					["rust-analyzer.cargo.extraEnv"] = {
 						RUSTFLAGS = "--cfg rust_analyzer",
 					},

@@ -4,6 +4,7 @@ require("config.lazy")
 
 require("config.theme")
 require("config.autocmds")
+require("config.colors")
 
 local remaps = require("config.remaps")
 for _, remap in ipairs(remaps) do

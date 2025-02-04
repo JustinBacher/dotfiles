@@ -62,7 +62,8 @@ end
 -- ╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝
 
 config.font = wezterm.font_with_fallback({
-	{ family = "ComicShannsMono Nerd Font Mono", weight = "Regular", stretch = "Normal", style = "Normal" },
+	{ family = "Comic Code Ligatures", weight = "Regular", stretch = "Normal", style = "Normal" },
+	{ family = "Comic Code", weight = "Regular", stretch = "Normal", style = "Normal" },
 	-- { family = "VictorMono Nerd Font", weight = "Medium", stretch = "Normal" },
 	{ family = "Symbols Nerd Font", weight = "Regular" },
 })
@@ -70,7 +71,7 @@ config.font = wezterm.font_with_fallback({
 if is_darwin then
 	config.font_size = 15
 else
-	config.font_size = 13
+	config.font_size = 12
 end
 
 --  ██████╗██╗   ██╗██████╗ ███████╗ ██████╗ ██████╗

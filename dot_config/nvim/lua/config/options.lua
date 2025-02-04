@@ -37,3 +37,9 @@ vim.opt.incsearch = true
 -- Other
 vim.o.timeout = true
 vim.o.timeoutlen = 300
+vim.diagnostic.config({
+    virtual_text = true,
+    float = {
+        border = "rounded",
+    }
+})
