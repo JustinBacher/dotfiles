@@ -1,3 +1,4 @@
+abook
 accountsservice
 adobe-source-han-sans-cn-fonts
 adobe-source-han-sans-jp-fonts
@@ -66,6 +67,7 @@ dex
 dhclient
 diffutils
 distcc
+dma
 dmidecode
 dmraid
 dnsmasq
@@ -168,6 +170,7 @@ hyprland
 hyprpicker
 inetutils
 iptables-nft
+isync
 iwd
 jfsutils
 jujutsu
@@ -220,19 +223,25 @@ mkinitcpio
 modemmanager
 most
 mousetweaks
+mpop
 mpvpaper
+msmtp
 mtools
+mutt
+mutt-wizard
 mutter-cachyos
 nano
 nano-syntax-highlighting
 nautilus
 neofetch
+neomutt
 neovim-git
 netctl
 networkmanager
 networkmanager-openvpn
 nfs-utils
 nilfs-utils
+notmuch
 noto-color-emoji-fontconfig
 noto-fonts
 noto-fonts-cjk
@@ -243,6 +252,7 @@ nvidia-settings
 nvidia-utils
 nvtop
 nwg-look
+oama-bin
 obs-studio
 octopi
 ollama
@@ -259,6 +269,7 @@ otf-monaspace-nerd
 pacdep
 pacman-contrib
 pacseek-bin
+pam-gnupg
 pamixer
 paru
 pass
@@ -351,6 +362,7 @@ unrar
 unzip
 upd72020x-fw
 upower
+urlview
 usb_modeswitch
 usbutils
 uutils-coreutils
@@ -364,6 +376,7 @@ virtualbox-guest-iso
 viu
 vulkan-icd-loader
 vulkan-tools
+w3m
 wallust
 waybar
 wd719x-firmware

@@ -7,6 +7,8 @@ set -gx TERMINAL wezterm
 #     	exec tmux 
 # end
 
+set -gx SSH_AUTH_SOCK /home/justin/.keeper/92jbach@gmail.com.ssh_agent
+
 set -l foreground c8d3f5 #c8d3f5
 set -l selection 2d3f76 #2d3f76
 set -l comment 636da6 #636da6

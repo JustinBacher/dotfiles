@@ -8,6 +8,11 @@ return {
 		config = function(_, opts) require("nvim_context_vt").setup(opts) end,
 	},
 	{
+		"alker0/chezmoi.vim",
+		lazy = false,
+		init = function() vim.g["chezmoi#use_tmp_buffer"] = true end,
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
 		event = "LazyFile",
@@ -31,15 +36,6 @@ return {
 			-- require("nvim-treesitter.install").prefer_git = true
 			vim.opt.runtimepath:prepend(treesitter_parser_path)
 			vim.filetype.add({ pattern = { [".*/hypr/.*%.conf"] = "hyprlang" } })
-			vim.filetype.add({
-				extension = {
-					tmpl = "gotmpl",
-				},
-				pattern = {
-					[".*.%.toml"] = "toml",
-					[".*.%.lua"] = "lua",
-				},
-			})
 		end,
 		dependencies = { { "nushell/tree-sitter-nu", build = ":TSUpdate nu" } },
 		build = ":TSUpdate",
@@ -49,7 +45,6 @@ return {
 				"bash",
 				"c",
 				"diff",
-				"gotmpl",
 				"html",
 				"hyprlang",
 				"javascript",
@@ -74,11 +69,20 @@ return {
 			},
 			parser_install_dir = treesitter_parser_path,
 			auto_install = true,
-			sync_install = false,
+			sync_install = true,
 			indent = { enable = true },
-			highlight = { enable = true, disable = { "c", "rust" } },
+			highlight = {
+				enable = true,
+				disable = function()
+					if string.find(vim.bo.filetype, "chezmoitmpl") then
+						return true
+					else
+						return { "c", "rust" }
+					end
+				end,
+			},
 			disable = function(lang, buf) ---@diagnostic disable-line: unused-local
-				local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+				local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
 				return ok and stats and stats.size > 100 * 1024 -- 100kb
 			end,
 			additional_vim_regex_highlighting = false,

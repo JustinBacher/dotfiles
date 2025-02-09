@@ -1,6 +1,0 @@
-nickeb96/puffer-fish
-ilancosman/tide@v6
-meaningful-ooo/sponge
-franciscolourenco/done
-jorgebucaran/autopair.fish
-danhper/fish-ssh-agent

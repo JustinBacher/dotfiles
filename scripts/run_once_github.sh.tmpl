@@ -1,0 +1,33 @@
+{{ $hostname := .chezmoi.hostname }}
+{{ $ssh_key_path := "~/.ssh/id_github_" | print $hostname }}
+
+# Retrieve GitHub API token from Keeper
+GITHUB_TOKEN=$(keeper get --field=token github_api_token)
+
+# Check if the SSH key already exists in GitHub
+EXISTING_KEYS=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user/keys | jq -r '.[].key')
+
+if echo "$EXISTING_KEYS" | grep -q "$(cat {{ $ssh_key_path }}.pub 2>/dev/null)"; then
+  echo "SSH key for {{ $hostname }} already exists in GitHub."
+else
+  echo "Generating new SSH key for {{ $hostname }}..."
+
+  # Retrieve SSH key passphrase from Keeper
+  SSH_PASSPHRASE=$(keeper get --field=passphrase github_ssh_passphrase)
+
+  # Generate a new SSH key pair (ed25519) with passphrase
+  ssh-keygen -t ed25519 -f {{ $ssh_key_path }} -N "$SSH_PASSPHRASE" -C "github@{{ $hostname }}"
+
+  # Start the SSH agent and add the new key
+  eval "$(ssh-agent -s)"
+  ssh-add {{ $ssh_key_path }}
+
+  # Add public key to GitHub via API
+  curl -X POST -H "Authorization: token $GITHUB_TOKEN" -d '{
+    "title": "{{ $hostname }}",
+    "key": "'"$(cat {{ $ssh_key_path }}.pub)"'"
+  }' https://api.github.com/user/keys
+
+  echo "SSH key added to GitHub successfully."
+fi
+
