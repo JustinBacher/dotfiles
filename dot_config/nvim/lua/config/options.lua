@@ -1,45 +1,10 @@
 local opt = vim.opt
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
-vim.cmd("au ColorScheme * hi Comment cterm=italic gui=italic") -- This fixed the italics not showing up for some reason
-
--- Indentation/formatting rules
-opt.tabstop = 4
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+opt.cursorline = false
+opt.linebreak = false
 opt.shiftwidth = 4
-opt.autoindent = true
-opt.expandtab = true
-opt.smartindent = true
+opt.tabstop = 4
 
--- Undo file
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-vim.opt.undofile = true
-
--- UI
-opt.termguicolors = true
-opt.relativenumber = true
-opt.updatetime = 750
-vim.opt.colorcolumn = "0"
-opt.signcolumn = "yes"
-opt.cursorline = true
-vim.opt.scrolloff = 8
-opt.wrap = true
-opt.linebreak = true
-
--- Searching
-opt.ignorecase = true
-opt.smartcase = true
-vim.opt.incsearch = true
-
--- Other
-vim.o.timeout = true
-vim.o.timeoutlen = 300
-vim.diagnostic.config({
-    virtual_text = true,
-    float = {
-        border = "rounded",
-    }
-})
+if vim.fn.has("nvim-0.10") == 1 then
+    opt.smoothscroll = false
+end
