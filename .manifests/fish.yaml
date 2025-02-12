@@ -1,7 +1,0 @@
-depends:
-  - sleep_3
-
-actions:
-  - action: package.install
-    name: fish 
-    provider: paru
