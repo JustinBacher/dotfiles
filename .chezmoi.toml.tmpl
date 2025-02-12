@@ -21,3 +21,6 @@ threads = {{- (output "powershell.exe" "-NoProfile" "-NonInteractive" "-Command"
 {{-   $displayServer = (output "sh" "-c" "echo $XDG_SESSION_TYPE") | trim }}
 {{- end }}
 displayServer = "{{ $displayServer }}"
+
+[hooks.read-source-state.pre]
+    command = ".local/share/chezmoi/.install-keeper-commander.sh"
