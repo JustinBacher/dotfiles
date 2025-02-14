@@ -6,7 +6,7 @@ return {
     config = function()
         --- @diagnostic disable-next-line:missing-fields
         require("neopywal").setup({
-            use_wallust = true,
+            use_palette = "wallust",
             transparent_background = true,
             plugins = {
                 snacks = { enabled = true },

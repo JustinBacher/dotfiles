@@ -5,6 +5,4 @@ opt.linebreak = false
 opt.shiftwidth = 4
 opt.tabstop = 4
 
-if vim.fn.has("nvim-0.10") == 1 then
-    opt.smoothscroll = false
-end
+opt.smoothscroll = false
