@@ -12,6 +12,10 @@ alsa-utils
 amd-ucode
 ani-cli
 arttime-git
+asciigames
+asciinema
+asciiville
+asciiville-aewan
 ast-firmware
 awesome-terminal-fonts
 baobab
@@ -26,6 +30,7 @@ bluez-hid2hci
 bluez-libs
 bluez-utils
 bottles
+bsd-games
 btop
 btrfs-assistant
 btrfs-progs
@@ -48,10 +53,13 @@ cachyos-wallpapers
 cachyos-zsh-config
 capitaine-cursors
 cava
+cbftp
+ccls
 chafa
 chezmoi
 chwd
 cliphist
+cmatrix
 code
 compsize
 comtrya
@@ -65,6 +73,7 @@ dconf-editor
 device-mapper
 dex
 dhclient
+dialog
 diffutils
 distcc
 dma
@@ -80,6 +89,7 @@ e2fsprogs
 efibootmgr
 efitools
 egl-wayland
+endoh1
 epiphany
 espeak-ng
 ethtool
@@ -87,6 +97,7 @@ evince
 exfatprogs
 f2fs-tools
 ffmpegthumbnailer
+figlet
 firefox
 flatpak
 foomatic-db
@@ -102,6 +113,7 @@ ghostscript
 ghostty
 git
 git-delta
+github-cli
 glances
 gnome-backgrounds
 gnome-calculator
@@ -204,9 +216,11 @@ linux-cachyos-headers
 linux-cachyos-nvidia-open
 linux-firmware
 logrotate
+lolcat
 lostfiles
 loupe
 lsb-release
+lsd
 lsscsi
 luarocks
 lvm2
@@ -239,6 +253,7 @@ neovim-git
 netctl
 networkmanager
 networkmanager-openvpn
+newsboat
 nfs-utils
 nilfs-utils
 notmuch
@@ -282,6 +297,7 @@ pipxu
 plasma-meta
 plocate
 plymouth
+pokemon-colorscripts-git
 polkit-kde-agent
 poppler-glib
 power-profiles-daemon
@@ -307,6 +323,7 @@ qt5-gsettings
 qt5-wayland
 qt5ct
 quich
+ranger
 rdma-core
 rebuild-detector
 reflector
@@ -326,6 +343,7 @@ snapper
 snapshot
 socat
 sof-firmware
+speedtest-cli
 spicetify-cli
 spicetify-marketplace-bin
 spicetify-themes-git
@@ -411,6 +429,7 @@ xorg-xinput
 xorg-xkill
 xorg-xrandr
 xorg-xwayland
+xsel
 yarn
 yay
 yazi-git
