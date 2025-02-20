@@ -8,6 +8,8 @@
     dark = true
     navigate = true
     diff-so-fancy = true
+    diff-highlight = true
+    features = diff-so-fancy
 
 [merge]
     conflictStyle = zdiff3

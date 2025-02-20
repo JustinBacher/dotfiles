@@ -2,6 +2,7 @@ return {
     "RedsXDD/neopywal.nvim",
     lazy = false,
     name = "neopywal",
+    version = false,
     priority = 1000,
     config = function()
         --- @diagnostic disable-next-line:missing-fields

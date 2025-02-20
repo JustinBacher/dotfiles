@@ -1,6 +1,8 @@
 # Font
 font-family = "Comic Code Ligatures"
+font-family-italic = "Victor Mono NF"
 font-style = "medium"
+font-style-italic = "medium italic"
 font-feature = "dlig"
 font-feature = "liga"
 font-variation = wght=700

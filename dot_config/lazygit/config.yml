@@ -1,4 +1,8 @@
+gui:
+  showCommandLog: false
 git:
   paging:
     colorArg: always
-    pager: delta --syntax-theme "tokyonight_moon" --paging=never
+    pager: delta --dark --diff-highlight --paging=never
+
+notARepository: skip

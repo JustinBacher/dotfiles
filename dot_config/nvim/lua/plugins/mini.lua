@@ -1,11 +1,14 @@
 return {
-    "echasnovski/mini.files",
-    opts = {
-        cursor = { enabled = false },
-        scroll = { enabled = false },
+    {
+        "echasnovski/mini.animate",
+        opts = {
+            cursor = { enabled = false },
+            scroll = { enabled = false },
+        },
     },
     {
         "echasnovski/mini.files",
+        lazy = false,
         opts = {
             windows = {
                 preview = true,

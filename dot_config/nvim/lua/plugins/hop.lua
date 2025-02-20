@@ -1,5 +1,6 @@
 return {
     "smoka7/hop.nvim",
+    lazu = "LazyFile",
     version = "*",
     opts = {
         keys = "etovxqpdygfblzhckisuran",
