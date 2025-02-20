@@ -326,7 +326,7 @@ mirror_session true
 //   - detach (Default)
 //   - quit
 // 
-// on_force_close "quit"
+on_force_close "quit"
  
 // Configure the scroll back buffer size
 // This is the number of lines zellij stores for each pane in the scroll back
@@ -378,7 +378,7 @@ copy_clipboard "primary"
 // if it is already running or creates it otherwise.
 // Default: false
 // 
-// attach_to_session true
+attach_to_session true
  
 // Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
 // Options:
@@ -423,7 +423,7 @@ copy_clipboard "primary"
 // (Requires restart)
 // Default: false
 // 
-// disable_session_metadata false
+disable_session_metadata false
  
 // Enable or disable support for the enhanced Kitty Keyboard Protocol (the host terminal must also support it)
 // (Requires restart)

@@ -1,5 +1,5 @@
 return {
-    "mluders/comfy-line-numbers.nvim"
+    "mluders/comfy-line-numbers.nvim",
     config = true,
-    lazy = "VeryLazy"
-  }
+    lazy = "VeryLazy",
+}

@@ -31,6 +31,7 @@ bluez-libs
 bluez-utils
 bottles
 bsd-games
+btdu-bin
 btop
 btrfs-assistant
 btrfs-progs
@@ -69,6 +70,7 @@ cups
 cups-filters
 cups-pdf
 cursor-bin
+davinci-resolve
 dconf-editor
 device-mapper
 dex
@@ -215,6 +217,7 @@ linux-cachyos-bore-lto-nvidia
 linux-cachyos-headers
 linux-cachyos-nvidia-open
 linux-firmware
+linux-firmware-qlogic
 logrotate
 lolcat
 lostfiles
@@ -273,6 +276,7 @@ octopi
 ollama
 ollama-cuda
 onlyoffice-bin
+opam
 openbsd-netcat
 opencl-nvidia
 opendesktop-fonts
@@ -310,6 +314,7 @@ python
 python-attr
 python-clickgen
 python-defusedxml
+python-gflags
 python-mutagen
 python-packaging
 python-pip
@@ -331,6 +336,7 @@ ripgrep
 rofi-emoji
 rsync
 rtkit
+rust-analyzer
 rygel
 s-nail
 sddm
