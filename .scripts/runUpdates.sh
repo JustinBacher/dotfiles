@@ -13,6 +13,7 @@ update_yazi() {
 
 update_hyprpm() {
 	hyprpm update
+	hyprpm reload
 }
 
 update_nvim() {
@@ -26,9 +27,7 @@ update_nvim() {
 
 install_arch_updates() {
 	echo "Updating Arch Linux system..."
-	sudo pacman -Syu
-	echo "Updating AUR packages..."
-	paru -Syu
+	paru -Syu --sudoloop
 	install_flatpak_updates
 	echo "Updating Rust..."
 	update_rustup
