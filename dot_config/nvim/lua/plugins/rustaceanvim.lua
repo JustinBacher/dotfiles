@@ -5,8 +5,9 @@ return {
             default_settings = {
                 ["rust-analyzer"] = {
                     procMacro = {
-                        enable = true,
-                        ignore = false,
+                        ignored = {
+                            ["async-trait"] = vim.NIL,
+                        },
                     },
                 },
             },

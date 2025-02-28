@@ -191,7 +191,6 @@ jujutsu
 kdialog
 keeper-commander
 keeper-password-manager
-kitty
 kvantum
 kvantum-theme-nordic-git
 layer-shell-qt5
@@ -226,6 +225,7 @@ lsb-release
 lsd
 lsscsi
 luarocks
+luau-bin
 lvm2
 mako
 malcontent
@@ -343,6 +343,7 @@ sddm
 sddm-theme-tokyo-night-git
 sg3_utils
 simple-scan
+slack-desktop-wayland
 slurp
 smartmontools
 snapper
@@ -406,7 +407,6 @@ waybar
 wd719x-firmware
 wdisplays
 wev
-wezterm-git
 wget
 which
 wireless-regdb

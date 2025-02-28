@@ -14,6 +14,6 @@ return {
                 trouble = { enabled = true },
             },
         })
-        vim.cmd.colorscheme("neopywal")
+        -- vim.cmd.colorscheme("neopywal")
     end,
 }
