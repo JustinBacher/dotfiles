@@ -9,3 +9,4 @@ opt.tabstop = 4
 opt.smoothscroll = false
 
 g.snacks_animate = false
+g.ollama_model = "qwen2.5-coder:1.5b"

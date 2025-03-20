@@ -1,29 +1,9 @@
--- local header = [[
--- ██╗  ██╗██╗         ██╗██╗   ██╗███████╗████████╗██╗███╗   ██╗
--- ██║  ██║██║         ██║██║   ██║██╔════╝╚══██╔══╝██║████╗  ██║
--- ███████║██║         ██║██║   ██║███████╗   ██║   ██║██╔██╗ ██║
--- ██╔══██║██║    ██   ██║██║   ██║╚════██║   ██║   ██║██║╚██╗██║
--- ██║  ██║██║    ╚█████╔╝╚██████╔╝███████║   ██║   ██║██║ ╚████║
--- ╚═╝  ╚═╝╚═╝     ╚════╝  ╚═════╝ ╚══════╝   ╚═╝   ╚═╝╚═╝  ╚═══╝]]
-local header = [[
-             ,----------------,              ,---------,
-        ,-----------------------,          ,"        ,"|
-      ,"                      ,"|        ,"        ,"  |
-     +-----------------------+  |      ,"        ,"    |
-     |  .-----------------.  |  |     +---------+      |
-     |  |                 |  |  |     | -==----'|      |
-     |  | $ sudo rm -rf / |  |  |     |         |      |
-     |  | $               |  |  |/----|`---=    |      |
-     |  | $ nvim .        |  |  |    /|==== ooo |      ;
-     |  |                 |  |  |   / |(((( [33]|    ," 
-     |  `-----------------'  |,"    | |((((     |  ,"   
-     +-----------------------+      | |         |,"     
-        /_)______________(_/        | +---------+       
-   _______________________________   `,                  
-  /  oooooooooooooooo  .o.  oooo /,   \,"-----------    
- / ==ooooooooooooooo==.o.  ooo= //   ,`\--{)B     ,"    
-/_==__==========__==_ooo__ooo=_/'   /___________,"
--------------------------------]]
+-- local quote = os.execute("curl https://quoteslate.vercel.app/api/quotes/random | jq -r '.quote'")
+-- local emoji = os.execute(
+--     "echo 'provide an emoji for the following quote. \""
+--         .. quote
+--         .. "\" Your response should include only the emoji you think best fits the quote and nothing else. It is imperative that that your response be only one character in length' | ollama run llama3.2:1b"
+-- )
 
 return {
     "folke/snacks.nvim",
@@ -33,16 +13,16 @@ return {
         scroll = { enabled = false },
         bigfile = { enabled = true },
         dashboard = {
-            preset = { header = header },
-            formats = {
-                header = { "%s", align = "center" },
-            },
             sections = {
-                { section = "header" },
-                { section = "keys", gap = 1, padding = 1 },
+                {
+                    section = "terminal",
+                    cmd = "chafa ~/Downloads/__ayase_momo_and_takakura_ken_dandadan_drawn_by_crescentbutton__sample-e20fb61afc5a39a2027da3ac4012c447-removebg-preview.png  --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
+                    height = 17,
+                    padding = 1,
+                },
                 {
                     pane = 2,
-                    icon = " ",
+                    icon = " ",
                     desc = "Browse Repo",
                     padding = 1,
                     key = "b",
@@ -50,6 +30,7 @@ return {
                         Snacks.gitbrowse()
                     end,
                 },
+                { section = "keys", gap = 1, padding = 1 },
                 function()
                     local in_git = Snacks.git.get_root() ~= nil
                     local cmds = {
@@ -72,7 +53,7 @@ return {
                                 vim.fn.jobstart("gh issue list --web", { detach = true })
                             end,
                             icon = " ",
-                            height = 7,
+                            height = 5,
                         },
                         {
                             icon = " ",
@@ -82,13 +63,13 @@ return {
                             action = function()
                                 vim.fn.jobstart("gh pr list --web", { detach = true })
                             end,
-                            height = 7,
+                            height = 5,
                         },
                         {
-                            icon = " ",
+                            icon = "󱖫 ",
                             title = "Git Status",
                             cmd = "git --no-pager diff --stat -B -M -C",
-                            height = 10,
+                            height = 7,
                         },
                     }
                     return vim.tbl_map(function(cmd)
@@ -104,10 +85,13 @@ return {
                 end,
                 { section = "startup" },
                 {
+                    pane = 2,
                     section = "terminal",
-                    cmd = "chafa ~/Downloads/__ayase_momo_and_takakura_ken_dandadan_drawn_by_crescentbutton__sample-e20fb61afc5a39a2027da3ac4012c447-removebg-preview.png  --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
-                    height = 17,
-                    padding = 1,
+                    icon = "󱀡 ",
+                    title = "Quote",
+                    height = 4,
+                    cmd = "curl -s https://quoteslate.vercel.app/api/quotes/random | jq -r '.quote'",
+                    indent = 2,
                 },
             },
         },

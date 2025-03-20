@@ -1,8 +1,8 @@
 return {
     "tamton-aquib/zone.nvim",
-    cond = false,
+    enabled = false,
     opts = {
+        style = "epilepsy",
         after = 30,
-        treadmill = { headache = true },
     },
 }

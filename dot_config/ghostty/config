@@ -1,11 +1,9 @@
 # Font
-font-family = "Comic Code Ligatures"
-font-family-italic = "Victor Mono NF"
-font-style = "medium"
-font-style-italic = "medium italic"
-font-feature = "dlig"
-font-feature = "liga"
-font-variation = wght=700
+font-family = "Maple Mono NF"
+font-family-italic = "Maple Mono NF"
+
+# Mouse
+mouse-hide-while-typing = true
 
 # Theming
 alpha-blending = "linear-corrected"
@@ -17,6 +15,15 @@ window-decoration = false
 cursor-style = bar
 shell-integration-features = no-cursor
 
+# Window
+gtk-single-instance = true
+window-padding-balance = true
+window-decoration = false
+
 # Other
+shell-integration-features = cursor,sudo,no-title
 shell-integration = fish
+copy-on-select = clipboard
 command = zellij
+confirm-close-surface = false
+quit-after-last-window-closed = true

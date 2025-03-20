@@ -30,12 +30,14 @@ bluez-hid2hci
 bluez-libs
 bluez-utils
 bottles
+bpftune-git
 bsd-games
 btdu-bin
 btop
 btrfs-assistant
 btrfs-progs
 cachyos-fish-config
+cachyos-gaming-applications
 cachyos-gaming-meta
 cachyos-hello
 cachyos-hooks
@@ -48,6 +50,7 @@ cachyos-packageinstaller
 cachyos-plymouth-theme
 cachyos-rate-mirrors
 cachyos-settings
+cachyos-snapper-support
 cachyos-v3-mirrorlist
 cachyos-v4-mirrorlist
 cachyos-wallpapers
@@ -60,6 +63,7 @@ chafa
 chezmoi
 chwd
 cliphist
+cmake
 cmatrix
 code
 compsize
@@ -83,6 +87,7 @@ dmidecode
 dmraid
 dnsmasq
 docker
+docker-compose
 dosfstools
 dracula-grub-theme-git
 duf
@@ -231,7 +236,6 @@ mako
 malcontent
 man-db
 man-pages
-mcpelauncher-appimage
 mdadm
 meld
 mesa-utils
@@ -305,6 +309,7 @@ pokemon-colorscripts-git
 polkit-kde-agent
 poppler-glib
 power-profiles-daemon
+profile-sync-daemon
 protontricks
 protonup-qt
 pv
@@ -333,6 +338,7 @@ rdma-core
 rebuild-detector
 reflector
 ripgrep
+rmlint-shredder-git
 rofi-emoji
 rsync
 rtkit
@@ -355,6 +361,7 @@ spicetify-cli
 spicetify-marketplace-bin
 spicetify-themes-git
 splix
+spoofdpi
 spotify
 stylua
 sudo
@@ -369,7 +376,6 @@ sysfsutils
 system-config-printer
 tecla
 texinfo
-timeshift
 tmux
 tokyonight-gtk-theme-git
 totem
@@ -378,6 +384,7 @@ ttf-bitstream-vera
 ttf-dejavu
 ttf-jetbrains-mono-nerd
 ttf-liberation
+ttf-maple-beta-nf
 ttf-meslo-nerd
 ttf-opensans
 ttf-victor-mono-nerd
@@ -396,8 +403,6 @@ vi
 vim
 virt-manager
 virt-viewer
-virtualbox
-virtualbox-guest-iso
 viu
 vulkan-icd-loader
 vulkan-tools
@@ -437,8 +442,7 @@ xorg-xrandr
 xorg-xwayland
 xsel
 yarn
-yay
-yazi-git
+yazi
 ydotool
 yelp
 yewtube
