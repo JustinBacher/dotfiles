@@ -1,48 +1,28 @@
+local kind_icons = {
+    -- LLM Provider icons
+    claude = "󰋦",
+    openai = "󱢆",
+    codestral = "󱎥",
+    gemini = "",
+    Groq = "",
+    Openrouter = "󱂇",
+    Ollama = "󰳆",
+    ["Llama.cpp"] = "󰳆",
+    Deepseek = "",
+}
+
 return {
     {
-        "saghen/blink.compat",
-        -- use the latest release, via version = '*', if you also use the latest release for blink.cmp
-        version = "*",
-        -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
-        lazy = true,
-        -- make sure to set opts so that lazy.nvim calls blink.compat's setup
-        config = true,
-    },
-    {
         "saghen/blink.cmp",
+        dependencies = {
+            -- "milanglacier/minuet-ai.nvim",
+            "Kaiser-Yang/blink-cmp-avante",
+            { "saghen/blink.compat", version = "*", lazy = true, config = true },
+        },
         opts_extend = {
             "sources.completion.enabled_providers",
             "sources.compat",
             "sources.default",
-        },
-        dependencies = {
-            {
-                "tzachar/cmp-ai",
-                dependencies = "nvim-lua/plenary.nvim",
-                config = function()
-                    local cmp_ai = require("cmp_ai.config")
-
-                    cmp_ai:setup({
-                        max_lines = 100,
-                        provider = "Ollama",
-                        provider_options = {
-                            model = "deepseek-coder",
-                            auto_unload = false, -- Set to true to automatically unload the model when
-                            -- exiting nvim.
-                        },
-                        notify = true,
-                        notify_callback = function(msg)
-                            vim.notify(msg)
-                        end,
-                        run_on_every_keystroke = true,
-                        ignored_file_types = {
-                            -- default is not to ignore
-                            -- uncomment to ignore in lua:
-                            -- lua = true
-                        },
-                    })
-                end,
-            },
         },
 
         ---@module 'blink.cmp'
@@ -66,11 +46,27 @@ return {
             sources = {
                 -- adding any nvim-cmp sources here will enable them
                 -- with blink.compat
-                compat = { "cmp-ai" },
-                default = { "cmp-ai", "lsp", "path", "snippets", "buffer" },
+                default = { "avante", "lsp", "path", "snippets", "buffer" },
+                providers = {
+                    avante = {
+                        module = "blink-cmp-avante",
+                        name = "Avante",
+                        opts = {
+                            -- options for blink-cmp-avante
+                        },
+                    },
+                    -- minuet = {
+                    --     name = "minuet",
+                    --     module = "minuet.blink",
+                    --     score_offset = 100,
+                    -- },
+                },
             },
-
             keymap = { preset = "super-tab" },
+            appearance = {
+                nerd_font_variant = "mono",
+                kind_icons = kind_icons,
+            },
         },
     },
 }
