@@ -10,3 +10,5 @@ opt.smoothscroll = false
 
 g.snacks_animate = false
 g.ollama_model = "qwen2.5-coder:1.5b"
+
+vim.g.lazyvim_python_ruff = "ruff"

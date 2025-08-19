@@ -1,0 +1,10 @@
+[Unit]
+Description= UDiskie Service
+Wants=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/udiskie --no-notify
+
+[Install]
+WantedBy=graphical-session.target

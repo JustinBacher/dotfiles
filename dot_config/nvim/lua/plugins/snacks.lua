@@ -90,7 +90,7 @@ return {
                     icon = "󱀡 ",
                     title = "Quote",
                     height = 4,
-                    cmd = "curl -s https://quoteslate.vercel.app/api/quotes/random | jq -r '.quote'",
+                    cmd = "gh inspire",
                     indent = 2,
                 },
             },
