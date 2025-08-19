@@ -18,7 +18,9 @@ return {
             -- "milanglacier/minuet-ai.nvim",
             "Kaiser-Yang/blink-cmp-avante",
             { "saghen/blink.compat", version = "*", lazy = true, config = true },
+            "rafamadriz/friendly-snippets",
         },
+        version = "1.*",
         opts_extend = {
             "sources.completion.enabled_providers",
             "sources.compat",
@@ -62,7 +64,14 @@ return {
                     -- },
                 },
             },
-            keymap = { preset = "super-tab" },
+            keymap = {
+                preset = "super-tab",
+                ["<Tab>"] = {
+                    require("blink.cmp.keymap.presets").get("super-tab")["<Tab>"][1],
+                    require("lazyvim.util.cmp").map({ "snippet_forward", "ai_accept" }),
+                    "fallback",
+                },
+            },
             appearance = {
                 nerd_font_variant = "mono",
                 kind_icons = kind_icons,

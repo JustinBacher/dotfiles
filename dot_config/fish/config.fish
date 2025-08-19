@@ -42,28 +42,32 @@ set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
 set -g fish_pager_color_selected_background --background=$selection
 
+# if status is-login; and status is-interactive
+#     keychain --eval --agents ssh ~/.ssh/id_ed25519 | source
+# end
+
 # Enable vim mode
 if status is-interactive
-  set fish_cursor_default     block      blink
-  set fish_cursor_insert      line       blink
-  set fish_cursor_replace_one underscore blink
-  set fish_cursor_visual      block
+    set fish_cursor_default block blink
+    set fish_cursor_insert line blink
+    set fish_cursor_replace_one underscore blink
+    set fish_cursor_visual block
 
-  function fish_user_key_bindings
-    # Execute this once per mode that emacs bindings should be used in
-    fish_default_key_bindings -M insert
-    fish_vi_key_bindings --no-erase insert
-  end
+    function fish_user_key_bindings
+        # Execute this once per mode that emacs bindings should be used in
+        fish_default_key_bindings -M insert
+        fish_vi_key_bindings --no-erase insert
+    end
 end
 
 if type -q brew
-	if test -d (brew --prefix)"/share/fish/completions"
-		set -p fish_complete_path (brew --prefix)/share/fish/completions
-	end
+    if test -d (brew --prefix)"/share/fish/completions"
+        set -p fish_complete_path (brew --prefix)/share/fish/completions
+    end
 
-	if test -d (brew --prefix)"/share/fish/vendor_completions.d"
-		set -p fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
-	end
+    if test -d (brew --prefix)"/share/fish/vendor_completions.d"
+        set -p fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
+    end
 end
 
 zoxide init --cmd cd fish | source
@@ -75,5 +79,5 @@ set --export PATH $BUN_INSTALL/bin $PATH
 # Start zellij if not already running
 if set -q ZELLIJ
 else
-  zellij
+    zellij
 end
