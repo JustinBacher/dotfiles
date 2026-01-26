@@ -13,13 +13,25 @@ return {
         scroll = { enabled = false },
         bigfile = { enabled = true },
         dashboard = {
+            preset = {
+                header = [[
+⠀⠀⠀⠀⣠⣶⡾⠏⠉⠙⠳⢦⡀⠀⠀⠀⢠⠞⠉⠙⠲⡀⠀
+⠀⠀⠀⣴⠿⠏⠀⠀⠀⠀⠀⠀⢳⡀⠀⡏⠀⠀⠀⠀⠀⢷
+⠀⠀⢠⣟⣋⡀⢀⣀⣀⡀⠀⣀⡀⣧⠀⢸⠀⠀⠀⠀⠀ ⡇
+⠀⠀⢸⣯⡭⠁⠸⣛⣟⠆⡴⣻⡲⣿⠀⣸⠀⠀OK⠀ ⡇
+⠀⠀⣟⣿⡭⠀⠀⠀⠀⠀⢱⠀⠀⣿⠀⢹⠀⠀⠀⠀⠀ ⡇
+⠀⠀⠙⢿⣯⠄⠀⠀⠀⢀⡀⠀⠀⡿⠀⠀⡇⠀⠀⠀⠀⡼
+⠀⠀⠀⠀⠹⣶⠆⠀⠀⠀⠀⠀⡴⠃⠀⠀⠘⠤⣄⣠⠞⠀
+⠀⠀⠀⠀⠀⢸⣷⡦⢤⡤⢤⣞⣁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢀⣤⣴⣿⣏⠁⠀⠀⠸⣏⢯⣷⣖⣦⡀⠀⠀⠀⠀⠀⠀
+⢀⣾⣽⣿⣿⣿⣿⠛⢲⣶⣾⢉⡷⣿⣿⠵⣿⠀⠀⠀⠀⠀⠀
+⣼⣿⠍⠉⣿⡭⠉⠙⢺⣇⣼⡏⠀⠀⠀⣄⢸⠀⠀⠀⠀⠀⠀
+⣿⣿⣧⣀⣿.........⣀⣰⣏⣘⣆⣀⠀⠀ 
+                ]],
+                footer = { "%s", align = "center" },
+            },
             sections = {
-                {
-                    section = "terminal",
-                    cmd = "chafa ~/Downloads/__ayase_momo_and_takakura_ken_dandadan_drawn_by_crescentbutton__sample-e20fb61afc5a39a2027da3ac4012c447-removebg-preview.png  --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
-                    height = 17,
-                    padding = 1,
-                },
+                { section = "header" },
                 {
                     pane = 2,
                     icon = " ",
@@ -36,7 +48,7 @@ return {
                     local cmds = {
                         {
                             title = "Notifications",
-                            cmd = "gh notify -s -a -n5",
+                            cmd = "fish -c 'gh notify -s -a -n5'",
                             action = function()
                                 vim.ui.open("https://github.com/notifications")
                             end,
@@ -61,7 +73,7 @@ return {
                             cmd = "gh pr list -L 3",
                             key = "P",
                             action = function()
-                                vim.fn.jobstart("gh pr list --web", { detach = true })
+                                vim.fn.jobstart("fish -c 'gh pr list --web'", { detach = true })
                             end,
                             height = 5,
                         },
@@ -90,7 +102,7 @@ return {
                     icon = "󱀡 ",
                     title = "Quote",
                     height = 4,
-                    cmd = "gh inspire",
+                    cmd = "fish -c 'gh inspire'",
                     indent = 2,
                 },
             },

@@ -21,6 +21,7 @@ local languages = {
 
 return {
     "Mr-LLLLL/treesitter-outer",
+    enabled = false,
     dependencies = "nvim-treesitter/nvim-treesitter",
     lazy = true,
     ft = languages,

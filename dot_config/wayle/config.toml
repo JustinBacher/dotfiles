@@ -1,0 +1,25 @@
+imports = ["colors.toml"]
+
+[styling]
+theme-provider = "wayle"
+
+[styling.palette]
+bg = "#16161e"
+fg = "#c0caf5"
+primary = "#7aa2f7"
+
+[bar]
+scale = 1
+location = "top"
+rounding = "sm"
+
+[[bar.layout]]
+monitor = "*"
+left = ["clock"]
+center = ["media"]
+right = ["battery"]
+
+[modules.clock]
+format = "%H:%M"
+icon-show = true
+label-show = true

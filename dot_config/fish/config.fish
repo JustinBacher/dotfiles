@@ -1,6 +1,18 @@
 set -gx EDITOR nvim
 set -gx PAGER less
 set -gx TERMINAL wezterm
+set -gx VISUAL nvim
+
+set processors $(nproc)
+
+# Rust Globals
+set -gx CARGO_BUILD_JOBS $processors
+set -gx RUSTC_WRAPPER sccache
+
+set -gx ANTHROPIC_AUTH_TOKEN ollama
+set -gx ANTHROPIC_BASE_URL "http://localhost:11434"
+
+fish_add_path /home/justin/.local/bin
 
 # if status is-interactive
 # 	and not set -q TMUX

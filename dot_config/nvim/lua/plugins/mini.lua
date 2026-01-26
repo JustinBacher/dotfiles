@@ -1,13 +1,13 @@
 return {
     {
-        "echasnovski/mini.animate",
+        "nvim-mini/mini.animate",
         opts = {
             cursor = { enabled = false },
             scroll = { enabled = false },
         },
     },
     {
-        "echasnovski/mini.files",
+        "nvim-mini/mini.files",
         lazy = false,
         opts = {
             windows = {

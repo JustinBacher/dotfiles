@@ -6,7 +6,7 @@ local censor_extmark_opts = function(x, match, y)
 end
 
 return {
-    "echasnovski/mini.hipatterns",
+    "nvim-mini/mini.hipatterns",
     opts = {
         highlighters = {
             fixme = {

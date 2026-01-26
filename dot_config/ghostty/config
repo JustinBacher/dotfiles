@@ -1,6 +1,7 @@
 # Font
-font-family = "Maple Mono NF"
-font-family-italic = "Maple Mono NF"
+font-family = "Maple Mono"
+font-family-italic = "Maple Mono"
+font-feature = +zero +calt
 
 # Mouse
 mouse-hide-while-typing = true
@@ -8,22 +9,49 @@ mouse-hide-while-typing = true
 # Theming
 alpha-blending = "linear-corrected"
 background-opacity = 0.6
-theme = tokyonight_night
-window-decoration = false
+theme = dark:Rose Pine Moon,light:Rose Pine Dawn
 
 # Cursor
 cursor-style = bar
 shell-integration-features = no-cursor
+focus-follows-mouse = true
 
 # Window
 gtk-single-instance = true
 window-padding-balance = true
+# May not want to use this on non-tiling WMs
 window-decoration = false
 
 # Other
-shell-integration-features = cursor,sudo,no-title
+shell-integration-features = cursor,sudo,no-title,ssh-env,ssh-terminfo
 shell-integration = fish
 copy-on-select = clipboard
-command = zellij
 confirm-close-surface = false
 quit-after-last-window-closed = true
+gtk-quick-terminal-layer = overlay
+# command = zellij
+
+# Shaders
+custom-shader = shaders/cursor_frozen.glsl
+# custom-shader = ./shaders/glow-rgbsplit-twitchy.glsl
+
+# Keybinds
+keybind = ctrl+shift+r=reload_config
+
+keybind = alt+h=new_split:left
+keybind = alt+j=new_split:down
+keybind = alt+k=new_split:up
+keybind = alt+l=new_split:right
+
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:down
+keybind = ctrl+k=goto_split:up
+keybind = ctrl+l=goto_split:right
+
+keybind = ctrl+alt+h=resize_split:left,30
+keybind = ctrl+alt+j=resize_split:down,15
+keybind = ctrl+alt+k=resize_split:up,15
+keybind = ctrl+alt+l=resize_split:right,30
+
+keybind = ctrl+shift+f=toggle_quick_terminal
+keybind = alt+escape=close_surface

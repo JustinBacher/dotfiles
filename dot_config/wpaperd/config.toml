@@ -1,8 +1,10 @@
 [default]
 duration = "5m"
-mode = "fit"
+mode = "stretch"
 sorting = "random"
-transition-time = 3000
+transition-time = 1000
+
+[default.transition.circle-crop]
 
 [any]
-path = "~/.config/swww/Tokyo-Night"
+path = "~/Wallpapers/"
