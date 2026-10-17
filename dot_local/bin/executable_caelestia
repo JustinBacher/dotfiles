@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Keep Caelestia's runtime and QML modules separate from other shells.
+runtime="$HOME/.local/opt/caelestia-quickshell"
+shell_prefix="$HOME/.local/opt/caelestia-shell"
+export PATH="$HOME/.local/libexec/caelestia:$runtime/bin:$PATH"
+export CAELESTIA_LIB_DIR="$shell_prefix/lib/caelestia"
+export QML_IMPORT_PATH="$shell_prefix/lib/qt6/qml:$runtime/lib/qt6/qml${QML_IMPORT_PATH:+:$QML_IMPORT_PATH}"
+
+# EGL fails to present this shell on this multi-GPU NVIDIA desktop.
+export QSG_RHI_BACKEND="${QSG_RHI_BACKEND:-vulkan}"
+export QT_VK_PHYSICAL_DEVICE_INDEX="${QT_VK_PHYSICAL_DEVICE_INDEX:-0}"
+# NVIDIA DMA-BUF imports can fail for captures; use Quickshell's SHM fallback.
+export QS_DISABLE_DMABUF=1
+
+exec /usr/bin/caelestia "$@"

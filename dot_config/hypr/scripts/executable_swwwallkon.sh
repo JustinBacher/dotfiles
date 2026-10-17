@@ -6,7 +6,6 @@
 ScrDir=$(dirname "$(realpath "$0")")
 source "${ScrDir}/globalcontrol.sh"
 scrName="$(basename "$0")"
-wallPath="${ConfDir}/swww"
 kmenuPath="$HOME/.local/share/kio/servicemenus"
 kmenuDesk="${kmenuPath}/hydewallpaper.desktop"
 readarray -t theme_ctl < <(cut -d '|' -f 2 "$ThemeCtl")
@@ -49,11 +48,8 @@ done
 
 if [ ! -z "${setTheme}" ] && [ ! -z "${setWall}" ] ; then
 
-    thmWall=$(basename "${setWall}")
-    xWall="${wallPath}/${setTheme}/${thmWall}"
-    cp "${setWall}" "${xWall}"
-    awk -F '|' -v thm="${setTheme}" -v wal="${xWall}" '{OFS=FS} {if($2==thm)$NF=wal;print$0}' "${ThemeCtl}" > "${ScrDir}/tmp" && mv "${ScrDir}/tmp" "${ThemeCtl}"
     ${ScrDir}/themeswitch.sh -s "${setTheme}"
+    noctalia msg wallpaper-set "${setWall}"
 
 else
 

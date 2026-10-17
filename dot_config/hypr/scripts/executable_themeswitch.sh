@@ -107,10 +107,3 @@ ln -s $themeDir/$ThemeSet/gtk-4.0 $ConfDir/gtk-4.0
 # flatpak GTK
 flatpak --user override --env=GTK_THEME="${ThemeSet}"
 flatpak --user override --env=ICON_THEME="${gtkIcon}"
-
-
-# wallpaper
-getWall=`grep '^1|' "$ThemeCtl" | awk -F '|' '{print $NF}'`
-getWall=`eval echo "$getWall"`
-"${ScrDir}/swwwallpaper.sh" -s "${getWall}"
-

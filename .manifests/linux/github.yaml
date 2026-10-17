@@ -1,0 +1,10 @@
+depends:
+  - linux.packages
+
+actions:
+  # Creates ~/.ssh/id_github and registers it with GitHub. Skips if the key
+  # exists. Reads its secrets from Keeper at run time, so Keeper must be unlocked.
+  - action: command.run
+    command: fish
+    args:
+      - files/github-ssh.fish

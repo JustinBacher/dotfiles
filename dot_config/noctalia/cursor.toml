@@ -1,0 +1,6 @@
+# Follow Noctalia's current palette (wallpaper, built-in, or community).
+[theme.templates.user.cursor]
+input_path = "~/.config/noctalia/templates/cursor-palette.json"
+output_path = "~/.cache/noctalia/cursor-palette.json"
+post_hook = "python3 ~/.config/hypr/scripts/recolor-cursor.py"
+hook_async = false

@@ -1,0 +1,14 @@
+providers:
+  local-kokoro:
+    baseUrl: http://127.0.0.1:8880/v1
+    auth: none
+    models:
+      - id: kokoro
+        name: Kokoro-82M (RTX 5060 Ti)
+        api: openai-speech
+  llama.cpp:
+    baseUrl: http://127.0.0.1:4096
+    api: openai-responses
+    auth: none
+    discovery:
+      type: llama.cpp

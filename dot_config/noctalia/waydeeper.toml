@@ -1,0 +1,7 @@
+# Keep Noctalia's picker, palette, and rotation; Waydeeper owns background surfaces.
+[wallpaper]
+render = false
+
+[hooks]
+started = "systemctl --user start noctalia-waydeeper.service"
+wallpaper_changed = "systemctl --user kill --kill-whom=main --signal=USR1 noctalia-waydeeper.service"

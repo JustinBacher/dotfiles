@@ -22,7 +22,6 @@ abbr chmod chmod -v --preserve-root
 abbr chgrp chgrp --preserve-root
 abbr chmox chmod +x --preserve-root
 
-
 # shortening common commands
 abbr h history
 abbr cls clear
@@ -71,3 +70,5 @@ abbr cz chezmoi
 abbr cze chezmoi edit
 abbr cza chezmoi apply
 abbr czu chezmoi epdate
+
+abbr oc opencode

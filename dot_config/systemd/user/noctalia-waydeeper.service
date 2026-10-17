@@ -1,0 +1,14 @@
+[Unit]
+Description=Render Noctalia wallpapers with Waydeeper
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+Environment=ORT_DYLIB_PATH=/usr/lib/libonnxruntime.so
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin
+ExecStart=%h/.local/bin/noctalia-waydeeper --watch
+ExecStopPost=%h/.local/bin/noctalia-waydeeper --stop
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=10

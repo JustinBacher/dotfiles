@@ -1,0 +1,33 @@
+# Docked left bar with rounded inner corners, similar to Caelestia.
+[bar.default]
+position = "left"
+thickness = 52
+margin_edge = 0
+margin_ends = 0
+padding = 12
+widget_spacing = 8
+radius = 40
+radius_top_left = 0
+radius_bottom_left = 0
+radius_top_right = 40
+radius_bottom_right = 40
+concave_edge_corners = true
+background_opacity = 0.65
+compositor_blur = true
+contact_shadow = true
+panel_overlap = 1
+shadow = false
+start = ["launcher", "wallpaper", "workspaces"]
+center = ["clock", "media"]
+end = ["tray", "notifications", "clipboard", "network", "volume", "control-center", "session"]
+
+[shell]
+corner_radius_scale = 1.25
+panel_anchor_bar = "default"
+
+[shell.screen_corners]
+enabled = true
+size = 40
+
+[shell.panel]
+transparency_mode = "glass"

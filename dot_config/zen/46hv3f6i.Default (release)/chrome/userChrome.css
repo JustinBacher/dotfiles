@@ -1,0 +1,22 @@
+@import "/home/justin/.cache/noctalia/zen-browser/zen-userChrome.css";
+
+:root {
+  --zen-main-browser-background: rgba(35, 35, 35, 0.72) !important;
+  --zen-themed-toolbar-bg: transparent !important;
+  --zen-themed-toolbar-bg-transparent: rgba(35, 35, 35, 0.72) !important;
+}
+
+body {
+  background: transparent !important;
+}
+
+#zen-browser-background {
+  --zen-main-browser-background: rgba(35, 35, 35, 0.72) !important;
+  --zen-main-browser-background-old: rgba(35, 35, 35, 0.72) !important;
+}
+
+#navigator-toolbox,
+#zen-tabbox-wrapper,
+#zen-sidebar-splitter {
+  background: transparent !important;
+}

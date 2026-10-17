@@ -1,0 +1,8 @@
+[Unit]
+Description=Rotate wallpapers every five minutes
+PartOf=awww.service
+
+[Timer]
+OnActiveSec=5min
+OnUnitActiveSec=5min
+Unit=awww-cycle.service

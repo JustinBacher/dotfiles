@@ -1,0 +1,14 @@
+# Runs first. Gets the tools the package steps need, then builds paru so
+# later package.install steps can use the paru provider (repo + AUR).
+actions:
+  - action: package.install
+    provider: pacman
+    list:
+      - git
+      - base-devel
+      - rustup
+
+  - action: command.run
+    command: bash
+    args:
+      - files/bootstrap-paru.sh

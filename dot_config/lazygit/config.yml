@@ -1,8 +1,36 @@
 gui:
+  theme:
+    activeBorderColor:
+      - "#ffb4a9"
+      - bold
+    inactiveBorderColor:
+      - "#ffb4a9"
+    searchingActiveBorderColor:
+      - "#f8bc60"
+      - bold
+    optionsTextColor:
+      - "#e0bfba"
+    selectedLineBgColor:
+      - "#352725"
+    inactiveViewSelectedLineBgColor:
+      - bold
+    cherryPickedCommitFgColor:
+      - "#e0bfba"
+    cherryPickedCommitBgColor:
+      - "#f8bc60"
+    markedBaseCommitFgColor:
+      - "#f8bc60"
+    markedBaseCommitBgColor:
+      - "#ffb4ab"
+    unstagedChangesColor:
+      - "#ffb4ab"
+    defaultFgColor:
+      - "#f6ddd9"
   showCommandLog: false
 git:
   paging:
     colorArg: always
     pager: delta --dark --diff-highlight --paging=never
+    useConfig: false
 
 notARepository: skip

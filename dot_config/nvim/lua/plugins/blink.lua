@@ -57,11 +57,11 @@ return {
                             -- options for blink-cmp-avante
                         },
                     },
-                    -- minuet = {
-                    --     name = "minuet",
-                    --     module = "minuet.blink",
-                    --     score_offset = 100,
-                    -- },
+                    minuet = {
+                        name = "minuet",
+                        module = "minuet.blink",
+                        score_offset = 100,
+                    },
                 },
             },
             keymap = {

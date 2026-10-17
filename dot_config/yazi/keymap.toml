@@ -1,0 +1,134 @@
+[[mgr.prepend_keymap]]
+on = "P"
+run = "plugin toggle-pane max-preview"
+desc = "Maximize or restore preview"
+
+[[mgr.prepend_keymap]]
+on = ["c", "m"]
+run = "plugin chmod"
+desc = "Chmod on selected files"
+
+[[mgr.prepend_keymap]]
+on = "z"
+run = "noop"
+desc = "Archive shortcuts"
+
+[[mgr.prepend_keymap]]
+on = ["z", "z"]
+run = "plugin ouch zip"
+desc = "Create ZIP archive"
+
+[[mgr.prepend_keymap]]
+on = ["z", "g"]
+run = "plugin ouch tar.gz"
+desc = "Create tar.gz archive"
+
+[[mgr.prepend_keymap]]
+on = "F"
+run = "plugin fzf"
+desc = "Jump via fzf"
+
+[[mgr.prepend_keymap]]
+on = "y"
+run = ["yank", "plugin clipboard -- --action=copy"]
+desc = "Copy internally and to system clipboard"
+
+[[mgr.prepend_keymap]]
+on = "Y"
+run = "plugin clipboard -- --action=paste"
+desc = "Paste files from system clipboard"
+
+[[mgr.prepend_keymap]]
+on = "i"
+run = "spot"
+desc = "Inspect metadata"
+
+[[mgr.prepend_keymap]]
+on = "M"
+run = "plugin toggle-details"
+desc = "Toggle size and modification time"
+
+[[mgr.prepend_keymap]]
+on = ";"
+run = "plugin selection-command"
+desc = "Run command on selected files"
+
+[[mgr.prepend_keymap]]
+on = ["R", "p", "p"]
+run = "plugin sudo -- paste"
+desc = "Sudo paste"
+
+[[mgr.prepend_keymap]]
+on = ["R", "P"]
+run = "plugin sudo -- paste --force"
+desc = "Sudo force paste"
+
+[[mgr.prepend_keymap]]
+on = ["R", "r"]
+run = "plugin sudo -- rename"
+desc = "Sudo rename"
+
+[[mgr.prepend_keymap]]
+on = ["R", "p", "l"]
+run = "plugin sudo -- link"
+desc = "Sudo absolute symlink"
+
+[[mgr.prepend_keymap]]
+on = ["R", "p", "r"]
+run = "plugin sudo -- link --relative"
+desc = "Sudo relative symlink"
+
+[[mgr.prepend_keymap]]
+on = ["R", "p", "L"]
+run = "plugin sudo -- hardlink"
+desc = "Sudo hardlink"
+
+[[mgr.prepend_keymap]]
+on = ["R", "a"]
+run = "plugin sudo -- create"
+desc = "Sudo create"
+
+[[mgr.prepend_keymap]]
+on = ["R", "d"]
+run = "plugin sudo -- remove"
+desc = "Sudo trash"
+
+[[mgr.prepend_keymap]]
+on = ["R", "D"]
+run = "plugin sudo -- remove --permanently"
+desc = "Sudo permanent delete"
+
+[[mgr.prepend_keymap]]
+on = ["R", "m"]
+run = "plugin sudo -- chmod"
+desc = "Sudo chmod"
+
+[[mgr.prepend_keymap]]
+on = [",", "m"]
+run = "sort mtime --reverse=no"
+desc = "Sort by mtime; preserve details"
+
+[[mgr.prepend_keymap]]
+on = [",", "M"]
+run = "sort mtime --reverse=yes"
+desc = "Sort by mtime; preserve details"
+
+[[mgr.prepend_keymap]]
+on = [",", "b"]
+run = "sort btime --reverse=no"
+desc = "Sort by btime; preserve details"
+
+[[mgr.prepend_keymap]]
+on = [",", "B"]
+run = "sort btime --reverse=yes"
+desc = "Sort by btime; preserve details"
+
+[[mgr.prepend_keymap]]
+on = [",", "s"]
+run = "sort size --reverse=no"
+desc = "Sort by size; preserve details"
+
+[[mgr.prepend_keymap]]
+on = [",", "S"]
+run = "sort size --reverse=yes"
+desc = "Sort by size; preserve details"

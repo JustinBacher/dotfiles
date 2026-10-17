@@ -1,0 +1,16 @@
+[Unit]
+Description=CUDA Kokoro TTS for OMP
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/docker run --rm --init --name kokoro-tts --gpus=device=1 --pids-limit=256 --memory=8g -p 127.0.0.1:8880:8880 ghcr.io/remsky/kokoro-fastapi-gpu:latest-cu128@sha256:e8d82279f0ecdde476a2dfa14aedbad78de7f10a67682895df5e84a3d037e8c3
+ExecStop=/usr/bin/docker stop --time 10 kokoro-tts
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=0
+TimeoutStopSec=20
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,8 @@
+[Unit]
+Description=Animated Wayland wallpapers
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/awww-daemon
+Restart=on-failure
+RestartSec=5

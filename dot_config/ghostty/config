@@ -8,8 +8,9 @@ mouse-hide-while-typing = true
 
 # Theming
 alpha-blending = "linear-corrected"
-background-opacity = 0.6
-theme = dark:Rose Pine Moon,light:Rose Pine Dawn
+background-opacity = 0.999999
+background-opacity-cells = true
+theme = noctalia
 
 # Cursor
 cursor-style = bar
@@ -30,28 +31,32 @@ confirm-close-surface = false
 quit-after-last-window-closed = true
 gtk-quick-terminal-layer = overlay
 # command = zellij
+command = tmux new-session -A -s main
 
 # Shaders
-custom-shader = shaders/cursor_frozen.glsl
-# custom-shader = ./shaders/glow-rgbsplit-twitchy.glsl
+custom-shader = shader-playground/public/shaders/cursor_frozen.glsl
+custom-shader = fade_top.glsl
+custom-shader-animation = true
+# custom-shader = shaders-cursor/cursor_warp.glsl
+
 
 # Keybinds
-keybind = ctrl+shift+r=reload_config
-
-keybind = alt+h=new_split:left
-keybind = alt+j=new_split:down
-keybind = alt+k=new_split:up
-keybind = alt+l=new_split:right
-
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+j=goto_split:down
-keybind = ctrl+k=goto_split:up
-keybind = ctrl+l=goto_split:right
-
-keybind = ctrl+alt+h=resize_split:left,30
-keybind = ctrl+alt+j=resize_split:down,15
-keybind = ctrl+alt+k=resize_split:up,15
-keybind = ctrl+alt+l=resize_split:right,30
-
-keybind = ctrl+shift+f=toggle_quick_terminal
-keybind = alt+escape=close_surface
+# keybind = ctrl+shift+r=reload_config
+#
+# keybind = alt+h=new_split:left
+# keybind = alt+j=new_split:down
+# keybind = alt+k=new_split:up
+# keybind = alt+l=new_split:right
+#
+# keybind = ctrl+h=goto_split:left
+# keybind = ctrl+j=goto_split:down
+# keybind = ctrl+k=goto_split:up
+# keybind = ctrl+l=goto_split:right
+#
+# keybind = ctrl+shift+h=resize_split:left,30
+# keybind = ctrl+shift+j=resize_split:down,15
+# keybind = ctrl+shift+k=resize_split:up,15
+# keybind = ctrl+shift+l=resize_split:right,30
+#
+# keybind = ctrl+shift+f=toggle_quick_terminal
+# keybind = alt+escape=close_surface

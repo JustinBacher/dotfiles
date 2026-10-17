@@ -1,0 +1,72 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "6cf1f43"
+hash = "347cc6b190eb0c2fd60513cc7ae37412"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mime-ext"
+rev = "6cf1f43"
+hash = "7d3b7f99e600fd7e77ebc5eb8423a897"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:no-status"
+rev = "6cf1f43"
+hash = "3e023d31f29201efdac2a6ae35fedb78"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "6cf1f43"
+hash = "5b2fbef7d1513ce38ff72623a071a5e"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "6cf1f43"
+hash = "87472b05a8c420100f6a2b9cde1e7746"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "596b666"
+hash = "c2f4f4aca257dcceafa9e3b828dbf1c9"
+
+[[plugin.deps]]
+use = "AleMenon/exiftool"
+rev = "4c35573"
+hash = "44ef03e4d7151fa4094dd6b87a553033"
+
+[[plugin.deps]]
+use = "XYenon/clipboard"
+rev = "4b4b6c5"
+hash = "cdcc9c84c9757d585af78c87b012f38b"
+
+[[plugin.deps]]
+use = "AnirudhG07/rich-preview"
+rev = "02597c4"
+hash = "33982a6e2d6df07619a2a0fc163a0950"
+
+[[plugin.deps]]
+use = "TD-Sky/sudo"
+rev = "e70796a"
+hash = "74129f78c811cfe7c694d86c3f634c26"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "6cf1f43"
+hash = "f281261ff04ad7ec867c3f802a50835f"
+
+[[plugin.deps]]
+use = "barbanevosa/linemode-plus"
+rev = "4d0d034"
+hash = "5d0ac26725d9a975bef1d0887374f10e"
+
+[[plugin.deps]]
+use = "AminurAlam/yazi-plugins:spot"
+rev = "28eea47"
+hash = "2e64679e3a122716a386954733cd3c28"
+
+[[plugin.deps]]
+use = "AminurAlam/yazi-plugins:spot-image"
+rev = "28eea47"
+hash = "779bec9dc4f028ec148915cef1e4da44"
+
+[flavor]
+deps = []

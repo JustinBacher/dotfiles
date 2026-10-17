@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 
 # set variables
@@ -37,7 +37,11 @@ if [ "${kvtheme}" != "${gtkTheme}" ] ; then
     a_ws=$(hyprctl -j activeworkspace | jq '.id')
     dpid=$(hyprctl -j clients | jq --arg wid "$a_ws" '.[] | select(.workspace.id == ($wid | tonumber)) | select(.class == "org.kde.dolphin") | .pid')
     if [ ! -z ${dpid} ] ; then
-        hyprctl dispatch closewindow pid:${dpid}
+        if [[ $(hyprctl repl 'return type(hl)' 2>/dev/null) == table ]]; then
+            hyprctl dispatch "hl.dsp.window.close({ window = \"pid:${dpid}\" })"
+        else
+            hyprctl dispatch closewindow "pid:${dpid}"
+        fi
         dolphin &
     fi
 fi

@@ -1,0 +1,34 @@
+@import "/home/justin/.cache/noctalia/zen-browser/zen-userChrome.css";
+
+/* Let Hyprglass provide the texture instead of Zen's theme grain overlay. */
+#main-window .zen-browser-grain {
+  display: none !important;
+}
+
+/* The compositor blurs through the browser chrome; pages stay opaque. */
+#main-window,
+body,
+#zen-main-app-wrapper,
+#navigator-toolbox,
+#zen-tabbox-wrapper,
+#zen-sidebar-splitter,
+#zen-appcontent-navbar-container,
+#TabsToolbar,
+hbox#titlebar,
+#nav-bar {
+  background: transparent !important;
+}
+
+/* Zen paints its surround with pseudo-elements, including toolbar copies. */
+#main-window .zen-browser-generic-background {
+  background: transparent !important;
+}
+
+#main-window .zen-browser-generic-background::after {
+  background: color-mix(in srgb, var(--base, #232323) 60%, transparent) !important;
+  opacity: 1 !important;
+}
+
+#main-window .zen-browser-generic-background::before {
+  background: transparent !important;
+}

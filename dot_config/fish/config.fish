@@ -1,25 +1,34 @@
 set -gx EDITOR nvim
 set -gx PAGER less
-set -gx TERMINAL wezterm
+set -gx TERMINAL ghostty
+
+# Use the generated UTF-8 locale available on this system.
+set -gx LANG en_US.UTF-8
+set -gx LC_ALL en_US.UTF-8
 set -gx VISUAL nvim
 
-set processors $(nproc)
+set -l processors (nproc)
 
 # Rust Globals
 set -gx CARGO_BUILD_JOBS $processors
 set -gx RUSTC_WRAPPER sccache
 
-set -gx ANTHROPIC_AUTH_TOKEN ollama
-set -gx ANTHROPIC_BASE_URL "http://localhost:11434"
+set -gx CUDA_HOME /opt/cuda
+set -gx CUDAToolkit_ROOT /opt/cuda
 
-fish_add_path /home/justin/.local/bin
+fish_add_path ~/.local/bin
+fish_add_path ~/.spicetify
+fish_add_path ~/.npm-global/bin
+fish_add_path ~/.lmstudio/bin
+fish_add_path ~/.cargo/bin/
 
-# if status is-interactive
-# 	and not set -q TMUX
-#     	exec tmux 
-# end
+fish_add_path /opt/cuda/bin
 
-set -gx SSH_AUTH_SOCK /home/justin/.keeper/92jbach@gmail.com.ssh_agent
+# SSH agent is Keeper's (Hyprland starts it with `keeper ssh-agent start`).
+set -gx SSH_AUTH_SOCK $HOME/.keeper/92jbach@gmail.com.ssh_agent
+
+# Bitwarden: no session stored in this file. Unlock per shell instead:
+#   set -gx BW_SESSION (bw unlock --raw)
 
 set -l foreground c8d3f5 #c8d3f5
 set -l selection 2d3f76 #2d3f76
@@ -54,10 +63,6 @@ set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
 set -g fish_pager_color_selected_background --background=$selection
 
-# if status is-login; and status is-interactive
-#     keychain --eval --agents ssh ~/.ssh/id_ed25519 | source
-# end
-
 # Enable vim mode
 if status is-interactive
     set fish_cursor_default block blink
@@ -87,9 +92,3 @@ zoxide init --cmd cd fish | source
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
-
-# Start zellij if not already running
-if set -q ZELLIJ
-else
-    zellij
-end

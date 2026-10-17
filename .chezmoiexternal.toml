@@ -1,0 +1,24 @@
+# Walker
+[".config/walker/themes/eldritch"]
+    type = "archive"
+    url = "https://github.com/eldritch-theme/walker/archive/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+
+# Ghostty
+[".config/ghostty/shaders-general"]
+    type = "archive"
+    url = "https://github.com/0xhckr/ghostty-shaders/archive/refs/heads/main.zip"
+    stripComponents = 1
+    refreshPeriod = "168h"
+[".config/ghostty/shader-playground"]
+    type = "archive"
+    url = "https://github.com/KroneCorylus/ghostty-shader-playground/archive/refs/heads/main.zip"
+    stripComponents = 1
+    refreshPeriod = "168h"
+[".config/ghostty/shaders-cursor"]
+    type = "archive"
+    url = "https://github.com/sahaj-b/ghostty-cursor-shaders/archive/refs/heads/main.zip"
+    stripComponents = 1
+    refreshPeriod = "168h"

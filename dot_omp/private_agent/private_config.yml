@@ -1,0 +1,39 @@
+setupVersion: 2
+modelRoles:
+  default: openai-codex/gpt-5.6-sol
+  dictation: local/nemotron-streaming-en-0.6b
+  speech: local-kokoro/kokoro
+retry:
+  fallbackChains:
+    llama.cpp/lfm-2.5:
+      - openai-codex/gpt-6-luna
+    memory:
+      - llama.cpp/lfm-2.5
+skills:
+  customDirectories:
+    - /home/justin/.codex/skills
+    - /home/justin/.codex/skills/.system
+computer:
+  enabled: true
+generate_image:
+  enabled: true
+github:
+  enabled: true
+memory:
+  backend: mnemopi
+mnemopi:
+  autoRecall: true
+  autoRetain: true
+  llmMode: smol
+security:
+  enabled: true
+speech:
+  enabled: false
+speechgen:
+  enabled: true
+stt:
+  enabled: true
+task:
+  enableLsp: true
+dev:
+  autoqaConsent: granted

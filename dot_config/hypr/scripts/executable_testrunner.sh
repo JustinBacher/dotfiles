@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 ScrDir=`dirname "$(realpath "$0")"`
 source $ScrDir/globalcontrol.sh
@@ -14,12 +14,20 @@ do
     $ScrDir/themeswitch.sh -s $themeName &> /dev/null
     sleep 0.2
 
-    hyprctl dispatch workspace empty
+    if [[ $(hyprctl repl 'return type(hl)' 2>/dev/null) == table ]]; then
+        hyprctl dispatch 'hl.dsp.focus({ workspace = "empty" })'
+    else
+        hyprctl dispatch workspace empty
+    fi
     dolphin &> /dev/null &
     sleep 0.21
     kitty &> /dev/null &
     sleep 1.4
-    hyprctl dispatch workspace empty
+    if [[ $(hyprctl repl 'return type(hl)' 2>/dev/null) == table ]]; then
+        hyprctl dispatch 'hl.dsp.focus({ workspace = "empty" })'
+    else
+        hyprctl dispatch workspace empty
+    fi
 
     #walln=`ls -l $WalDir/$themeName | wc -l`
     for (( i=1 ; i<3 ; i++ ))

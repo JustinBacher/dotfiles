@@ -1,0 +1,15 @@
+depends:
+  - linux.packages
+
+actions:
+  # ACP adapters that avante.nvim drives for Claude Code and Codex.
+  # Pinned on purpose: bump these versions deliberately, not by accident.
+  - action: command.run
+    command: npm
+    args:
+      - install
+      - -g
+      - --prefix
+      - "{{ user.home_dir }}/.npm-global"
+      - "@agentclientprotocol/claude-agent-acp@0.88.0"
+      - "@agentclientprotocol/codex-acp@2.1.1"

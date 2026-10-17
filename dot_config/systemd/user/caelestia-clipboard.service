@@ -1,0 +1,11 @@
+[Unit]
+Description=Clipboard history for Caelestia
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/wl-paste --watch /usr/bin/cliphist store
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

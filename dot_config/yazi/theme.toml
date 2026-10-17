@@ -1,0 +1,8 @@
+[flavor]
+dark = "noctalia"
+light = "noctalia"
+
+[git]
+unknown_sign = ""
+ignored_sign = ""
+clean_sign = ""

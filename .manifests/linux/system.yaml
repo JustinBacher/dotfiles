@@ -1,0 +1,17 @@
+depends:
+  - linux.packages
+
+actions:
+  # Only sets a default when rustup has none. Leaves an existing default alone.
+  - action: command.run
+    command: sh
+    args:
+      - -c
+      - "rustup show active-toolchain >/dev/null 2>&1 || rustup default stable"
+
+  # Only does work on NVIDIA machines. Loads the nvidia modules into the
+  # initramfs and enables DRM modeset. Calls sudo itself for root steps.
+  - action: command.run
+    command: bash
+    args:
+      - files/nvidia-setup.sh

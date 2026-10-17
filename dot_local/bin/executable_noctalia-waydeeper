@@ -1,0 +1,231 @@
+#!/usr/bin/env python3
+"""Keep Waydeeper aligned with Noctalia's selected wallpapers on Hyprland."""
+import argparse
+import fcntl
+import json
+import os
+import re
+from pathlib import Path
+import signal
+import socket
+import struct
+import zlib
+import subprocess
+import sys
+import select
+import tomllib
+import time
+
+BIN = Path.home() / '.local/bin/waydeeper'
+MODEL = Path.home() / '.local/share/waydeeper/models/midas-small.onnx'
+STATE = Path(os.environ.get('XDG_STATE_HOME', Path.home() / '.local/state')) / 'noctalia-waydeeper'
+
+
+def run(*args, timeout=10):
+    result = subprocess.run(args, capture_output=True, text=True, timeout=timeout, check=True)
+    text = result.stdout.strip()
+    if text.startswith('error:'):
+        raise RuntimeError(text)
+    return text
+
+
+def running(connector):
+    try:
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(1)
+            client.connect(f'/tmp/waydeeper-{os.getuid()}/{connector}.sock')
+            client.sendall(b'{"command":"PING","params":null}\n')
+            data = b''
+            while b'\n' not in data and len(data) < 65536:
+                part = client.recv(4096)
+                if not part:
+                    return False
+                data += part
+            return json.loads(data).get('success', False)
+    except (OSError, ValueError):
+        return False
+
+def layer_visible(connector, monitors=None, layers=None):
+    if monitors is None:
+        monitors = json.loads(run('hyprctl', '-i', '0', '-j', 'monitors'))
+    if layers is None:
+        layers = json.loads(run('hyprctl', '-i', '0', '-j', 'layers'))
+    monitor = next((item for item in monitors if item.get('name') == connector), None)
+    if monitor is None:
+        return False
+    scale = monitor.get('scale', 1) or 1
+    expected_width = round(monitor['width'] / scale)
+    expected_height = round(monitor['height'] / scale)
+    return any(
+        layer.get('namespace') == 'waydeeper'
+        and layer.get('alpha', 0) >= 0.99
+        and layer.get('w') == expected_width
+        and layer.get('h') == expected_height
+        for level in layers.get(connector, {}).get('levels', {}).values()
+        for layer in level
+    )
+
+
+def wallpaper_image(path):
+    if not path.startswith('color:'):
+        return path if Path(path).is_file() else None
+    color = path.removeprefix('color:').removeprefix('#')
+    if not re.fullmatch(r'[0-9a-fA-F]{6}([0-9a-fA-F]{2})?', color):
+        return None
+    rgba = bytes.fromhex(color + ('ff' if len(color) == 6 else ''))
+    directory = STATE / 'colors'
+    directory.mkdir(parents=True, exist_ok=True)
+    image = directory / f'{color.lower()}.png'
+    if not image.exists():
+        def chunk(kind, data):
+            return struct.pack('!I', len(data)) + kind + data + struct.pack('!I', zlib.crc32(kind + data))
+        image.write_bytes(
+            b'\x89PNG\r\n\x1a\n'
+            + chunk(b'IHDR', struct.pack('!2I5B', 1, 1, 8, 6, 0, 0, 0))
+            + chunk(b'IDAT', zlib.compress(b'\0' + rgba))
+            + chunk(b'IEND', b'')
+        )
+    return str(image)
+
+
+def desired_wallpapers():
+    run('noctalia', 'msg', 'status')
+    wallpaper = tomllib.loads(run('noctalia', 'config', 'export', 'full')).get('wallpaper', {})
+    if not wallpaper.get('enabled', True) or wallpaper.get('render', True):
+        return {}
+    monitors = json.loads(run('hyprctl', '-i', '0', '-j', 'monitors'))
+    desired = {}
+    for monitor in monitors:
+        if monitor.get('disabled', False):
+            continue
+        connector = monitor['name']
+        # Respect the same per-output enable selector used by Noctalia.
+        enabled = True
+        for selector, override in wallpaper.get('monitor', {}).items():
+            matches = selector == connector or any(
+                re.search(r'(?<!\S)' + re.escape(selector) + r'(?!\S)', monitor.get(field, ''))
+                for field in ('description', 'make', 'model', 'serial')
+            )
+            if selector and matches:
+                enabled = override.get('enabled', True)
+                break
+        if not enabled:
+            continue
+        path = run('noctalia', 'msg', 'wallpaper-get', connector)
+        image = wallpaper_image(path) if path else None
+        if image:
+            desired[connector] = image
+        elif path:
+            print(f'{connector}: unsupported wallpaper {path!r}', flush=True)
+    return desired
+
+
+def sync(stop=False):
+    STATE.mkdir(parents=True, exist_ok=True)
+    with (STATE / 'sync.lock').open('w') as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            return
+        try:
+            applied = json.loads((STATE / 'applied.json').read_text())
+        except FileNotFoundError:
+            applied = {}
+        desired = {} if stop else desired_wallpapers()
+        for connector in list(applied):
+            if connector not in desired:
+                run(str(BIN), 'stop', '-m', connector)
+                del applied[connector]
+        for connector, path in desired.items():
+            try:
+                daemon_running = running(connector)
+                visible = daemon_running and layer_visible(connector)
+                if applied.get(connector) == path and visible:
+                    continue
+                if daemon_running and not visible:
+                    print(f'{connector}: restarting invisible Waydeeper layer', flush=True)
+                    run(str(BIN), 'stop', '-m', connector)
+                print(f'{connector}: applying {path}', flush=True)
+                # Daemon subprocesses inherit stdout, so use the service journal
+                # rather than a capture pipe that would stay open after `set` exits.
+                subprocess.run(
+                    [str(BIN), 'set', path, '-m', connector, '--model', str(MODEL)],
+                    timeout=240, check=True,
+                )
+                if not running(connector):
+                    raise RuntimeError(f'{connector}: Waydeeper did not start')
+                deadline = time.monotonic() + 10
+                while time.monotonic() < deadline:
+                    if layer_visible(connector):
+                        break
+                    time.sleep(0.25)
+                else:
+                    raise RuntimeError(f'{connector}: Waydeeper layer did not become visible')
+                applied[connector] = path
+            except (subprocess.SubprocessError, OSError, ValueError, RuntimeError) as error:
+                print(f'{connector}: {error}', file=sys.stderr, flush=True)
+                applied.pop(connector, None)
+                if running(connector):
+                    try:
+                        run(str(BIN), 'stop', '-m', connector)
+                    except (subprocess.SubprocessError, OSError, ValueError, RuntimeError) as stop_error:
+                        print(f'{connector}: failed to stop unhealthy daemon: {stop_error}',
+                              file=sys.stderr, flush=True)
+        temporary = STATE / 'applied.tmp'
+        temporary.write_text(json.dumps(applied, indent=2) + '\n')
+        temporary.replace(STATE / 'applied.json')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--sync', action='store_true')
+    group.add_argument('--watch', action='store_true')
+    group.add_argument('--stop', action='store_true')
+    args = parser.parse_args()
+    if not args.watch:
+        sync(stop=args.stop)
+        return
+    watch()
+
+
+def watch():
+    # A Python Event takes a non-reentrant lock. Repeated hook signals can
+    # interrupt Event.set while it holds that lock and deadlock the watcher.
+    # Signal handlers only set a flag; the nonblocking pipe wakes select.
+    read_fd, write_fd = os.pipe2(os.O_NONBLOCK | os.O_CLOEXEC)
+    previous_fd = signal.set_wakeup_fd(write_fd, warn_on_full_buffer=False)
+    previous_handlers = {}
+    stopping = False
+
+    def handle(number, _frame):
+        nonlocal stopping
+        if number != signal.SIGUSR1:
+            stopping = True
+
+    try:
+        for number in (signal.SIGUSR1, signal.SIGTERM, signal.SIGINT):
+            previous_handlers[number] = signal.signal(number, handle)
+        while not stopping:
+            try:
+                sync()
+            except (subprocess.SubprocessError, OSError, ValueError, RuntimeError) as error:
+                print(f'sync: {error}', file=sys.stderr, flush=True)
+            if stopping:
+                break
+            # Hooks wake immediately; the timeout also handles reconnects.
+            if select.select([read_fd], [], [], 5)[0]:
+                try:
+                    os.read(read_fd, 65536)
+                except BlockingIOError:
+                    pass
+    finally:
+        signal.set_wakeup_fd(previous_fd)
+        for number, previous in previous_handlers.items():
+            signal.signal(number, previous)
+        os.close(read_fd)
+        os.close(write_fd)
+
+
+if __name__ == '__main__':
+    main()

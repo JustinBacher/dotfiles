@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# A root quickshell/shell.qml hides named configs. Select this checkout by path.
+args=()
+while (($#)); do
+    if [[ ($1 == -c || $1 == --config) && ${2-} == caelestia ]]; then
+        args+=(-p "$HOME/forks/caelestia-shell")
+        shift 2
+    else
+        args+=("$1")
+        shift
+    fi
+done
+
+exec "$HOME/.local/opt/caelestia-quickshell/bin/qs" "${args[@]}"

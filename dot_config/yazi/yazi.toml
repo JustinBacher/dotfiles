@@ -1,45 +1,61 @@
-[manager]
+[mgr]
 show_hidden = true
 show_symlink = true
+linemode = "size_mtime"
 
 [opener]
-edit = [
-	{ run = 'nvim "$@"', block = true },
-]
-play = [
-	{ run = 'mpv "$@"', orphan = true, for = "unix" },
-]
-view = [
-	{ run = 'mupdf "$@"', orphan = true, for = "unix" },
-]
-open = [
-	{ run = 'xdg-open "$@"', desc = "Open" },
-]
+edit = [{ run = 'nvim %s', block = true }]
+play = [{ run = 'mpv %s', orphan = true, for = "unix" }]
+view = [{ run = 'mupdf %s', orphan = true, for = "unix" }]
+open = [{ run = 'xdg-open %s', desc = "Open" }]
+
+extract = [{ run = "ouch d %s", block = true, desc = "Extract with Ouch into named subfolder", for = "unix" }]
 
 [open]
 prepend_rules = [
-	{ name = "*.json", use = "edit" },
+    { mime = "application/{*zip,*gzip,tar,bzip*,7z*,rar,xz,zstd,java-archive}", use = "extract" },
+    { url = "*.json", use = "edit" },
 
-	# Multiple openers for a single rule
-	{ name = "*.html", use = [ "open", "edit" ] },
+    # Multiple openers for a single rule
+    { url = "*.html", use = ["open", "edit"] },
 ]
-append_rules = [
-	{ name = "*", use = "my-fallback" },
-]
+append_rules = [{ url = "*", use = "open" }]
 
 [[plugin.prepend_fetchers]]
-id   = "mime"
-if   = "!mime"
-name = "*"
-run  = "mime-ext"
+url = "local://*"
+run = "mime-ext.local"
 prio = "high"
+group = "mime"
 
-[[manager.prepend_keymap]]
-on   = "P"
-run  = "plugin --sync max-preview"
-desc = "Maximize or restore preview"
+[[plugin.prepend_fetchers]]
+url = "remote://*"
+run = "mime-ext.remote"
+prio = "high"
+group = "mime"
 
-[[manager.prepend_keymap]]
-on   = [ "c", "m" ]
-run  = "plugin chmod"
-desc = "Chmod on selected files"
+
+[[plugin.prepend_fetchers]]
+url = "*"
+run = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+url = "*/"
+run = "git"
+group = "git"
+
+[[plugin.prepend_previewers]]
+mime = "application/{*zip,*gzip,tar,bzip*,7z*,rar,xz,zstd,java-archive}"
+run = "ouch --show-file-icons"
+
+[[plugin.prepend_previewers]]
+mime = "application/{*executable*,msdownload,x-dosexec,x-msdos-program}"
+run = "exiftool"
+
+[[plugin.prepend_previewers]]
+url = "*.{md,csv,rst,ipynb,json}"
+run = "rich-preview"
+
+[[plugin.prepend_spotters]]
+mime = "image/*"
+run = "spot-image"
