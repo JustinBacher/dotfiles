@@ -1,6 +1,8 @@
 # Explicit packages for this machine. provider: paru installs repo and AUR packages.
 # Source: merged from the old base.yaml, files/linux.txt, and dot_config/pacman/packages.lst.
-# 499 packages. Edit here; pacman -Qqe shows what is installed but not listed.
+# 506 unconditional packages plus one hardware-selected Ollama package.
+where: os.name == "linux"
+
 depends:
   - linux.bootstrap
 
@@ -28,6 +30,7 @@ actions:
       - asciiville-aewan
       - ast-firmware
       - awesome-terminal-fonts
+      - awww
       - aylurs-gtk-shell-git
       - baobab
       - base
@@ -71,6 +74,7 @@ actions:
       - capitaine-cursors
       - cava
       - cbftp
+      - ccache
       - ccls
       - chafa
       - check-broken-packages-pacman-hook-git
@@ -102,6 +106,7 @@ actions:
       - dmidecode
       - dmraid
       - dnsmasq
+      - dolphin
       - docker
       - docker-compose
       - dosfstools
@@ -128,6 +133,7 @@ actions:
       - figlet-fonts-extra
       - firefox
       - fish
+      - fisher
       - flatpak
       - foomatic-db
       - foomatic-db-engine
@@ -143,6 +149,7 @@ actions:
       - git
       - git-credential-manager-core
       - git-delta
+      - gitleaks
       - github-cli
       - glances
       - gnome-backgrounds
@@ -212,7 +219,9 @@ actions:
       - hyprgui
       - hyprland
       - hyprpicker
+      - hyprpm
       - inetutils
+      - informant
       - iptables-nft
       - isync
       - iwd
@@ -266,6 +275,7 @@ actions:
       - malcontent
       - man-db
       - man-pages
+      - maplemono-nf
       - matugen-bin
       - mdadm
       - meld
@@ -273,6 +283,7 @@ actions:
       - micro
       - mkinitcpio
       - modemmanager
+      - mold
       - most
       - mousetweaks
       - mpop
@@ -290,6 +301,7 @@ actions:
       - neovim-git
       - neovim-nvim-treesitter
       - netctl
+      - network-manager-applet
       - networkmanager
       - networkmanager-openvpn
       - newsboat
@@ -313,9 +325,8 @@ actions:
       - obs-studio
       - octipi
       - octopi
-      - ollama
-      - ollama-cuda
-      - ollama-cuda-git
+      - oh-my-pi-bin
+      - oh-my-pi-grammars-bin
       - onlyoffice-bin
       - opam
       - openbsd-netcat
@@ -338,7 +349,6 @@ actions:
       - pass
       - pavucontrol
       - perl
-      - pipes-rs
       - pipes-rs-bin
       - pipewire-alsa
       - pipewire-pulse
@@ -353,7 +363,6 @@ actions:
       - power-profiles-daemon
       - profile-sync-daemon
       - protontricks
-      - protonup-qt
       - protonup-qt-bin
       - pv
       - pwvucontrol
@@ -430,9 +439,9 @@ actions:
       - timeshift
       - timg
       - tmux
-      - tmux-git
       - tokyonight-gtk-theme-git
       - totem
+      - trash-cli
       - tree-sitter-cli
       - ttf-bitstream-vera
       - ttf-dejavu
@@ -452,6 +461,7 @@ actions:
       - usb_modeswitch
       - usbutils
       - uutils-coreutils
+      - uv
       - vesktop-bin
       - vi
       - vim
@@ -499,7 +509,6 @@ actions:
       - xsel
       - yarn
       - yazi
-      - yazi-git
       - ydotool
       - yelp
       - yewtube
@@ -507,3 +516,9 @@ actions:
       - zen-browser-bin
       - zoxide
       - zram-generator
+
+  # Select the CUDA build only when NVIDIA display hardware is present.
+  - action: command.run
+    command: bash
+    args:
+      - files/install-ollama.sh

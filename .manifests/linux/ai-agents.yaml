@@ -1,3 +1,5 @@
+where: os.name == "linux"
+
 depends:
   - linux.packages
 
@@ -13,3 +15,16 @@ actions:
       - "{{ user.home_dir }}/.npm-global"
       - "@agentclientprotocol/claude-agent-acp@0.88.0"
       - "@agentclientprotocol/codex-acp@2.1.1"
+
+  # Global AI and code-analysis CLIs intentionally track their latest releases.
+  - action: command.run
+    command: npm
+    args:
+      - install
+      - -g
+      - --prefix
+      - "{{ user.home_dir }}/.npm-global"
+      - "@augmentcode/auggie"
+      - "@caveman-ai/cli"
+      - "@nanonets/graft"
+      - "@openai/codex"

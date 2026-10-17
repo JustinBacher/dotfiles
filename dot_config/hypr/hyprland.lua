@@ -1,6 +1,9 @@
 -- Hyprland 0.56 Lua configuration. Legacy .conf files are fallback copies.
 local apps = require("variables")
 
+-- Allow the managed startup reload to load enabled Hyprpm plugins.
+hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
+
 hl.on("hyprland.start", function()
 	for _, command in ipairs({
 		apps.script("resetxdgportal.sh"),

@@ -1,3 +1,5 @@
+where: os.name == "linux"
+
 depends:
   - linux.packages
 

@@ -1,0 +1,234 @@
+{
+  "env": {
+    "_CLAUDE_CODE_ASSUME_FIRST_PARTY_BASE_URL": "1",
+    "ENABLE_TOOL_SEARCH": "auto"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(graft:*)",
+      "Bash(npx graft:*)",
+      "Bash(graft-dev:*)",
+      "Bash(node dist/cli.js:*)"
+    ]
+  },
+  "model": "opus",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.caveman/bin/caveman-proxy' native-hook claude --adapter '{{ .chezmoi.homeDir }}/.npm-global/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js'",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"{{ .chezmoi.homeDir }}/.claude/helpers/graft-hooks.cjs\" post-edit",
+            "timeout": 10000
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|mcp__graft__|Read|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"{{ .chezmoi.homeDir }}/.claude/helpers/graft-hooks.cjs\" tool-savings",
+            "timeout": 8000
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.caveman/bin/caveman-proxy' native-hook claude --adapter '{{ .chezmoi.homeDir }}/.npm-global/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js'",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"{{ .chezmoi.homeDir }}/.claude/helpers/graft-hooks.cjs\" prompt",
+            "timeout": 15000
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.caveman/bin/caveman-proxy' native-hook claude --adapter '{{ .chezmoi.homeDir }}/.npm-global/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js'",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"{{ .chezmoi.homeDir }}/.claude/helpers/graft-hooks.cjs\" session-start",
+            "timeout": 8000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.caveman/bin/caveman-proxy' native-hook claude --adapter '{{ .chezmoi.homeDir }}/.npm-global/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js'",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"{{ .chezmoi.homeDir }}/.claude/helpers/graft-hooks.cjs\" stop",
+            "timeout": 8000
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.caveman/bin/caveman-proxy' native-hook claude --adapter '{{ .chezmoi.homeDir }}/.npm-global/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js'",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.npm-global/bin/caveman' shrink-hook",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.caveman/bin/caveman-proxy' native-hook claude --adapter '{{ .chezmoi.homeDir }}/.npm-global/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js'",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.caveman/bin/caveman-proxy' native-hook claude --adapter '{{ .chezmoi.homeDir }}/.npm-global/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js'",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.caveman/bin/caveman-proxy' native-hook claude --adapter '{{ .chezmoi.homeDir }}/.npm-global/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js'",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.caveman/bin/caveman-proxy' native-hook claude --adapter '{{ .chezmoi.homeDir }}/.npm-global/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js'",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ .chezmoi.homeDir }}/.caveman/bin/caveman-proxy' native-hook claude --adapter '{{ .chezmoi.homeDir }}/.npm-global/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js'",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node \"${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/graft-statusline.cjs\""
+  },
+  "footerLinksRegexes": [],
+  "subagentStatusLine": {
+    "type": "command",
+    "command": "node \"${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/graft-statusline.cjs\""
+  },
+  "enabledPlugins": {
+    "caveman@caveman": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "codex@openai-codex": true,
+    "whiteboard@devfast": true,
+    "lua-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "devfast": {
+      "source": {
+        "source": "github",
+        "repo": "devdotfast/whiteboard"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "medium"
+    },
+    "claude-haiku-5-5": {
+      "effortLevel": "xhigh"
+    },
+    "haiku": {},
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
+}

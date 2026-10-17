@@ -1,0 +1,13 @@
+[Unit]
+Description=RDP access to Hyprland over NetBird
+After=graphical-session.target
+PartOf=graphical-session.target
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart=/usr/bin/hypr-rdp --config %h/.config/hypr-rdp/config.toml
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

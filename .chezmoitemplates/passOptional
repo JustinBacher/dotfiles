@@ -1,0 +1,1 @@
+{{- output "sh" "-c" (printf "pass show %s 2>/dev/null || true" .) | trim -}}

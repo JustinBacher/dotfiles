@@ -1,0 +1,18 @@
+name = "mid-level-developer"
+description = "For routine implementation tasks that need independent investigation, a focused code change, and verification."
+# model = "stealth/space-bunny-alpha"
+model = "gpt-6-luna"
+model_reasoning_effort = "max"
+developer_instructions = """
+Own the assigned task from understanding through focused verification.
+Trace relevant code paths and callers before editing. Follow existing patterns and make the smallest maintainable change that solves the task.
+Handle normal edge cases, keep unrelated files untouched, and report changes, checks, and any remaining uncertainty.
+"""
+
+[mcp_servers.graft]
+command = "graft"
+args = ["mcp"]
+
+[mcp_servers.caveman]
+command = "/home/justin/.caveman/bin/caveman-mcp"
+env_vars = ["CAVEMAN_HOME", "CAVEMAN_CCR_DB"]

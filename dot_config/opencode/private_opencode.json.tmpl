@@ -1,0 +1,90 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "augment-context-engine": {
+      "command": [
+        "auggie",
+        "--mcp",
+        "--mcp-auto-workspace"
+      ],
+      "enabled": true,
+      "type": "local"
+    }
+  },
+  "permission": {
+    "external_directory": {
+      "~/forks/*": "allow",
+      "~/projects/*": "allow"
+    },
+    "glob": "deny",
+    "grep": "deny"
+  },
+  "provider": {
+    "llama.cpp": {
+      "models": {
+        "{{ .chezmoi.homeDir }}/.cache/llama.cpp/unsloth_GLM-4.7-Flash-GGUF_GLM-4.7-Flash-IQ4_NL.gguf": {
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          },
+          "name": "Local GLM-4.7-Flash"
+        },
+        "{{ .chezmoi.homeDir }}/.cache/llama.cpp/unsloth_Nemotron-3-Nano-30B-A3B-GGUF_Nemotron-3-Nano-30B-A3B-IQ4_NL.gguf": {
+          "limit": {
+            "context": 256000,
+            "output": 128000
+          },
+          "name": "Local Nemotron 3-Nano 30B A3B",
+          "variants": {
+            "fast": {
+              "disabled": true
+            },
+            "thinking": {
+              "reasoningEffort": "high",
+              "textVerbosity": "low"
+            }
+          }
+        },
+        "{{ .chezmoi.homeDir }}/.cache/llama.cpp/unsloth_gpt-oss-20b-GGUF_gpt-oss-20b-UD-Q6_K_XL.gguf": {
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          },
+          "name": "GPT-OSS 20b",
+          "variants": {
+            "fast": {
+              "disabled": true
+            },
+            "thinking": {
+              "reasoningEffort": "medium",
+              "textVerbosity": "low"
+            }
+          }
+        }
+      },
+      "name": "LLaMA.cpp",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:4096/v1"
+      }
+    },
+    "lmstudio": {
+      "models": {
+        "nvidia/nemotron-3-nano": {
+          "name": "Local Nemotron 3-Nano 30B A3B"
+        },
+        "openai/gpt-oss-20b": {
+          "name": "GPT-OSS 20b"
+        }
+      },
+      "name": "LM-Studio",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseUrl": "http://127.0.0.1:1234/v1"
+      }
+    }
+  },
+  "plugin": [
+    "./plugins/caveman/plugin.js"
+  ]
+}

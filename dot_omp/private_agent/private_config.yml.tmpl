@@ -11,8 +11,8 @@ retry:
       - llama.cpp/lfm-2.5
 skills:
   customDirectories:
-    - /home/justin/.codex/skills
-    - /home/justin/.codex/skills/.system
+    - {{ .chezmoi.homeDir }}/.codex/skills
+    - {{ .chezmoi.homeDir }}/.codex/skills/.system
 computer:
   enabled: true
 generate_image:
