@@ -1,0 +1,2 @@
+{{- /* chezmoi:modify-template */ -}}
+{{ fromJson .chezmoi.stdin | setValueAtPath "useQuickCss" true | setValueAtPath "transparent" true | setValueAtPath "enabledThemes" (list "noctalia-material.theme.css") | toPrettyJson }}

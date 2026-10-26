@@ -1,6 +1,11 @@
 README.md
 graft
 
+# Ignore files that are supposed to be symlinked
+# due to outside modification to original files
+symlinks/.
+symlinks/**
+
 {{ if ne .chezmoi.os "linux" }}
 .config/hypr
 .config/rofi
@@ -20,5 +25,4 @@ graft
 
 {{ if ne .chezmoi.os "windows" }}
 .config/komorebi
-
 {{ end }}

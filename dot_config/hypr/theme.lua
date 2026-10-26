@@ -1,7 +1,7 @@
 -- Appearance and toolkit settings.
 hl.config({
 	general = {
-		gaps_in = 3,
+		gaps_in = 12,
 		gaps_out = { top = 15, right = 30, bottom = 30, left = 30 },
 		border_size = 0,
 		allow_tearing = false,
@@ -47,10 +47,10 @@ hl.config({
 		},
 		shadow = {
 			enabled = true,
-			offset = { 10, 50 },
-			color = "rgba(0000009c)",
-			range = 340,
-			render_power = 3,
+			offset = { 0, 0 },
+			color = "rgba(00000055)",
+			range = 12,
+			render_power = 2,
 			scale = 0.98,
 		},
 	},

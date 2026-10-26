@@ -82,20 +82,9 @@ function ud
     safe "Homebrew packages" brew update && brew upgrade
 
     # Development tools
-    safe "Rust toolchains" rustup update
-    safe "NPM packages" sudo npm update -g
+    safe "Mise tools" mise upgrade
     safe "Conda packages" conda update --all -y
     safe "Mamba packages" mamba update --all -y
-
-    # Cargo
-    if type -q cargo-update
-        safe "Cargo binaries" cargo install-update -a
-    else
-        gum spin \
-            --spinner dot \
-            --title "Installing cargo-update" \
-            -- cargo install cargo-update
-    end
 
     # Other
     safe "Yazi plugins" ya pkg upgrade

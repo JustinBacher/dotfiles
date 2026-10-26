@@ -1,0 +1,26 @@
+# Match the Noctalia palette currently used by Ghostty.
+[colors]
+background = "#000000"
+foreground = "#f2f4f8"
+cursor = "#f2f4f8"
+vi-cursor = "#f2f4f8"
+selection-background = "#f2f4f8"
+selection-foreground = "#161616"
+
+black = "#262626"
+red = "#ee5396"
+green = "#42be65"
+yellow = "#82cfff"
+blue = "#33b1ff"
+magenta = "#ff7eb6"
+cyan = "#3ddbd9"
+white = "#dde1e6"
+
+light-black = "#393939"
+light-red = "#ee5396"
+light-green = "#42be65"
+light-yellow = "#82cfff"
+light-blue = "#33b1ff"
+light-magenta = "#ff7eb6"
+light-cyan = "#3ddbd9"
+light-white = "#ffffff"

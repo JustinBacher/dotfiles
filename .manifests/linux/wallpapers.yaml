@@ -1,6 +1,0 @@
-where: os.name == "linux"
-
-actions:
-  - action: file.download
-    from: https://i.imgur.com/l2GXHw0.png
-    to: "{{ user.home_dir }}/Wallpapers/snowy_stairs.png"

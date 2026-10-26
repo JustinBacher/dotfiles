@@ -1,0 +1,44 @@
+# Keep Rio visually and behaviorally close to Ghostty where Rio supports it.
+theme = "noctalia"
+confirm-before-quit = false
+copy-on-select = true
+hide-mouse-cursor-when-typing = true
+padding = [10]
+
+[fonts]
+size = 14
+features = ["zero", "calt"]
+
+[fonts.regular]
+family = "Maple Mono"
+style = "Regular"
+
+[fonts.bold]
+family = "Maple Mono"
+style = "Bold"
+
+[fonts.italic]
+family = "Maple Mono"
+style = "Italic"
+
+[fonts.bold-italic]
+family = "Maple Mono"
+style = "Bold Italic"
+
+[cursor]
+shape = "beam"
+blinking = true
+
+[navigation]
+mode = "Plain"
+
+# [shell]
+# program = "/usr/bin/tmux"
+# args = ["new-session", "-A", "-s", "main"]
+
+[window]
+# Rio cannot reproduce Ghostty's animated opacity shader; this approximates
+# the shader's 60%-to-90% alpha range with one uniform value.
+opacity = 0.75
+opacity-cells = true
+decorations = "Disabled"

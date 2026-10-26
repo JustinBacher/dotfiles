@@ -6,7 +6,6 @@ local kind_icons = {
     gemini = "",
     Groq = "",
     Openrouter = "󱂇",
-    Ollama = "󰳆",
     ["Llama.cpp"] = "󰳆",
     Deepseek = "",
 }

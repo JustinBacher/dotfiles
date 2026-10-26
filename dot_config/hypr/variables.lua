@@ -8,7 +8,7 @@ local M = {
 	cache_home = home .. "/.cache",
 	terminal = "ghostty",
 	editor = "nvim",
-	file_manager = "dolphin",
+	file_manager = "dolphin --style kvantum --stylesheet " .. config_home .. "/dolphin/noctalia-glass.qss",
 	browser = "zen-browser",
 	main_mod = "SUPER",
 }

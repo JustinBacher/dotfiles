@@ -27,6 +27,5 @@ api.nvim_create_autocmd("BufWritePre", {
 })
 
 g.snacks_animate = false
-g.ollama_model = "qwen3.6"
 
 vim.g.lazyvim_python_ruff = "ruff"

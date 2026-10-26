@@ -1,9 +1,3 @@
--- local quote = os.execute("curl https://quoteslate.vercel.app/api/quotes/random | jq -r '.quote'")
--- local emoji = os.execute(
---     "echo 'provide an emoji for the following quote. \""
---         .. quote
---         .. "\" Your response should include only the emoji you think best fits the quote and nothing else. It is imperative that that your response be only one character in length' | ollama run llama3.2:1b"
--- )
 
 return {
     "folke/snacks.nvim",

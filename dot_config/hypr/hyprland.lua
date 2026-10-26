@@ -2,7 +2,7 @@
 local apps = require("variables")
 
 -- Allow the managed startup reload to load enabled Hyprpm plugins.
-hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
+hl.permission({ binary = "/usr/(bin|local/bin)/hyprpm", type = "plugin", mode = "allow" })
 
 hl.on("hyprland.start", function()
 	for _, command in ipairs({

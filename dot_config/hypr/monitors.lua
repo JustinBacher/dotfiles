@@ -56,3 +56,6 @@ for workspace, output in ipairs(workspace_monitors) do
 end
 
 hl.workspace_rule({ workspace = "1", layout = "scrolling", layout_opts = { direction = "right" } })
+
+-- Avoid the Hyprland 0.56 scrolling-fullscreen pointer regression on the game workspace.
+hl.workspace_rule({ workspace = "3", layout = "dwindle" })

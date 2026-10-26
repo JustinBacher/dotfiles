@@ -1,0 +1,53 @@
+/* Noctalia-generated Dolphin translucency. Hyprglass supplies compositor glass. */
+QMainWindow {
+  color: {{ colors.on_surface.default.hex }};
+  selection-background-color: {{ colors.primary.default.hex }};
+  selection-color: {{ colors.on_primary.default.hex }};
+}
+
+/* All outer chrome shares Kvantum's single glass background; do not stack fills. */
+QToolBar,
+QDockWidget,
+QStatusBar,
+QMenuBar {
+  background: transparent;
+  color: {{ colors.on_surface.default.hex }};
+}
+
+/* Do not stack translucent fills: only the innermost file viewport paints. */
+DolphinViewContainer,
+DolphinView,
+KItemListContainer,
+KItemListContainer QGraphicsView {
+  background: transparent;
+}
+
+KItemListContainer QGraphicsView > QWidget {
+  background-color: rgba({{ colors.background.default.rgb_csv }}, 90%);
+  color: {{ colors.on_background.default.hex }};
+}
+
+/* Places is an item view too, but must not inherit Qt's opaque Base brush. */
+QDockWidget QAbstractItemView,
+QDockWidget QAbstractItemView > QWidget,
+QToolBar QWidget {
+  background: transparent;
+}
+
+QLineEdit,
+QAbstractSpinBox,
+QComboBox {
+  background-color: rgba({{ colors.surface_container_high.default.rgb_csv }}, 90%);
+  color: {{ colors.on_surface.default.hex }};
+}
+
+/* The location field belongs to the glass toolbar, not the near-opaque file view. */
+QToolBar QLineEdit,
+QToolBar QAbstractSpinBox,
+QToolBar QComboBox {
+  background: transparent;
+}
+
+QAbstractItemView::item:selected {
+  color: {{ colors.on_primary.default.hex }};
+}

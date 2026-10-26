@@ -1,0 +1,86 @@
+# Dolphin-only native alpha surface. Noctalia regenerates this palette on theme changes.
+# The SVG supplies translucent chrome; Base supplies the 90%-opaque file background.
+[%General]
+composite=true
+translucent_windows=true
+reduce_window_opacity=0
+blurring=false
+popup_blurring=false
+scroll_width=8
+scroll_min_extent=36
+scroll_arrows=false
+transient_scrollbar=false
+
+[GeneralColors]
+window.color={{ colors.surface_container.default.hex }}
+base.color={{ colors.background.default.hex }}e6
+alt.base.color={{ colors.surface_container.default.hex }}40
+text.color={{ colors.on_background.default.hex }}
+window.text.color={{ colors.on_surface.default.hex }}
+button.color={{ colors.surface_container_high.default.hex }}
+button.text.color={{ colors.on_surface.default.hex }}
+highlight.color={{ colors.primary.default.hex }}
+highlight.text.color={{ colors.on_primary.default.hex }}
+
+[Hacks]
+transparent_dolphin_view=false
+
+[Window]
+interior=true
+interior.element=window
+frame=false
+
+[WindowTranslucent]
+interior=true
+interior.element=window
+frame=false
+
+[Toolbar]
+interior=false
+frame=false
+
+# Darker translucent button wells remain readable over bright wallpaper.
+[ToolbarButton]
+frame=false
+interior=true
+interior.element=control
+text.normal.color={{ colors.on_surface.default.hex }}
+text.focus.color={{ colors.on_surface.default.hex }}
+text.press.color={{ colors.on_primary.default.hex }}
+text.toggle.color={{ colors.on_primary.default.hex }}
+text.shadow=false
+
+# Flat, palette-aware controls replace Kvantum's beveled fallback artwork.
+[ItemView]
+frame=false
+interior=true
+interior.element=selection
+text.normal.color={{ colors.on_surface.default.hex }}
+text.focus.color={{ colors.on_surface.default.hex }}
+text.press.color={{ colors.on_primary.default.hex }}
+text.toggle.color={{ colors.on_primary.default.hex }}
+text.shadow=false
+
+[HeaderSection]
+frame=false
+interior=true
+interior.element=header
+text.normal.color={{ colors.on_surface_variant.default.hex }}
+text.focus.color={{ colors.on_surface.default.hex }}
+text.press.color={{ colors.on_surface.default.hex }}
+text.toggle.color={{ colors.on_surface.default.hex }}
+text.shadow=false
+
+[GenericFrame]
+frame=false
+interior=false
+
+[ScrollbarGroove]
+frame=false
+interior=false
+
+[ScrollbarSlider]
+frame=false
+interior=true
+interior.element=scrollthumb
+indicator.size=0

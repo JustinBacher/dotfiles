@@ -1,0 +1,69 @@
+/* Noctalia-generated translucency for Vesktop. Hyprglass supplies compositor blur. */
+:root,
+.theme-dark,
+.theme-light {
+  --accent-hue: {{ colors.primary.default.hue }};
+  --accent-saturation: {{ colors.primary.default.saturation }}%;
+  --accent-lightness: {{ colors.primary.default.lightness }}%;
+  --accent-text-color: {{ colors.on_primary.default.hex }};
+  --tooltip-text-color: {{ colors.on_surface.default.hex }};
+  --input-text-color: {{ colors.on_surface.default.hex }};
+
+  /* Main content is subtly translucent; sidebars expose stronger glass. */
+  --app-bg: transparent;
+  --main-color: {{ colors.surface.default.rgba | set_alpha: 0.9 }};
+  --main-alt: {{ colors.surface.default.rgba | set_alpha: 0.9 }};
+  --server-color: {{ colors.surface.default.rgba | set_alpha: 0.52 }};
+  --chat-color: {{ colors.surface.default.rgba | set_alpha: 0.9 }};
+  --status-picker-color: {{ colors.surface_container.default.rgba | set_alpha: 0.78 }};
+  --sidebar-panel-color: {{ colors.surface_container.default.rgba | set_alpha: 0.68 }};
+  --tooltip-color: {{ colors.surface.default.rgba | set_alpha: 0.9 }};
+  --main-textarea-color: {{ colors.primary.default.hex }};
+  --main-textarea-color-alt: {{ colors.secondary.default.hex }};
+
+  --message-color: {{ colors.surface_container.default.hex }};
+  --message-color-alt: {{ colors.surface_container_low.default.hex }};
+  --attachment-color: {{ colors.surface_container.default.hex }};
+  --main-textarea-button-color: {{ colors.surface_container.default.hex }};
+  --main-textarea-border: {{ colors.outline.default.rgba | set_alpha: 0.45 }};
+  --card-color-hover: {{ colors.inverse_primary.default.hex }};
+  --card-color-active: {{ colors.inverse_primary.default.hex }};
+  --card-color-alt-hover: {{ colors.secondary.default.hex }};
+  --card-header-text-color: {{ colors.on_surface.default.hex }};
+
+  --card-color-filled: {{ colors.surface_container.default.hex }};
+  --card-color-alt: {{ colors.secondary_container.default.hex }};
+  --card-border-color: {{ colors.outline.default.hex }};
+  --switch-knob-color: {{ colors.surface_container_high.default.hex }};
+  --switch-slider-color: {{ colors.surface.default.hex }};
+
+  --background-base-lowest: {{ colors.surface.default.hex }};
+  --background-base-lower: {{ colors.surface.default.hex }};
+  --background-base-low: {{ colors.surface_container_low.default.hex }};
+  --background-surface-high: {{ colors.surface_container.default.hex }};
+  --background-surface-higher: {{ colors.surface_container_high.default.hex }};
+  --background-surface-highest: {{ colors.surface_container_highest.default.hex }};
+}
+
+html,
+body,
+#app-mount,
+.theme-dark,
+.theme-light,
+[class^="bg_"],
+[class*=" bg_"] {
+  background-color: transparent !important;
+}
+
+/* Material Discord uses the main/chat colors in both the content and channel
+ * columns. Scope translucent variants to the sidebars so the chat stays solid. */
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) {
+  --main-color: {{ colors.surface.default.rgba | set_alpha: 0.52 }};
+  --chat-color: {{ colors.surface.default.rgba | set_alpha: 0.52 }};
+  --sidebar-panel-color: {{ colors.surface_container.default.rgba | set_alpha: 0.68 }};
+  background-color: {{ colors.surface.default.rgba | set_alpha: 0.52 }} !important;
+}
+
+:is([class^="membersWrap_"], [class*=" membersWrap_"]) {
+  background-color: {{ colors.surface.default.rgba | set_alpha: 0.52 }} !important;
+}

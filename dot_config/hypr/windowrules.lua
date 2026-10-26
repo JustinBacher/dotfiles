@@ -7,12 +7,22 @@ local window_rules = {
     { name = "appearance-steam-capitalized-opacity", match = { class = "^(Steam)$" }, opacity = "1.0 override 1.0 override" },
     { name = "appearance-steam-opacity", match = { class = "^(steam)$" }, opacity = "1.0 override 1.0 override" },
     { name = "appearance-steamwebhelper-opacity", match = { class = "^(steamwebhelper)$" }, opacity = "1.0 override 1.0 override" },
-    { name = "appearance-spotify-opacity", match = { class = "^(Spotify)$" }, opacity = "1.00 1.00" },
+    {
+        name = "appearance-steam-glass",
+        match = { class = "^(steam|Steam|steamwebhelper)$", title = "^(Steam)$" },
+        tag = "+hyprglass_preset_transparent_blur",
+    },
+    { name = "appearance-spotify-glass", match = { class = "^(Spotify)$" }, opacity = "1.00 1.00", tag = "+hyprglass_preset_transparent_blur" },
     { name = "appearance-code-url-handler-opacity", match = { class = "^(code-url-handler)$" }, opacity = "0.80 0.80" },
     { name = "appearance-kitty-opacity", match = { class = "^(kitty)$" }, opacity = "1.00 0.80" },
     { name = "appearance-wezterm-opacity", match = { class = "^(wezterm)$" }, opacity = "0.20 0.30" },
     { name = "appearance-cursor-opacity", match = { class = ".*(Cursor:)$" }, opacity = "0.20 0.30" },
-    { name = "appearance-dolphin-opacity", match = { class = "^(org.kde.dolphin)$" }, opacity = "0.80 0.80" },
+    {
+        name = "appearance-dolphin-glass",
+        match = { class = "^(org.kde.dolphin)$" },
+        -- The app stylesheet controls regional opacity; whole-window opacity would compound it.
+        tag = "+hyprglass_preset_transparent_blur",
+    },
     { name = "appearance-ark-appearance", match = { class = "^(org.kde.ark)$" }, float = true, opacity = "0.80 0.80" },
     {
         name = "appearance-nwg-look-appearance",
@@ -51,7 +61,16 @@ local window_rules = {
     { name = "appearance-discord-opacity", match = { class = "^(discord)$" }, opacity = "0.80 0.80" },
     { name = "appearance-webcord-opacity", match = { class = "^(WebCord)$" }, opacity = "0.80 0.80" },
     { name = "appearance-armcord-opacity", match = { class = "^(ArmCord)$" }, opacity = "0.80 0.80" },
-    { name = "appearance-vesktop-opacity", match = { class = "^(Vesktop)$" }, opacity = "0.80 0.80" },
+    {
+        name = "appearance-vesktop-remove-frosted",
+        match = { class = "^(vesktop|Vesktop)$" },
+        tag = "-hyprglass_preset_frosted",
+    },
+    {
+        name = "appearance-vesktop-glass",
+        match = { class = "^(vesktop|Vesktop)$" },
+        tag = "+hyprglass_preset_vesktop_glass",
+    },
     {
         name = "appearance-warp-appearance",
         match = { class = "^(app.drey.Warp)$" },

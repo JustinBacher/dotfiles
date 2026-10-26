@@ -15,6 +15,35 @@ local function hyprland_config(name, entry)
 end
 
 local plugins = {
+	hyprchromakey = {
+		apply = function(name, entry)
+			hyprland_config(name, entry)
+			hl.window_rule({
+				name = "appearance-spotify-chromakey",
+				match = { class = "^(Spotify)$" },
+				["plugin:chromakey"] = "spotify",
+			})
+			hl.window_rule({
+				name = "appearance-steam-chromakey",
+				match = { class = "^(steam|Steam|steamwebhelper)$", title = "^(Steam)$" },
+				["plugin:chromakey"] = "steam",
+			})
+		end,
+		options = {
+			enabled = true,
+			default_windows = "off",
+			default_layers = "off",
+			main_surface_only = true,
+			-- Spotify keys black chrome; Steam keys Material's dark surfaces.
+			-- Matching pixels in artwork are also affected.
+			keys = table.concat({
+				"profile spotify, color rgb(000000), similarity 0.008, smoothness 0.006, opacity 0.7",
+				-- Material Dark/Blue's library background and sidebar/app bars.
+				"profile steam, color rgb(111318), similarity 0.004, smoothness 0.004, opacity 0.7",
+				"profile steam, color rgb(1d2024), similarity 0.004, smoothness 0.004, opacity 0.7",
+			}, "; "),
+		},
+	},
 	hyprglass = {
 		apply = native_config,
 		options = {
@@ -28,7 +57,7 @@ local plugins = {
 			dark = { brightness = 0.82 },
 			light = { adaptive_boost = 0.5 },
 
-			layers = { enabled = true },
+			layers = { enabled = true, exclude_namespaces = "siri-edge-glow,siri-edge-glow-card" },
 		},
 		callables = {
 			-- Match the surfaces covered by windowrules.lua's blur rules.
@@ -105,6 +134,14 @@ local plugins = {
 						refraction_spread = 0.2,
 						lens_distortion = 0.0,
 						noise_strength = 0.0,
+					},
+				},
+				{
+					"vesktop_glass",
+					{
+						inherits = "frosted",
+						glass_opacity = 0.9,
+						blur_strength = 1.0,
 					},
 				},
 				{

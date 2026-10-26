@@ -15,7 +15,7 @@ local groups = {
 		QT_QPA_PLATFORM = "wayland",
 		MOZ_ENABLE_WAYLAND = "1",
 		ELECTRON_OZONE_PLATFORM_HINT = "wayland",
-		QT_QPA_PLATFORMTHEME = "qt5ct",
+		QT_QPA_PLATFORMTHEME = "qt6ct",
 		QT_WAYLAND_DISABLE_WINDOWDECORATION = "1",
 		QT_AUTO_SCREEN_SCALE_FACTOR = "1",
 	},
@@ -32,12 +32,6 @@ local groups = {
 		LANG = "en_US.UTF-8",
 		LC_ALL = "en_US.UTF-8",
 		FZF_DEFAULT_OPTS = "--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'",
-	},
-	-- Ollama
-	{
-		OLLAMA_CONTEXT_LENGTH = "8192",
-		OLLAMA_FLASH_ATTENTION = "1",
-		OLLAMA_KV_CACHE_TYPE = "q8_0",
 	},
 	-- NVIDIA and Vulkan
 	{

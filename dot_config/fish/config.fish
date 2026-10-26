@@ -18,11 +18,9 @@ set -gx CUDAToolkit_ROOT /opt/cuda
 
 fish_add_path ~/.local/bin
 fish_add_path ~/.spicetify
-fish_add_path ~/.npm-global/bin
 fish_add_path ~/.lmstudio/bin
-fish_add_path ~/.cargo/bin/
-
 fish_add_path /opt/cuda/bin
+
 
 # SSH agent is Keeper's (Hyprland starts it with `keeper ssh-agent start`).
 set -gx SSH_AUTH_SOCK $HOME/.keeper/92jbach@gmail.com.ssh_agent
@@ -92,3 +90,11 @@ zoxide init --cmd cd fish | source
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+# >>> mise:activate >>> managed by mise — do not edit between markers
+if status is-interactive
+    mise activate fish | source
+else
+    mise activate fish --shims | source
+end
+# <<< mise:activate <<<

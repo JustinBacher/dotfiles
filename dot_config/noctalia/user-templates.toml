@@ -1,17 +1,19 @@
-[config]
+[theme.templates.user.vesktop-glass]
+input_path = "~/.config/noctalia/templates/vesktop-glass.css"
+output_path = "~/.config/vesktop/settings/quickCss.css"
 
-[templates]
+[theme.templates.user.dolphin-glass]
+input_path = "~/.config/noctalia/templates/dolphin-glass.qss"
+output_path = "~/.config/dolphin/noctalia-glass.qss"
+post_hook = "~/.config/hypr/scripts/apply-dolphin-theme.sh"
+hook_async = false
 
-# User-defined templates
-# Add your custom templates below
-# Example:
-# [templates.myapp]
-# input_path = "~/.config/noctalia/templates/myapp.css"
-# output_path = "~/.config/myapp/theme.css"
-# post_hook = "myapp --reload-theme"
+[theme.templates.user.dolphin-kvantum]
+input_path = "~/.config/noctalia/templates/dolphin.kvconfig"
+output_path = "~/.config/Kvantum/NoctaliaDolphin/NoctaliaDolphin.kvconfig"
+hook_async = false
 
-# Remove this section and add your own templates
-#[templates.placeholder]
-#input_path = "/etc/xdg/quickshell/noctalia-shell/Assets/Templates/noctalia.json"
-#output_path = "/home/justin/.cache/noctalia/placeholder.json"
-
+[theme.templates.user.dolphin-kvantum-svg]
+input_path = "~/.config/noctalia/templates/dolphin.svg"
+output_path = "~/.config/Kvantum/NoctaliaDolphin/NoctaliaDolphin.svg"
+hook_async = false

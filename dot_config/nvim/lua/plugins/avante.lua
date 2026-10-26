@@ -1,25 +1,28 @@
--- ACP agents, run through their adapters (installed by .manifests/linux/ai-agents.yaml).
--- They use the subscription logins already on this machine: ChatGPT in ~/.codex (through the
--- installed codex binary) and Claude in ~/.claude. A provider appears only when its login
--- file exists. avante passes the adapter only PATH and the env table below, so no API key
--- from the shell reaches it.
+-- ACP agents, run through their adapters installed as global Mise npm tools.
+-- They use the subscription logins already on this machine: ChatGPT in ~/.codex and Claude
+-- in ~/.claude. A provider appears only when its login and adapter are available. Avante
+-- passes the adapter only PATH and the env table below, so no API key from the shell reaches it.
 local acp_providers = (function()
     local providers = {}
     local home = os.getenv("HOME")
-    if vim.fn.filereadable(home .. "/.codex/auth.json") == 1 then
+    local codex_acp = vim.fn.exepath("codex-acp")
+    local codex = vim.fn.exepath("codex")
+    local claude_acp = vim.fn.exepath("claude-agent-acp")
+
+    if vim.fn.filereadable(home .. "/.codex/auth.json") == 1 and codex_acp ~= "" and codex ~= "" then
         providers["codex"] = {
-            command = home .. "/.npm-global/bin/codex-acp",
+            command = codex_acp,
             args = {},
             env = {
                 HOME = home,
                 NODE_NO_WARNINGS = "1",
-                CODEX_PATH = home .. "/.npm-global/bin/codex",
+                CODEX_PATH = codex,
             },
         }
     end
-    if vim.fn.filereadable(home .. "/.claude/.credentials.json") == 1 then
+    if vim.fn.filereadable(home .. "/.claude/.credentials.json") == 1 and claude_acp ~= "" then
         providers["claude-code"] = {
-            command = home .. "/.npm-global/bin/claude-agent-acp",
+            command = claude_acp,
             args = {},
             env = { HOME = home, NODE_NO_WARNINGS = "1" },
         }
@@ -36,9 +39,6 @@ return {
         -- Default to an ACP agent: Codex if logged in, else Claude. Switch with :AvanteSwitchProvider.
         provider = acp_providers.codex and "codex" or "claude-code",
         providers = {
-            ollama = {
-                model = "llama3.2",
-            },
             openai = {
                 endpoint = "https://api.openai.com/v1",
                 model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
